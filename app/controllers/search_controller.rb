@@ -2,8 +2,9 @@
 class SearchController < ApplicationController
 
    def search
-
+    puts params[:keyword]
     @keyword =  params[:keyword].gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
+    puts @keyword
     @start = (params[:start] || '1').to_i
     @end = (params[:end] || '20').to_i
     @type = params[:type]
@@ -54,7 +55,7 @@ class SearchController < ApplicationController
         href = node['href']
         link = href.gsub(homeurl, "http://localhost:3000/services/"+name)
         node['href'] = link
-        root.add_child(node)
+          root.add_child(node)
         end
         counter = counter + 1
         if counter>@end then
