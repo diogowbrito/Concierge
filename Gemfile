@@ -11,7 +11,7 @@ gem 'mysql2'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+ gem 'capistrano'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
@@ -23,6 +23,7 @@ gem 'nokogiri'
 gem 'rest-open-uri'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "mail", "2.2.19"
+
 
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
