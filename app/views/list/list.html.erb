@@ -1,0 +1,35 @@
+<div id="serviceName" style="display:none">
+  <%= @service %>
+
+</div>
+
+<div id="jqt">
+  <div id="theform">
+    <div class="toolbar">
+      <h1>FeedAPP</h1>
+    </div>
+    <ul id="prof_list" class="rounded">
+    </ul>
+  </div>
+</div>
+
+<div id="method">
+
+</div>
+
+
+
+<script type=text/javascript>
+
+   function bla(url) {
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "xml",
+        success: parseList
+    });
+
+   }
+
+</script>
