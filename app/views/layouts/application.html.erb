@@ -29,9 +29,9 @@
 
       <% if current_user %>
         Logged in as <%= current_user.userName %>.
-        <a id="login" href="http://localhost:3000/logout" data-role="button" data-icon="gear">Logout</a>
+        <a id="login" href="/logout" data-role="button" data-icon="gear">Logout</a>
       <% else %>
-        <a href="http://localhost:3000/login" data-role="button"  data-icon="gear">Login</a>
+        <a href="/login" data-role="button"  data-icon="gear">Login</a>
       <% end %>
     </div>
 
