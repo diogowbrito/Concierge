@@ -52,7 +52,9 @@ function getRecord(url) {
 }
 
 function parseSearchList(xml) {
-    var page = createPage("search");
+
+    var bla = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("search"+bla);
     var pageWritable = $("[data-role=content]", page.get(0));
 
 
@@ -109,8 +111,8 @@ function createPage(id) {
 
 function parseList(xml) {
 
-
-    var page = createPage("list");
+    var bla = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("list"+bla);
     var pageWritable = $("[data-role=content]", page.get(0));
 
     $(xml).find("list").each(function() {
@@ -129,8 +131,8 @@ function parseList(xml) {
 
 function parseHomepage(xml) {
 
-
-    var page = createPage("homepage");
+    var bla = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("homepage"+bla);
     var pageWritable = $("[data-role=content]", page.get(0));
     var list;
     var titleold;

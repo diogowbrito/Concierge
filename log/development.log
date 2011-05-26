@@ -42356,3 +42356,688 @@ Started GET "/services/degreesandcourses/courses/1077" for 127.0.0.1 at 2011-05-
   [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
 Rendered service_forward/recordrequest.xml.erb (0.4ms)
 Completed 200 OK in 140ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:31:16 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 125ms (Views: 16.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-26 21:31:20 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mSQL (24.2ms)[0m  SHOW TABLES
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 1159ms (Views: 2.9ms | ActiveRecord: 24.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-26 21:31:25 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 193ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-26 21:31:27 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 209ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:31:32 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)[0m
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 1065ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:31:33 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 201ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:31:33 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1
+  [1m[36mCompetence Load (0.2ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)[0m
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 194ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/services/degreesandcourses/courses/1077" for 127.0.0.1 at 2011-05-26 21:31:35 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"1077"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 90ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:32:07 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 57ms (Views: 12.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-26 21:32:11 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 89ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-26 21:32:12 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 64ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-26 21:32:14 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 115ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:32:19 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.6ms)
+Completed 200 OK in 131ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/1077" for 127.0.0.1 at 2011-05-26 21:32:25 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"1077"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 63ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/courses/1077" for 127.0.0.1 at 2011-05-26 21:32:31 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"1077"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 87ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Introdu%C3%A7%C3%A3o+%C3%A0+Bioqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:32:38 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Introdução à Bioquímica", "entity"=>"course"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 131ms (Views: 2.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/degreesandcourses/courses/497" for 127.0.0.1 at 2011-05-26 21:32:39 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"497"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 121ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Pedro+Ant%C3%B3nio+de+Brito+Tavares&entity=person" for 127.0.0.1 at 2011-05-26 21:32:43 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Pedro António de Brito Tavares", "entity"=>"person"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 125ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/372" for 127.0.0.1 at 2011-05-26 21:32:45 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"372"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 120ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-26 21:33:11 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 63ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-26 21:33:12 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 129ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:33:15 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)[0m
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 133ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/1077" for 127.0.0.1 at 2011-05-26 21:33:17 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"1077"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 67ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/2" for 127.0.0.1 at 2011-05-26 21:33:23 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"2"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 117ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Electr%C3%B3nica+II&entity=course" for 127.0.0.1 at 2011-05-26 21:33:26 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Electrónica II", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 170ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/285" for 127.0.0.1 at 2011-05-26 21:33:28 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"285"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 95ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Lu%C3%ADs+Augusto+Bica+Gomes+de+Oliveira&entity=person" for 127.0.0.1 at 2011-05-26 21:33:32 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Luís Augusto Bica Gomes de Oliveira", "entity"=>"person"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 125ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/550" for 127.0.0.1 at 2011-05-26 21:33:33 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"550"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 113ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Electr%C3%B3nica+II&entity=course" for 127.0.0.1 at 2011-05-26 21:33:47 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Electrónica II", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 124ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/286" for 127.0.0.1 at 2011-05-26 21:33:48 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"286"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 60ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:34:27 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 26ms (Views: 12.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/meteofct/index" for 127.0.0.1 at 2011-05-26 21:34:30 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"meteofct"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'meteofct'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 5)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 2486ms (Views: 3.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/OrgUnits/index" for 127.0.0.1 at 2011-05-26 21:35:06 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"OrgUnits"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'OrgUnits'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)
+Completed   in 35ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/service_forward_controller.rb:10:in `homepagerequest'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.7ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.9ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-05-26 21:35:13 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 4)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 58ms (Views: 2.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/services/degreesandcourses/degrees" for 127.0.0.1 at 2011-05-26 21:35:15 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 60ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/degrees/1" for 127.0.0.1 at 2011-05-26 21:35:16 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees", "id"=>"1"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 171ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/courses" for 127.0.0.1 at 2011-05-26 21:35:20 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 88ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/courses/23" for 127.0.0.1 at 2011-05-26 21:35:22 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"23"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 60ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Amadeu+Le%C3%A3o+Santos+Rodrigues&entity=person" for 127.0.0.1 at 2011-05-26 21:35:24 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Amadeu Leão Santos Rodrigues", "entity"=>"person"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 130ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/105" for 127.0.0.1 at 2011-05-26 21:35:38 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"105"}
+  [1m[35mService Load (2.9ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 75ms (Views: 2.8ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/search?keyword=Carlos+Manuel+Saiago&entity=person" for 127.0.0.1 at 2011-05-26 21:35:40 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Carlos Manuel Saiago", "entity"=>"person"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 125ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/89" for 127.0.0.1 at 2011-05-26 21:35:41 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"89"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 114ms (Views: 3.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Carlos+Manuel+Saiago&entity=person" for 127.0.0.1 at 2011-05-26 21:35:55 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Carlos Manuel Saiago", "entity"=>"person"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 152ms (Views: 2.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people/89" for 127.0.0.1 at 2011-05-26 21:36:03 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"89"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 155ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-26 21:38:25 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 158ms (Views: 2.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/search?keyword=M%C3%A9todos+Instrumentais+de+An%C3%A1lise&entity=course" for 127.0.0.1 at 2011-05-26 21:39:06 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Métodos Instrumentais de Análise", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.6ms)
+Completed 200 OK in 132ms (Views: 2.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people/89" for 127.0.0.1 at 2011-05-26 21:40:14 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"89"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 90ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Introdu%C3%A7%C3%A3o+%C3%A0+Programa%C3%A7%C3%A3o&entity=course" for 127.0.0.1 at 2011-05-26 21:40:20 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Introdução à Programação", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.6ms)
+Completed 200 OK in 132ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/512" for 127.0.0.1 at 2011-05-26 21:40:25 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"512"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 60ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Artur+Miguel+de+Andrade+Vieira+Dias&entity=person" for 127.0.0.1 at 2011-05-26 21:40:27 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Artur Miguel de Andrade Vieira Dias", "entity"=>"person"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 170ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/74" for 127.0.0.1 at 2011-05-26 21:40:28 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"74"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 133ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Departamento+de+Inform%C3%A1tica&entity=organizational+unit" for 127.0.0.1 at 2011-05-26 21:40:30 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Departamento de Informática", "entity"=>"organizational unit"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'organizational unit'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 3 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 3)
+Completed   in 85ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/search_controller.rb:35:in `block in search'
+  app/controllers/search_controller.rb:30:in `each'
+  app/controllers/search_controller.rb:30:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.0ms)
+
+
+Started GET "/search?keyword=Projecto+de+M%C3%A1quinas&entity=course" for 127.0.0.1 at 2011-05-26 21:40:32 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Projecto de Máquinas", "entity"=>"course"}
+  [1m[36mInfEntity Load (0.1ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)[0m
+Rendered search/search.xml.erb (2.2ms)
+Completed 200 OK in 136ms (Views: 4.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/search?keyword=Sistemas+Mec%C3%A2nicos+de+Transmiss%C3%A3o&entity=course" for 127.0.0.1 at 2011-05-26 21:40:37 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Sistemas Mecânicos de Transmissão", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.6ms)
+Completed 200 OK in 168ms (Views: 4.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/511" for 127.0.0.1 at 2011-05-26 21:40:47 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"511"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 61ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Artur+Miguel+de+Andrade+Vieira+Dias&entity=person" for 127.0.0.1 at 2011-05-26 21:40:51 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Artur Miguel de Andrade Vieira Dias", "entity"=>"person"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'person'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 1)
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/516" for 127.0.0.1 at 2011-05-26 21:40:53 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"516"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 87ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:44:00 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (43.7ms)
+Completed 200 OK in 61ms (Views: 46.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-05-26 21:44:02 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 4)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 92ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/degrees" for 127.0.0.1 at 2011-05-26 21:44:08 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 63ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/degrees/1" for 127.0.0.1 at 2011-05-26 21:44:11 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees", "id"=>"1"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 129ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/degrees/2" for 127.0.0.1 at 2011-05-26 21:44:20 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees", "id"=>"2"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 184ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/courses" for 127.0.0.1 at 2011-05-26 21:44:32 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 64ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:45:31 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 26ms (Views: 12.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-26 21:45:32 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 90ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-26 21:45:33 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 68ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/2" for 127.0.0.1 at 2011-05-26 21:45:34 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"2"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/search?keyword=Electr%C3%B3nica+I&entity=course" for 127.0.0.1 at 2011-05-26 21:45:38 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Electrónica I", "entity"=>"course"}
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 4 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 4)
+Rendered search/search.xml.erb (0.6ms)
+Completed 200 OK in 136ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses/1248" for 127.0.0.1 at 2011-05-26 21:45:40 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"1248"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 122ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-26 21:45:55 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 92ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:46:00 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 26ms (Views: 12.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-05-26 21:46:02 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 4)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 91ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/degrees" for 127.0.0.1 at 2011-05-26 21:46:03 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 64ms (Views: 5.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-26 21:46:11 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 25ms (Views: 11.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-05-26 21:46:12 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 4)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 87ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/degrees" for 127.0.0.1 at 2011-05-26 21:46:13 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees"}
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 99ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/courses" for 127.0.0.1 at 2011-05-26 21:46:19 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 64ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/degreesandcourses/courses/22" for 127.0.0.1 at 2011-05-26 21:46:22 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"22"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 87ms (Views: 2.9ms | ActiveRecord: 0.1ms)

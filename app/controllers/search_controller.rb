@@ -7,7 +7,6 @@ class SearchController < ApplicationController
 
     text = CGI.escape(params[:keyword].to_s)
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
-    puts @keyword
     @start = (params[:start] || '1').to_i
     @end = (params[:end] || '20').to_i
     @type = params[:type]
@@ -33,7 +32,6 @@ class SearchController < ApplicationController
       url = competence[0].competenceUrl
       homeurl = service.url
       name = service.serviceName
-      puts url+'?keyword='+@keyword+"&start=1&end=5000"
       tempdoc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start=1&end=5000"),nil, 'UTF-8')
       temproot = tempdoc.at_css "list"
       temproot.add_child("<home>"+homeurl+"</home>")
@@ -42,7 +40,7 @@ class SearchController < ApplicationController
 
     end
 
-    @doc = Nokogiri::XML("<list title='"+@keyword+"'></list>")
+    @doc = Nokogiri::XML("<list title='"+params[:keyword]+"'></list>")
 
     list.each do |result|
 
@@ -81,9 +79,6 @@ class SearchController < ApplicationController
 
     text = CGI.escape(params[:keyword].to_s)
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
-    puts "boraa"
-    puts "keyword: "+@keyword
-    puts "params: "+params[:keyword]
     @start = (params[:start] || '1')
     @end = (params[:end] || '20')
     @servicename = params[:service]
