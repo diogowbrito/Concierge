@@ -25,7 +25,7 @@ Concierge::Application.routes.draw do
 
   match "login" => "sessions#new"
   match "logout" => "sessions#destroy"
-  match "register" => "users#new"
+  match "signin" => "users#new"
   match "activation" => "users#activate"
 
 #  match "services/:service/:id" => "Record#record"

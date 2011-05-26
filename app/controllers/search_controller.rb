@@ -1,9 +1,12 @@
+#Encoding: UTF-8
 
 class SearchController < ApplicationController
 
    def search
-    puts params[:keyword]
-    @keyword =  params[:keyword].gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
+    require 'cgi'
+
+    text = CGI.escape(params[:keyword].to_s)
+    @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     puts @keyword
     @start = (params[:start] || '1').to_i
     @end = (params[:end] || '20').to_i
@@ -74,8 +77,10 @@ class SearchController < ApplicationController
    end
 
   def servicesearch
+    require 'cgi'
 
-    @keyword =  params[:keyword].gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
+    text = CGI.escape(params[:keyword].to_s)
+    @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     puts "boraa"
     puts "keyword: "+@keyword
     puts "params: "+params[:keyword]

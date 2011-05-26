@@ -132,21 +132,63 @@ function parseHomepage(xml) {
 
     var page = createPage("homepage");
     var pageWritable = $("[data-role=content]", page.get(0));
+    var list;
+    var titleold;
+    var title;
 
     $(xml).find("record").each(function() {
         pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-        $(this).find("text").each(function() {
-            pageWritable.append("<p>" + $(this).text() + "</p>");
-        });
-        var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
-        $(this).find("link").each(function() {
-            list.append("<li class='list' href=" + $(this).attr('href') + "> <a href=''>" + $(this).text() + "</a></li>")
+        $(this).children().each(function(index, element) {
+            switch (element.nodeName) {
+                case 'text':
+                    if ($(this).children().size() == 0) {
+                        pageWritable.append("<p>" + $(this).text() + "</p>");
+                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+                    }
+                    else {
+                        titleold = $(this).attr('title');
+                        title = replaceAll(titleold, " ", "_");
+                        var html = '<li class="slide activeZero 0" title="' + title + '">';
+
+                        if (title != undefined)
+                            html += '<a href="">' + titleold + '</a>';
+
+                        html += '</li>';
+
+                        $(this).children().each(function(index, element) {
+                            text = $(this).text();
+                            if (element.nodeName == 'entity') {
+                                attr = $(this).attr('href');
+                                html += '<li class="slide_items ' + title + '"><a class="search" href="' + attr + '" >' + text + '</a></li>';
+                            }
+                            else if (element.nodeName == 'text') {
+                                html += '<li class="slide_items ' + title + '">' + text + '</li>';
+                            }
+                            else if (element.nodeName == 'email') {
+                                attr = $(this).attr('href');
+                                html += '<li class="slide_items ' + title + '"><a class="link" href="' + attr + '" >' + text + '</a></li>';
+                            }
+                            else if (element.nodeName == 'link') {
+                                attr = $(this).attr('href');
+                                html += '<li class="slide_items ' + title + '"><a class="link" href="' + attr + '" >' + text + '</a></li>';
+                            }
+
+                        });
+
+                        list.append(html);
+                    }
+                    break;
+                case 'link':
+                    list.append("<li class='list' href=" + $(this).attr('href') + "> <a href=''>" + $(this).text() + "</a></li>");
+                    break;
+            }
         });
     });
 
     page.page();
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
+    $(".slide_items").hide();
 }
 
 
@@ -155,7 +197,8 @@ function parseRecord(xml) {
     var bla = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("record" + bla);
     var pageWritable = $("[data-role=content]", page.get(0));
-
+    var titleold;
+    var title;
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
     $(xml).find("record").children().each(function(index, element) {
@@ -172,10 +215,11 @@ function parseRecord(xml) {
                         list.append('<li>' + text + '<p>' + title + '</p></li>');
                 }
                 else {
-                    title = $(this).attr('title').replace(" ", "_");
+                    titleold = $(this).attr('title');
+                    title = replaceAll(titleold, " ", "_");
                     var html = '<li class="slide activeZero 0" title="' + title + '">';
                     if (title != undefined)
-                        html += '<a href="">' + title.replace("_", " ") + '</a>';
+                        html += '<a href="">' + titleold + '</a>';
 
                     $(this).children().each(function(index, element) {
 
@@ -328,3 +372,10 @@ function logOut() {
 $('#login').live('click', function() {
     logOut();
 });
+
+function replaceAll(string, token, newtoken) {
+	while (string.indexOf(token) != -1) {
+ 		string = string.replace(token, newtoken);
+	}
+	return string;
+}
