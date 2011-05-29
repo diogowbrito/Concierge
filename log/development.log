@@ -43041,3 +43041,861 @@ Started GET "/services/degreesandcourses/courses/22" for 127.0.0.1 at 2011-05-26
   [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
 Rendered service_forward/recordrequest.xml.erb (0.4ms)
 Completed 200 OK in 87ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateRefEntities (20110509133857)
+Migrating to CreateInfEntities (20110509133931)
+Migrating to CreateCompetences (20110509133950)
+Migrating to CreateTags (20110509134005)
+Migrating to CreateServices (20110511141419)
+Migrating to CreateUsers (20110522131256)
+Migrating to CreateDataFiles (20110524134244)
+  [1m[35mSQL (25.3ms)[0m  CREATE TABLE `data_files` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110524134244')[0m
+Migrating to CreateHistories (20110529135715)
+  [1m[35mSQL (12.4ms)[0m  CREATE TABLE `histories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `date` date, `time` time, `description` varchar(255), `url` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110529135715')[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `competences`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `competences`
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `data_files`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `data_files`
+  [1m[36mSQL (1.2ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `histories`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `inf_entities`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `inf_entities`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `ref_entities`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `ref_entities`
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `services`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `services`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `tags`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `tags`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `users`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (2.9ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (2.5ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateRefEntities (20110509133857)
+  [1m[35mSQL (2.0ms)[0m  CREATE TABLE `ref_entities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `entity` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133857')[0m
+Migrating to CreateInfEntities (20110509133931)
+  [1m[35mSQL (1.6ms)[0m  CREATE TABLE `inf_entities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `entity` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133931')[0m
+Migrating to CreateCompetences (20110509133950)
+  [1m[35mSQL (1.8ms)[0m  CREATE TABLE `competences` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `competenceType` varchar(255), `competenceUrl` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133950')[0m
+Migrating to CreateTags (20110509134005)
+  [1m[35mSQL (1.6ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `tag` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509134005')[0m
+Migrating to CreateServices (20110511141419)
+  [1m[35mSQL (1.8ms)[0m  CREATE TABLE `services` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `serviceName` varchar(255), `provider` varchar(255), `servicetype` varchar(255), `ranking` int(11), `url` varchar(255), `imgPath` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110511141419')[0m
+Migrating to CreateUsers (20110522131256)
+  [1m[35mSQL (1.8ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `userName` varchar(255), `email` varchar(255), `passwordHash` varchar(255), `passwordSalt` varchar(255), `activateCode` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110522131256')[0m
+Migrating to CreateDataFiles (20110524134244)
+  [1m[35mSQL (2.2ms)[0m  CREATE TABLE `data_files` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110524134244')[0m
+Migrating to CreateHistories (20110529135715)
+  [1m[35mSQL (1.9ms)[0m  CREATE TABLE `histories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `time` datetime, `description` varchar(255), `url` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110529135715')[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `competences`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `competences`
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `data_files`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `data_files`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `histories`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `inf_entities`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `inf_entities`
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `ref_entities`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `ref_entities`
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `services`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `services`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `tags`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `tags`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `users`
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:02:02 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 141ms (Views: 6.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-05-29 16:02:11 +0100
+  Processing by BackOfficeController#newservice as HTML
+Rendered back_office/newservice.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-05-29 16:02:28 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KOKsmyDMGx7a/o1vrYpd3o6e0/VPMQGlTfNmK8OvN5c=", "url"=>"http://localhost:3001/metainfo", "commit"=>"Insert"}
+  [1m[35mSQL (8.7ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.4ms)[0m  describe `services`
+  [1m[36mAREL (0.3ms)[0m  [1mINSERT INTO `services` (`serviceName`, `provider`, `servicetype`, `ranking`, `url`, `imgPath`, `created_at`, `updated_at`) VALUES ('people', 'G6', 'academics', 0, 'http://localhost:3001', 'TODO', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (1.1ms)[0m  COMMIT
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `tags`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (1, 'pessoas', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (1, 'professores', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (1, 'docentes', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `ref_entities`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'person', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'organizational unit', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'degree', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'course', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'room', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (1.7ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'building', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.3ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `inf_entities`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (1.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'person', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.3ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `competences`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Home', 'http://localhost:3001/index', 'Devolve a descrição do serviço', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Status', 'http://localhost:3001/status', 'Devolve o estado o serviço', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.5ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Metainfo', 'http://localhost:3001/metainfo', 'Devolve a meta info do serviço', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Search', 'http://localhost:3001/search', 'Devolve os resultados de uma procura', '2011-05-29 15:02:28', '2011-05-29 15:02:28')[0m
+  [1m[35mSQL (0.3ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Recomendation', 'http://localhost:3001/recomendation', 'Devolve as recomendações para uma palavra', '2011-05-29 15:02:28', '2011-05-29 15:02:28')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+Rendered back_office/createservice.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 323ms (Views: 6.3ms | ActiveRecord: 27.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:02:31 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 24ms (Views: 11.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:02:37 +0100
+
+SyntaxError (/home/jphorta/RubymineProjects/Concierge/app/controllers/service_forward_controller.rb:65: syntax error, unexpected tIVAR, expecting keyword_end
+...vices/"+@servicename+"/"@method+"/"+@id
+...                               ^):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.6ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:02:41 +0100
+
+SyntaxError (/home/jphorta/RubymineProjects/Concierge/app/controllers/service_forward_controller.rb:65: syntax error, unexpected tIVAR, expecting keyword_end
+...vices/"+@servicename+"/"@method+"/"+@id
+...                               ^):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (64.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (69.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:02:47 +0100
+
+SyntaxError (/home/jphorta/RubymineProjects/Concierge/app/controllers/service_forward_controller.rb:65: syntax error, unexpected tIVAR, expecting keyword_end
+...vices/"+@servicename+"/"@method+"/"+@id
+...                               ^):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:04:12 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 25ms (Views: 12.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:04:14 +0100
+
+SyntaxError (/home/jphorta/RubymineProjects/Concierge/app/controllers/service_forward_controller.rb:65: syntax error, unexpected tIVAR, expecting keyword_end
+...vices/"+@servicename+"/"@method+"/"+@id
+...                               ^):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.1ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:04:18 +0100
+
+SyntaxError (/home/jphorta/RubymineProjects/Concierge/app/controllers/service_forward_controller.rb:65: syntax error, unexpected tIVAR, expecting keyword_end
+...vices/"+@servicename+"/"@method+"/"+@id
+...                               ^):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.4ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:04:54 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.3ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 161ms (Views: 3.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:04:59 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 86ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:05:01 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 69ms (Views: 3.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-29 16:05:02 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 162ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/index.html" for 127.0.0.1 at 2011-05-29 16:05:22 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 25ms (Views: 12.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-29 16:05:23 +0100
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2011-05-29 16:05:26 +0100
+  Processing by UsersController#new as HTML
+Rendered users/new.html.erb within layouts/application (83.9ms)
+Completed 200 OK in 99ms (Views: 88.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2011-05-29 16:05:47 +0100
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KOKsmyDMGx7a/o1vrYpd3o6e0/VPMQGlTfNmK8OvN5c=", "user"=>{"userName"=>"horta", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "email"=>"jphorta.volt@gmail.com"}, "commit"=>"Create User"}
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'horta') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'jphorta.volt@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  describe `users`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `created_at`, `updated_at`) VALUES ('horta', 'jphorta.volt@gmail.com', '$2a$10$lBjVDxgTYRi0LIgvUjggiOujP1R1HD3AXyt8M59ixDZRcqH5nFG/6', '$2a$10$lBjVDxgTYRi0LIgvUjggiO', NULL, '2011-05-29 15:05:47', '2011-05-29 15:05:47')[0m
+  [1m[35mSQL (1.0ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'horta') AND (`users`.id <> 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'jphorta.volt@gmail.com') AND (`users`.id <> 1) LIMIT 1[0m
+  [1m[35mAREL (16.0ms)[0m  UPDATE `users` SET `activateCode` = 1022, `passwordSalt` = '$2a$10$5pAPCLg1smOgXmbA/daJVe', `passwordHash` = '$2a$10$5pAPCLg1smOgXmbA/daJVelHljQ801MsBewJfnnu27tt6J1nvlBI.', `updated_at` = '2011-05-29 15:05:47' WHERE `users`.`id` = 1
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+Rendered user_mailer/registration_confirmation.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5064ms)
+Date: Sun, 29 May 2011 16:05:47 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de260cbd1098_fbf22da05864997@ubuntu.mail>
+Subject: Registered
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Hello horta,</p>
+
+<p>Thank you for registering!</p>
+
+<p>Please activate your account by clicking the link above.</p>
+
+<p><a href="http://localhost:3000/activation?code=1022&amp;id=1">Activate Account</a></p>
+
+<p>Thank you</p>
+Redirected to http://localhost:3000/
+Completed 302 Found in 5370ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:05:52 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 25ms (Views: 11.9ms | ActiveRecord: 20.1ms)
+
+
+Started GET "/activation?code=1022&id=1" for 127.0.0.1 at 2011-05-29 16:06:42 +0100
+  Processing by UsersController#activate as HTML
+  Parameters: {"code"=>"1022", "id"=>"1"}
+  [1m[36mUser Load (2.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'horta') AND (`users`.id <> 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'jphorta.volt@gmail.com') AND (`users`.id <> 1) LIMIT 1
+  [1m[36mAREL (0.2ms)[0m  [1mUPDATE `users` SET `activateCode` = -1, `updated_at` = '2011-05-29 15:06:42' WHERE `users`.`id` = 1[0m
+  [1m[35mSQL (1.4ms)[0m  COMMIT
+Rendered users/activate.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 31ms (Views: 5.1ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-29 16:06:48 +0100
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-29 16:06:54 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KOKsmyDMGx7a/o1vrYpd3o6e0/VPMQGlTfNmK8OvN5c=", "username"=>"jphorta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'jphorta' LIMIT 1[0m
+Rendered sessions/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 19ms (Views: 6.6ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-29 16:07:02 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KOKsmyDMGx7a/o1vrYpd3o6e0/VPMQGlTfNmK8OvN5c=", "username"=>"horta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`userName` = 'horta' LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 104ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:07:02 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered home_page/index.html.erb within layouts/application (27.2ms)
+Completed 200 OK in 44ms (Views: 30.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:07:07 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 59ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:07:08 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 68ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-29 16:07:09 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `histories`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:07:10', 'Record: Professor', 'http://localhost:3000/services/people/people/437', '2011-05-29 15:07:10', '2011-05-29 15:07:10')[0m
+  [1m[35mSQL (1.5ms)[0m  COMMIT
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 178ms (Views: 2.8ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/services/people/people/1" for 127.0.0.1 at 2011-05-29 16:07:32 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"1"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:07:33', 'Record: Professor', 'http://localhost:3000/services/people/people/1', '2011-05-29 15:07:33', '2011-05-29 15:07:33')
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 182ms (Views: 2.8ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:07:50 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered home_page/index.html.erb within layouts/application (27.2ms)
+Completed 200 OK in 43ms (Views: 30.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2011-05-29 16:07:51 +0100
+  Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:07:51 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 25ms (Views: 12.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:07:52 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 59ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:07:54 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 67ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-29 16:07:55 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 124ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/index.html" for 127.0.0.1 at 2011-05-29 16:17:03 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 29ms (Views: 13.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-29 16:17:05 +0100
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 9ms (Views: 8.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/index.html" for 127.0.0.1 at 2011-05-29 16:17:14 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 26ms (Views: 12.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-29 16:17:15 +0100
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-29 16:17:22 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KOKsmyDMGx7a/o1vrYpd3o6e0/VPMQGlTfNmK8OvN5c=", "username"=>"horta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'horta' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 104ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:17:22 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.4ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered home_page/index.html.erb within layouts/application (62.3ms)
+Completed 200 OK in 79ms (Views: 65.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:17:25 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 58ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:17:26 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 132ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/437" for 127.0.0.1 at 2011-05-29 16:17:27 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"437"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:17:27', 'Record: Professor', 'http://localhost:3000/services/people/people/437', '2011-05-29 15:17:27', '2011-05-29 15:17:27')
+  [1m[36mSQL (0.9ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 175ms (Views: 4.6ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:17:32 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.2ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:09 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+Completed   in 9ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (36.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (43.3ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:10 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.4ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:10 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.7ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:11 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.4ms)
+
+
+Started GET "/search?keyword=Bioelectroqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:11 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Bioelectroquímica", "entity"=>"course"}
+Completed   in 46ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.4ms)
+
+
+Started GET "/search?keyword=Introdu%C3%A7%C3%A3o+%C3%A0+Bioqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:12 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Introdução à Bioquímica", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.0ms)
+
+
+Started GET "/search?keyword=Introdu%C3%A7%C3%A3o+%C3%A0+Bioqu%C3%ADmica&entity=course" for 127.0.0.1 at 2011-05-29 16:20:13 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Introdução à Bioquímica", "entity"=>"course"}
+Completed   in 44ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:20:16 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered home_page/index.html.erb within layouts/application (63.7ms)
+Completed 200 OK in 80ms (Views: 66.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:20:18 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 58ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:20:19 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 72ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/1" for 127.0.0.1 at 2011-05-29 16:20:20 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"1"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:20:20', 'Record: Professor', 'http://localhost:3000/services/people/people/1', '2011-05-29 15:20:20', '2011-05-29 15:20:20')
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 184ms (Views: 3.1ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/search?keyword=Teoria+de+Sinais&entity=course" for 127.0.0.1 at 2011-05-29 16:20:23 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Teoria de Sinais", "entity"=>"course"}
+Completed   in 7ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.7ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.8ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-29 16:20:47 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XAxp1g/VTXOG1MfYAD8IvTWwrSiU4CDNkxTjFVKMfIs=", "username"=>"horta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`userName` = 'horta' LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 112ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:20:47 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered home_page/index.html.erb within layouts/application (64.0ms)
+Completed 200 OK in 80ms (Views: 67.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:20:50 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 93ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:20:51 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 95ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/2" for 127.0.0.1 at 2011-05-29 16:20:52 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"2"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  describe `histories`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:20:52', 'Record: Professor', 'http://localhost:3000/services/people/people/2', '2011-05-29 15:20:52', '2011-05-29 15:20:52')[0m
+  [1m[35mSQL (0.8ms)[0m  COMMIT
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 112ms (Views: 3.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/search?keyword=Electr%C3%B3nica+I&entity=course" for 127.0.0.1 at 2011-05-29 16:20:55 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Electrónica I", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.0ms)
+
+
+Started GET "/search?keyword=Electr%C3%B3nica+I&entity=course" for 127.0.0.1 at 2011-05-29 16:20:55 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Electrónica I", "entity"=>"course"}
+Completed   in 8ms
+
+TypeError (can't convert Fixnum into String):
+  app/controllers/search_controller.rb:17:in `+'
+  app/controllers/search_controller.rb:17:in `search'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.2ms)
+
+
+Started GET "/search?keyword=Teoria+de+Sinais&entity=course" for 127.0.0.1 at 2011-05-29 16:21:38 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Teoria de Sinais", "entity"=>"course"}
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `histories`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:21:38', 'Search: Teoria de Sinais', 'http://localhost:3000/search?keyword=Teoria de Sinais&start=1&end=20', '2011-05-29 15:21:38', '2011-05-29 15:21:38')[0m
+  [1m[35mSQL (2.2ms)[0m  COMMIT
+  [1m[36mInfEntity Load (0.2ms)[0m  [1mSELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'[0m
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 30ms (Views: 2.8ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-29 16:21:44 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered home_page/index.html.erb within layouts/application (65.9ms)
+Completed 200 OK in 82ms (Views: 68.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-29 16:21:45 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 95ms (Views: 3.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-29 16:21:47 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 92ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/people/people/1" for 127.0.0.1 at 2011-05-29 16:21:48 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"1"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:21:48', 'Record: Professor', 'http://localhost:3000/services/people/people/1', '2011-05-29 15:21:48', '2011-05-29 15:21:48')
+  [1m[36mSQL (1.4ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 173ms (Views: 2.8ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/search?keyword=Teoria+de+Sinais&entity=course" for 127.0.0.1 at 2011-05-29 16:21:50 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Teoria de Sinais", "entity"=>"course"}
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (1, '2011-05-29 15:21:50', 'Search: Teoria de Sinais', 'http://localhost:3000/search?keyword=Teoria de Sinais&start=1&end=20', '2011-05-29 15:21:50', '2011-05-29 15:21:50')
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mInfEntity Load (0.1ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+Rendered search/search.xml.erb (0.4ms)
+Completed 200 OK in 67ms (Views: 2.6ms | ActiveRecord: 1.8ms)

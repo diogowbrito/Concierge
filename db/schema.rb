@@ -10,13 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110522131256) do
+ActiveRecord::Schema.define(:version => 20110529135715) do
 
   create_table "competences", :force => true do |t|
     t.integer  "service_id"
     t.string   "competenceType"
     t.string   "competenceUrl"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_files", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "histories", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "time"
+    t.string   "description"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

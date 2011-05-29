@@ -13,6 +13,10 @@ class SearchController < ApplicationController
     @entity = params[:entity]
     counter = 1
 
+    if session[:user_id] != nil then
+      History.create :user_id => :user_id, :time => Time.now, :description => "Search: "+params[:keyword], :url => "http://localhost:3000/search?keyword="+params[:keyword]+"&start="+@start.to_s+"&end="+@end.to_s
+    end
+
     if @type != nil then
       services = Service.where(:servicetype => @type).order(:ranking)
     elsif @entity != nil then
@@ -88,6 +92,10 @@ class SearchController < ApplicationController
 
     url = competence[0].competenceUrl
     @doc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start="+@start+"&end="+@end),nil, 'UTF-8')
+
+    if session[:user_id] != nil then
+      History.create :user_id => :user_id, :time => Time.now, :description => "Search: "+params[:keyword], :url => "http://localhost:3000/services/"+@servicename+"/search?keyword="+params[:keyword]+"&start="+@start.to_s+"&end="+@end.to_s
+    end
 
     nodes = @doc.xpath("//item")
 

@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  has_many :histories
+
   attr_accessible :userName, :email, :password, :password_confirmation
 
     attr_accessor :password
