@@ -10,13 +10,14 @@ class SessionsController < ApplicationController
     if user
       if user.activateCode == -1 then
         session[:user_id] = user.id
-        redirect_to :root
+        session[:expires_at] = 30.minutes.from_now
         old_user = User.find(old_id)
         histories = old_user.histories
         old_user.destroy
         histories.each do |h|
           h.destroy
         end
+        redirect_to :root
       else
         @msg = "Your account needs activation. Go to your email and do it!"
         render "new"

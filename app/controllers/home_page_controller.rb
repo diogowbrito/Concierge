@@ -5,9 +5,10 @@ class HomePageController < ApplicationController
     if current_user == nil then
 
       name = "Anonymus"+rand(100000).to_s
-      User.create :userName => name, :password => name, :email => name, :notAnonymus => "no"
+      User.create :userName => name, :password => name, :email => name
       users = User.where(:userName => name)
       session[:user_id] = users[0].id
+      session[:expires_at] = 30.minutes.from_now
 
     end
 
