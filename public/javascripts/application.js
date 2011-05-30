@@ -116,6 +116,7 @@ function parseList(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
 
     $(xml).find("list").each(function() {
+        pageWritable.append("<p>" + $(this).attr('title') + "</p>");
         var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
         $(this).find("item").each(function() {
@@ -201,6 +202,9 @@ function parseRecord(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
     var title;
+    $(xml).find("record").each(function() {
+    pageWritable.append("<p>" + $(this).attr('title') + "</p>");
+    });
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
     $(xml).find("record").children().each(function(index, element) {

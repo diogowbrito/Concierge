@@ -1,3 +1,4 @@
+#Encoding: UTF-8
 class UsersController < ApplicationController
 
   def new
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       @rand = rand(2000)
       @user[:activateCode] = @rand
+      @user[:notAnonymus] = "yes"
       @user.save
       UserMailer.registration_confirmation(@user, @rand).deliver
       redirect_to root_url
@@ -27,6 +29,62 @@ class UsersController < ApplicationController
       @user[:activateCode] = -1
       @user.save
     end
+
+  end
+
+  def history
+
+    if session[:user_id] != nil then
+
+      @start = params[:start] || '0'
+      @end = params[:end] || '7'
+      @next = @end.to_i+1
+      puts session[:user_id]
+      user = User.find(session[:user_id])
+
+      history = user.histories.find(:all, :order =>"time", :offset =>@start.to_i, :limit => @end.to_i)
+      puts history.count
+      @doc = Nokogiri::XML("<list title='Histórico'></list>")
+      root = @doc.at_css "list"
+
+      history.each do |hist|
+        root.add_child("<item title='"+hist.time.to_s+"' href='"+hist.url+"'>"+hist.description+"</item>")
+      end
+
+      if history.count != 7 then
+      @next = ""
+
+    end
+
+    else
+
+      @next = ""
+      @doc = Nokogiri::XML("<list title='Utilizador não registado'></list>")
+
+    end
+
+    respond_to :xml
+
+  end
+
+  def sendresource
+
+  if session[:user_id] != nil then
+
+    @url = params[:url]
+    @user = find(:user_id)
+    @msg = "O recurso foi enviado para o seu email com sucesso."
+
+    UserMailer.sendres(@user, @url).deliver
+
+    respond_to :html
+
+  else
+
+  @msg = "Não conseguimos enviar o recurso para o seu email"
+  respond_to :html
+
+  end
 
   end
 

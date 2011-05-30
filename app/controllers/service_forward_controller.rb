@@ -30,7 +30,7 @@ class ServiceForwardController < ApplicationController
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 
-    @url = serviceurl + "/" + @method
+    @url = serviceurl + "/" + @method + "?start=1&end=7"
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
 
     nodes = @doc.xpath("//item")
@@ -62,7 +62,7 @@ class ServiceForwardController < ApplicationController
     title = record['title']
 
     if session[:user_id] != nil then
-      History.create :user_id => :user_id, :time => Time.now, :description => "Record: "+title, :url => "http://localhost:3000/services/"+@servicename+"/"+@method+"/"+@id
+      History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => "http://localhost:3000/services/"+@servicename+"/"+@method+"/"+@id
     end
 
     entity = @doc.xpath("//entity");

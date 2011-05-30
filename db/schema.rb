@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20110529135715) do
     t.string   "passwordHash"
     t.string   "passwordSalt"
     t.integer  "activateCode"
+    t.string   "notAnonymus"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

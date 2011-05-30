@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :passwordHash
       t.string :passwordSalt
       t.integer :activateCode
+      t.string :notAnonymus
 
       t.timestamps
     end

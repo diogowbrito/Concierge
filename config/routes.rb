@@ -21,12 +21,14 @@ Concierge::Application.routes.draw do
   match "admin/listservices" => "BackOffice#listservices"
   match "admin/destroyservice" => "BackOffice#destroyservice"
 
-  #test login
+  #user actions
 
   match "login" => "sessions#new"
   match "logout" => "sessions#destroy"
   match "signin" => "users#new"
   match "activation" => "users#activate"
+  match "history" => "Users#history", :defaults => { :format => :xml}
+  match "sendresource" => "Users#sendresource"
 
 #  match "services/:service/:id" => "Record#record"
 #  match "record" => "Record#record", :defaults => { :format => :xml}

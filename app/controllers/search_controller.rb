@@ -8,14 +8,10 @@ class SearchController < ApplicationController
     text = CGI.escape(params[:keyword].to_s)
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     @start = (params[:start] || '1').to_i
-    @end = (params[:end] || '20').to_i
+    @end = (params[:end] || '7').to_i
     @type = params[:type]
     @entity = params[:entity]
     counter = 1
-
-    if session[:user_id] != nil then
-      History.create :user_id => :user_id, :time => Time.now, :description => "Search: "+params[:keyword], :url => "http://localhost:3000/search?keyword="+params[:keyword]+"&start="+@start.to_s+"&end="+@end.to_s
-    end
 
     if @type != nil then
       services = Service.where(:servicetype => @type).order(:ranking)
@@ -84,7 +80,7 @@ class SearchController < ApplicationController
     text = CGI.escape(params[:keyword].to_s)
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     @start = (params[:start] || '1')
-    @end = (params[:end] || '20')
+    @end = (params[:end] || '7')
     @servicename = params[:service]
     service = Service.where(:serviceName => @servicename)
     competence = service[0].competences.where(:competenceType => "Search")
@@ -92,10 +88,6 @@ class SearchController < ApplicationController
 
     url = competence[0].competenceUrl
     @doc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start="+@start+"&end="+@end),nil, 'UTF-8')
-
-    if session[:user_id] != nil then
-      History.create :user_id => :user_id, :time => Time.now, :description => "Search: "+params[:keyword], :url => "http://localhost:3000/services/"+@servicename+"/search?keyword="+params[:keyword]+"&start="+@start.to_s+"&end="+@end.to_s
-    end
 
     nodes = @doc.xpath("//item")
 
