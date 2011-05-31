@@ -49081,3 +49081,27 @@ Started GET "/" for 127.0.0.1 at 2011-05-30 22:29:51 +0100
 Rendered home_page/index.html.erb within layouts/application (9.3ms)
 Completed 200 OK in 185ms (Views: 12.6ms | ActiveRecord: 5.4ms)
 >>>>>>> 3df57e63b9d635454941f8ceb175ad24369cad22
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 08:52:47 -0700
+  Processing by HomePageController#index as HTML
+Completed   in 678ms
+
+Mysql2::Error (Table 'Concierge_development.users' doesn't exist):
+  app/controllers/home_page_controller.rb:8:in `index'
+
+Rendered /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (71.3ms)
+Rendered /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (90.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 08:52:52 -0700
+  Processing by HomePageController#index as HTML
+Completed   in 28ms
+
+Mysql2::Error (Table 'Concierge_development.users' doesn't exist):
+  app/controllers/home_page_controller.rb:8:in `index'
+
+Rendered /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.7ms)
+Rendered /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.4ms)
+Rendered /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (20.5ms)
