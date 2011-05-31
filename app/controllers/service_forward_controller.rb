@@ -12,12 +12,12 @@ class ServiceForwardController < ApplicationController
 
     nodes.each do |node|
       href = node['href']
-      link = href.gsub(homeurl, "http://localhost:3000/services/"+@servicename)
+      link = href.gsub(homeurl, $myApplicationURL+"/services/"+@servicename)
       node['href'] = link
     end
 
     root = @doc.at_css "record"
-    root.add_child("<search>http://localhost:3000/services/"+@servicename+"/search?keyword=<search/>")
+    root.add_child("<search>"+$myApplicationURL+"/services/"+@servicename+"/search?keyword=<search/>")
 
     respond_to :xml
   end
@@ -37,8 +37,10 @@ class ServiceForwardController < ApplicationController
 
     nodes.each do |node|
       href = node['href']
-      link = href.gsub(serviceurl, "http://localhost:3000/services/"+@servicename)
-      node['href'] = link
+      if href != nil
+       link = href.gsub(serviceurl, $myApplicationURL + "/services/"+@servicename)
+       node['href'] = link
+      end
     end
 
     respond_to :xml
@@ -62,7 +64,7 @@ class ServiceForwardController < ApplicationController
     title = record['title']
 
     if session[:user_id] != nil then
-      History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => "http://localhost:3000/services/"+@servicename+"/"+@method+"/"+@id
+      History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => $myApplicationURL + "/services/"+@servicename+"/"+@method+"/"+@id
     end
 
     entity = @doc.xpath("//entity");
@@ -79,7 +81,7 @@ class ServiceForwardController < ApplicationController
       plus_value = value.gsub(" ", "+")
       puts request.port
       puts request.host
-      link = 'http://localhost:3000/'
+      link = $myApplicationURL+'/'
 
       if service != nil then
         link += 'services/'+service+'search?keyword='+plus_value
@@ -107,7 +109,7 @@ class ServiceForwardController < ApplicationController
         node.name = "external_link"
         href = node['ehref']
       end
-      link = href.gsub(serviceurl, "http://localhost:3000/services/"+@servicename)
+      link = href.gsub(serviceurl, $myApplicationURL+"/services/"+@servicename)
       node['href'] = link
 
     end

@@ -114,13 +114,17 @@ function parseList(xml) {
     var bla = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("list"+bla);
     var pageWritable = $("[data-role=content]", page.get(0));
-
+   // html += '<li class="slide_items ' + title + '"><a class="search" href="' + attr + '" >' + text + '</a></li>';
     $(xml).find("list").each(function() {
         pageWritable.append("<p>" + $(this).attr('title') + "</p>");
         var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
         $(this).find("item").each(function() {
-            list.append("<li class='item' href=" + $(this).attr('href') + ">" + "<a href='' >" + $(this).text() + "<p>" + $(this).attr("title") + "</p> </a></li>");
+            var attr = $(this).attr('href');
+            if (attr != undefined )
+                list.append("<li>" + "<a class='item' href=" + $(this).attr('href') + ">" + $(this).text() + "<p>" + $(this).attr("title") + "</p> </a></li>");
+            else
+               list.append("<li class='item'>" + $(this).text() + "<p>" + $(this).attr("title") + "</p></li>");
         });
 
     });
@@ -201,10 +205,9 @@ function parseRecord(xml) {
     var page = createPage("record" + bla);
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
-    var title;
-    $(xml).find("record").each(function() {
-    pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-    });
+    var title = $(xml).find("record").attr('title');
+    pageWritable.append("<p>" + title + "</p>");
+
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
     $(xml).find("record").children().each(function(index, element) {
@@ -307,7 +310,10 @@ $('.list').live('click', function() {
 });
 
 $('.item').live('click', function() {
+    event.stopPropagation();
+    event.preventDefault();
     getRecord($(this).attr('href'));
+    $.mobile.ajaxEnabled(false);
 });
 
 $('.search').live('click', function(event) {
