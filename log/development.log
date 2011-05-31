@@ -48907,3 +48907,3251 @@ Started GET "/" for 127.0.0.1 at 2011-05-30 22:29:51 +0100
   [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
 Rendered home_page/index.html.erb within layouts/application (9.3ms)
 Completed 200 OK in 185ms (Views: 12.6ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 15:17:55 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'Anonymus32689') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'Anonymus32689') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.6ms)[0m  [1mdescribe `users`[0m
+  [1m[35mAREL (0.3ms)[0m  INSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `notAnonymus`, `created_at`, `updated_at`) VALUES ('Anonymus32689', 'Anonymus32689', '$2a$10$1RGTstaj5/QlixR7z4LlLOYUjL/SKHjMZESgQeXcShKaqK1PFPfwK', '$2a$10$1RGTstaj5/QlixR7z4LlLO', NULL, NULL, '2011-05-31 14:17:56', '2011-05-31 14:17:56')
+  [1m[36mSQL (1.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`userName` = 'Anonymus32689'
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 14 LIMIT 1
+Rendered home_page/index.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 345ms (Views: 20.5ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-31 15:17:59 +0100
+  Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 14 LIMIT 1[0m
+Rendered sessions/new.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 30ms (Views: 16.7ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-31 15:18:03 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"p3n62N5SpZPOqafrPphBjhnaF296qSHn67OxxQzzTJQ=", "username"=>"horta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[35mUser Load (15.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 14 LIMIT 1
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'horta' LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 14 LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.3ms)[0m  DELETE FROM `users` WHERE `users`.`id` = 14
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mHistory Load (0.4ms)[0m  SELECT `histories`.* FROM `histories` WHERE (`histories`.user_id = 14)
+Redirected to http://localhost:3000/
+Completed 302 Found in 283ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 15:18:03 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (16.1ms)
+Completed 200 OK in 46ms (Views: 19.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 15:18:32 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (55.4ms)
+Completed 200 OK in 85ms (Views: 59.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-31 15:18:34 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.3ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Completed   in 95ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/service_forward_controller.rb:10:in `homepagerequest'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.7ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.6ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-31 15:18:36 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)
+Completed   in 90ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/service_forward_controller.rb:10:in `homepagerequest'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (10.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (16.4ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-31 15:18:38 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)[0m
+Completed   in 91ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/service_forward_controller.rb:10:in `homepagerequest'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (9.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.6ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:19:01 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Completed   in 20ms
+
+NoMethodError (undefined method `find' for #<UsersController:0x00000003346748>):
+  app/controllers/users_controller.rb:77:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.4ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:19:44 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Completed   in 55ms
+
+NoMethodError (undefined method `find' for #<UsersController:0x00000001da5448>):
+  app/controllers/users_controller.rb:77:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.3ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:19:54 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 60096ms
+
+Timeout::Error (Timeout::Error):
+  app/mailers/user_mailer.rb:13:in `sendres'
+  app/controllers/users_controller.rb:80:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.5ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.0ms)
+
+
+Started GET "/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:20:55 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"2"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Completed   in 23ms
+
+Errno::ECONNREFUSED (Connection refused - connect(2)):
+  app/controllers/service_forward_controller.rb:59:in `recordrequest'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.5ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.8ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:22:48 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 60078ms
+
+Timeout::Error (Timeout::Error):
+  app/mailers/user_mailer.rb:13:in `sendres'
+  app/controllers/users_controller.rb:80:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.2ms)
+
+
+Started GET "/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:23:48 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"2"}
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+Rendered service_forward/recordrequest.xml.erb (0.5ms)
+Completed 200 OK in 1491ms (Views: 3.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 15:28:09 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (50.3ms)
+Completed 200 OK in 77ms (Views: 53.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-05-31 15:28:11 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 1)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 105ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-05-31 15:28:12 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 144ms (Views: 3.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/1" for 127.0.0.1 at 2011-05-31 15:28:13 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  describe `histories`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (2, '2011-05-31 14:28:13', 'Recurso: Professor', 'http://localhost:3000/services/people/people/1', '2011-05-31 14:28:13', '2011-05-31 14:28:13')[0m
+  [1m[35mSQL (1.7ms)[0m  COMMIT
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 192ms (Views: 2.8ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:39:20 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Completed   in 26ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:13:in `sendres'
+  app/controllers/users_controller.rb:82:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.8ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:40:01 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 26ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:13:in `sendres'
+  app/controllers/users_controller.rb:82:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.7ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:42:53 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 180ms
+
+NameError (undefined local variable or method `root' for #<UserMailer:0x000000030d13f0>):
+  app/mailers/user_mailer.rb:19:in `sendres'
+  app/controllers/users_controller.rb:87:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:43:51 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (2.7ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 143ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:25:in `+'
+  app/mailers/user_mailer.rb:25:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.5ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:44:45 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 113ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:24:in `+'
+  app/mailers/user_mailer.rb:24:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.5ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.8ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:45:54 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 142ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:25:in `+'
+  app/mailers/user_mailer.rb:25:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.9ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:46:18 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 141ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:25:in `+'
+  app/mailers/user_mailer.rb:25:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (39.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (45.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:46:44 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 161ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:25:in `+'
+  app/mailers/user_mailer.rb:25:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.6ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.9ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:52:17 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 180ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:25:in `+'
+  app/mailers/user_mailer.rb:25:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.5ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:53:00 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 199ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:24:in `+'
+  app/mailers/user_mailer.rb:24:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.5ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.4ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:53:16 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 152ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:24:in `+'
+  app/mailers/user_mailer.rb:24:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.7ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:59:15 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered users/sendresource.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 59ms (Views: 4.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 15:59:55 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+Rendered users/sendresource.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:01:01 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+Rendered users/sendresource.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:01:23 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+Rendered users/sendresource.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 5ms (Views: 4.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:02:04 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+Rendered users/sendresource.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:03:00 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+Rendered users/sendresource.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-31 16:03:09 +0100
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 5.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-31 16:03:14 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1Ys/aH4SHJkM3OPrvs71iIxgrbG90guV16z8yFhbhfw=", "username"=>"horta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'horta' LIMIT 1[0m
+Completed   in 107ms
+
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  app/controllers/sessions_controller.rb:14:in `create'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 16:03:31 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'Anonymus24678') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'Anonymus24678') LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `users`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `notAnonymus`, `created_at`, `updated_at`) VALUES ('Anonymus24678', 'Anonymus24678', '$2a$10$K9IX6.jkWdCqKFBxKW8E8.MVZCKp5UIeqN.8SFpSpK56xWSyiTRXW', '$2a$10$K9IX6.jkWdCqKFBxKW8E8.', NULL, NULL, '2011-05-31 15:03:32', '2011-05-31 15:03:32')
+  [1m[36mSQL (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`userName` = 'Anonymus24678'
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 15 LIMIT 1
+Rendered home_page/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 137ms (Views: 13.0ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-05-31 16:03:33 +0100
+  Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 15 LIMIT 1[0m
+Rendered sessions/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 24ms (Views: 12.7ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2011-05-31 16:03:38 +0100
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1Ys/aH4SHJkM3OPrvs71iIxgrbG90guV16z8yFhbhfw=", "username"=>"horta", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 15 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'horta' LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 15 LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (19.4ms)[0m  DELETE FROM `users` WHERE `users`.`id` = 15
+  [1m[36mSQL (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mHistory Load (0.3ms)[0m  SELECT `histories`.* FROM `histories` WHERE (`histories`.user_id = 15)
+Redirected to http://localhost:3000/
+Completed 302 Found in 142ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-05-31 16:03:39 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (57.2ms)
+Completed 200 OK in 85ms (Views: 60.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:03:50 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 148ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:26:in `+'
+  app/mailers/user_mailer.rb:26:in `block in sendres'
+  app/mailers/user_mailer.rb:22:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.5ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:04:37 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 186ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:25:in `+'
+  app/mailers/user_mailer.rb:25:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.9ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:05:13 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 179ms
+
+TypeError (can't convert nil into String):
+  app/mailers/user_mailer.rb:26:in `+'
+  app/mailers/user_mailer.rb:26:in `block in sendres'
+  app/mailers/user_mailer.rb:22:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.7ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.7ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:09:30 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 111ms
+
+NoMethodError (undefined method `Node' for Nokogiri::HTML:Module):
+  app/mailers/user_mailer.rb:33:in `block in sendres'
+  app/mailers/user_mailer.rb:22:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.6ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:12:39 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 144ms
+
+NoMethodError (undefined method `Node' for Nokogiri::XML:Module):
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.6ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:18:21 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 143ms
+
+NoMethodError (undefined method `new_from_str' for #<UserMailer:0x000000020be490>):
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.9ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:18:31 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 140ms
+
+NoMethodError (undefined method `new_from_str' for Nokogiri:Module):
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (45.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:18:45 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 117ms
+
+NoMethodError (undefined method `new_from_str' for Nokogiri::XML:Module):
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (46.6ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:21:29 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 182ms
+
+NoMethodError (undefined method `new_from_str' for Nokogiri::XML::Node:Class):
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.8ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:21:37 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 180ms
+
+ArgumentError (wrong number of arguments (1 for 2+)):
+  app/mailers/user_mailer.rb:31:in `new'
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.1ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:22:27 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 153ms
+
+NameError (undefined local variable or method `html' for #<UserMailer:0x000000035d74d0>):
+  app/mailers/user_mailer.rb:31:in `block in sendres'
+  app/mailers/user_mailer.rb:20:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.0ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:23:24 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 183ms
+
+NoMethodError (undefined method `mail' for #<User:0x00000003359640>):
+  app/mailers/user_mailer.rb:46:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.5ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:23:38 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 195ms
+
+NameError (undefined local variable or method `title' for #<UserMailer:0x0000000325caa8>):
+  app/mailers/user_mailer.rb:46:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.1ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:24:35 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (30150ms)
+Date: Tue, 31 May 2011 16:24:36 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de508341ddd5_9b61834d74354b6@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<<ul></ul>><li>Adolfo Sanchez Steiger Gar</li></<ul></ul>><p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<<ul></ul>><li>Professor Catedr</li></<ul></ul>><p>Sector: Departamento de Engenharia Electrot</p>
+<<ul></ul>><li>Departamento de Engenharia Electrot</li></<ul></ul>><p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 30426ms (Views: 12.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:41:39 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (6868ms)
+Date: Tue, 31 May 2011 16:41:40 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50c342bef7_9b61927538355ea@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<<ul></ul>><li>Adolfo Sanchez Steiger Gar</li></<ul></ul>><p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<<ul></ul>><li>Professor Catedr</li></<ul></ul>><p>Sector: Departamento de Engenharia Electrot</p>
+<<ul></ul>><li>Departamento de Engenharia Electrot</li></<ul></ul>><p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 7047ms (Views: 13.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:43:27 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5464ms)
+Date: Tue, 31 May 2011 16:43:27 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50c9f69e88_9b611432a43562b@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<<ul></ul>><li>Adolfo Sanchez Steiger Gar</li></<ul></ul>><p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<<ul></ul>><li>Professor Catedr</li></<ul></ul>><p>Sector: Departamento de Engenharia Electrot</p>
+<<ul></ul>><li>Departamento de Engenharia Electrot</li></<ul></ul>><p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 5672ms (Views: 13.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:45:19 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5537ms)
+Date: Tue, 31 May 2011 16:45:19 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50d0f5bbfa_9b618c40dc3578@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<<ul></ul>><li>Adolfo Sanchez Steiger Gar</li></<ul></ul>><p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<<ul></ul>><li>Professor Catedr</li></<ul></ul>><p>Sector: Departamento de Engenharia Electrot</p>
+<<ul></ul>><li>Departamento de Engenharia Electrot</li></<ul></ul>><p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 5743ms (Views: 13.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:47:02 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 181ms
+
+NoMethodError (undefined method `empty?' for #<UserMailer:0x00000001f4d2c8>):
+  app/mailers/user_mailer.rb:24:in `block in sendres'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.7ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:47:26 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.7ms)
+
+Sent mail to jphorta.volt@gmail.com (5211ms)
+Date: Tue, 31 May 2011 16:47:26 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50d8e70ff7_9b61b011c435828@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<<ul></ul>><li>Adolfo Sanchez Steiger Gar</li></<ul></ul>><p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<<ul></ul>><li>Professor Catedr</li></<ul></ul>><p>Sector: Departamento de Engenharia Electrot</p>
+<<ul></ul>><li>Departamento de Engenharia Electrot</li></<ul></ul>><p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 5395ms (Views: 14.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:50:17 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5665ms)
+Date: Tue, 31 May 2011 16:50:17 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50e3990e0a_9b6187284035937@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<<ul></ul>><li>Adolfo Sanchez Steiger Gar</li></<ul></ul>><p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<<ul></ul>><li>Professor Catedr</li></<ul></ul>><p>Sector: Departamento de Engenharia Electrot</p>
+<<ul></ul>><li>Departamento de Engenharia Electrot</li></<ul></ul>><p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 5836ms (Views: 13.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:52:37 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5277ms)
+Date: Tue, 31 May 2011 16:52:37 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50ec59c9fd_9b61974b9436044@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails: 
+    asg@dee.fct.unl.pt
+    asg@fct.unl.pt
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location: 
+    Ed.X
+    2.23
+  </p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses: 
+    Electr</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 5483ms (Views: 13.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:56:02 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5532ms)
+Date: Tue, 31 May 2011 16:56:02 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de50f92a984b_9b617cd1c436165@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 5714ms (Views: 14.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 16:58:27 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.7ms)
+
+Sent mail to jphorta.volt@gmail.com (6074ms)
+Date: Tue, 31 May 2011 16:58:28 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de510241fb3_9b618e2b5436252@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 6282ms (Views: 14.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:03:17 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (27711ms)
+Date: Tue, 31 May 2011 17:03:17 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de511453f875_9b618a3850363d5@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 27916ms (Views: 11.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:09:44 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (30009ms)
+Date: Tue, 31 May 2011 17:09:44 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de512c8d6966_9b618da9043649b@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 30213ms (Views: 13.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:11:09 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5069ms)
+Date: Tue, 31 May 2011 17:11:10 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5131df40d5_9b610999c036546@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 5241ms (Views: 13.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:12:13 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 182ms
+
+TypeError (can't convert Nokogiri::XML::NodeSet into String):
+  app/mailers/user_mailer.rb:21:in `+'
+  app/mailers/user_mailer.rb:21:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.8ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:12:38 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed   in 180ms
+
+NoMethodError (undefined method `add_child' for [#<Nokogiri::XML::Element:0x18e94e0 name="ul">]:Nokogiri::XML::NodeSet):
+  app/mailers/user_mailer.rb:22:in `sendres'
+  app/controllers/users_controller.rb:86:in `sendresource'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.5ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:13:10 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5596ms)
+Date: Tue, 31 May 2011 17:13:10 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de51396a128f_9b61843d4c3662e@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<ul><li>boraa</li></ul>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 5776ms (Views: 14.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:13:55 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (5122ms)
+Date: Tue, 31 May 2011 17:13:56 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de513c419cd2_9b61e03f9836713@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<ul><li>boraa</li></ul>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<<ul></ul>><li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li></<ul></ul>><p>Office Location</p>
+<<ul></ul>><li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li></<ul></ul>><p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<<ul></ul>><li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li></<ul></ul>>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 5327ms (Views: 14.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:22:10 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (30008ms)
+Date: Tue, 31 May 2011 17:22:10 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de515b2c22b6_9b618ad74c36826@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 30214ms (Views: 14.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:33:31 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (7527ms)
+Date: Tue, 31 May 2011 17:33:31 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5185b62c32_9b61dfe6b0369fa@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 7729ms (Views: 11.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:35:34 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.6ms)
+
+Sent mail to jphorta.volt@gmail.com (6475ms)
+Date: Tue, 31 May 2011 17:35:34 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de518d631cd9_9b618aadbc370b7@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar</p>
+<p>Emails</p>
+<ul>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr</p>
+<p>Sector: Departamento de Engenharia Electrot</p>
+<p>Courses</p>
+<ul>
+<li>Electr</li>
+<li>
+    </li>
+<li>Electr</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+    </li>
+<li>Sistemas L</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 6648ms (Views: 12.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:38:30 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (6632ms)
+Date: Tue, 31 May 2011 17:38:30 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de51986d6e34_9b61aeb504371bf@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 6841ms (Views: 14.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:39:43 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (4877ms)
+Date: Tue, 31 May 2011 17:39:43 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de519cf9b74f_9b61898d8837241@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 5093ms (Views: 15.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:40:34 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5180ms)
+Date: Tue, 31 May 2011 17:40:34 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de51a024dc0d_9b61aed41c373ca@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 5387ms (Views: 13.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:49:07 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (14563ms)
+Date: Tue, 31 May 2011 17:49:07 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de51c03e6da1_9b6189b2a437421@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 14746ms (Views: 13.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:52:41 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.7ms)
+
+Sent mail to jphorta.volt@gmail.com (5689ms)
+Date: Tue, 31 May 2011 17:52:41 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de51cd9951ff_9b61dead043758@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+<li>nice</li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 5902ms (Views: 14.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 17:55:43 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.4ms)
+
+Sent mail to jphorta.volt@gmail.com (5341ms)
+Date: Tue, 31 May 2011 17:55:44 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de51d901228b_9b618aae0c37618@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>'asg@dee.fct.unl.pt'</li>
+<li>'
+    '</li>
+<li>'asg@fct.unl.pt'</li>
+<li>'
+  '</li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>'Ed.X'</li>
+<li>'
+    '</li>
+<li>'2.23'</li>
+<li>'
+  '</li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>'Electr=C3=B3nica I'</li>
+<li>'
+    '</li>
+<li>'Electr=C3=B3nica II'</li>
+<li>'
+    '</li>
+<li>'Sistemas L=C3=B3gicos'</li>
+<li>'
+    '</li>
+<li>'Sistemas L=C3=B3gicos'</li>
+<li>'
+    '</li>
+<li>'Sistemas L=C3=B3gicos I'</li>
+<li>'
+  '</li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 5545ms (Views: 13.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:11:40 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5885ms)
+Date: Tue, 31 May 2011 18:11:41 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5214d14316_9b61afbc2437733@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 6088ms (Views: 13.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:13:59 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5085ms)
+Date: Tue, 31 May 2011 18:14:00 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de521d86368_9b6189b36c37847@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+<li>hfhf</li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 5262ms (Views: 14.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:14:51 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5024ms)
+Date: Tue, 31 May 2011 18:14:51 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5220bded2a_9b61af4b903798a@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 5229ms (Views: 14.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:15:54 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5862ms)
+Date: Tue, 31 May 2011 18:15:54 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5224a4c5f1_9b618a79c83807b@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 6068ms (Views: 14.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:16:57 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (6508ms)
+Date: Tue, 31 May 2011 18:16:57 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de52289aba8f_9b61df8f8038178@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 6690ms (Views: 11.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:19:48 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (4867ms)
+Date: Tue, 31 May 2011 18:19:48 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de523344e864_9b618aa9e8382f2@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 5066ms (Views: 5.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:20:16 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5799ms)
+Date: Tue, 31 May 2011 18:20:17 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de523512127a_9b618aa9e838383@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 6018ms (Views: 14.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:20:41 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5868ms)
+Date: Tue, 31 May 2011 18:20:42 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5236a3493c_9b6f9cbd0384b7@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 6086ms (Views: 14.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:23:52 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5565ms)
+Date: Tue, 31 May 2011 18:23:53 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de524291c9b6_9b61df9b243856@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 5745ms (Views: 14.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:28:38 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (5979ms)
+Date: Tue, 31 May 2011 18:28:39 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5254714ce0_9b618b2198386af@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 6193ms (Views: 13.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:29:14 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (30008ms)
+Date: Tue, 31 May 2011 18:29:14 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de5256aef405_9b618b21983875e@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>
+    </li>
+<li>asg@dee.fct.unl.pt</li>
+<li>
+    </li>
+<li>asg@fct.unl.pt</li>
+<li>
+  </li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>
+    </li>
+<li>Ed.X</li>
+<li>
+    </li>
+<li>2.23</li>
+<li>
+  </li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>
+    </li>
+<li>Electr=C3=B3nica I</li>
+<li>
+    </li>
+<li>Electr=C3=B3nica II</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>
+    </li>
+<li>Sistemas L=C3=B3gicos I</li>
+<li>
+  </li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 30211ms (Views: 6.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sendresource?url=http://localhost:3000/services/people/people/2" for 127.0.0.1 at 2011-05-31 18:30:14 +0100
+  Processing by UsersController#sendresource as HTML
+  Parameters: {"url"=>"http://localhost:3000/services/people/people/2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered user_mailer/sendres.html.erb (0.5ms)
+
+Sent mail to jphorta.volt@gmail.com (26543ms)
+Date: Tue, 31 May 2011 18:30:14 +0100
+From: concierge.g06@gmail.com
+To: horta <jphorta.volt@gmail.com>
+Message-ID: <4de525a67d1ff_9b619493b83887f@ubuntu.mail>
+Subject: Recurso :Professor
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div>
+<p>Name: Adolfo Sanchez Steiger Gar=C3=A7=C3=A3o</p>
+<p>Emails</p>
+<ul>
+<li>asg@dee.fct.unl.pt</li>
+<li>asg@fct.unl.pt</li>
+</ul>
+<p>Office Location</p>
+<ul>
+<li>Ed.X</li>
+<li>2.23</li>
+</ul>
+<p>Category: Professor Catedr=C3=A1tico</p>
+<p>Sector: Departamento de Engenharia Electrot=C3=A9cnica</p>
+<p>Courses</p>
+<ul>
+<li>Electr=C3=B3nica I</li>
+<li>Electr=C3=B3nica II</li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>Sistemas L=C3=B3gicos</li>
+<li>Sistemas L=C3=B3gicos I</li>
+</ul>
+</div></body></html>
+Rendered users/sendresource.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 26720ms (Views: 14.1ms | ActiveRecord: 0.2ms)

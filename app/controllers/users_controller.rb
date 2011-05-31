@@ -69,22 +69,35 @@ class UsersController < ApplicationController
 
   def sendresource
 
-  if session[:user_id] != nil then
+  if session[:user_id] != nil
+    user = User.find(session[:user_id])
+    if user.notAnonymus != nil
 
-    @url = params[:url]
-    @user = find(:user_id)
-    @msg = "O recurso foi enviado para o seu email com sucesso."
+      urlraw = params[:url]
+      urlarray = urlraw.split('/')
+      service = Service.where(:serviceName => urlarray[4])
+      serviceurl = service[0].url
 
-    UserMailer.sendres(@user, @url).deliver
+      @url = serviceurl+"/" +urlarray[5]+"/"+urlarray[6]
 
-    respond_to :html
+      @user = User.find(session[:user_id])
+      @msg = "O recurso foi enviado para o seu email com sucesso."
+
+      UserMailer.sendres(@user, @url).deliver
+
+    else
+
+      @msg = "Não conseguimos enviar o recurso para o seu email"
+
+    end
 
   else
 
-  @msg = "Não conseguimos enviar o recurso para o seu email"
-  respond_to :html
+    @msg = "Não conseguimos enviar o recurso para o seu email"
 
   end
+
+  respond_to :html
 
   end
 

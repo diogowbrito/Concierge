@@ -1,3 +1,4 @@
+#Encoding: UTF-8
 class UserMailer < ActionMailer::Base
 
   default :from => "concierge.g06@gmail.com"
@@ -12,37 +13,41 @@ class UserMailer < ActionMailer::Base
 
   @doc = Nokogiri::XML(open(url), nil, 'UTF-8')
   @newdoc = Nokogiri::HTML("<div></div>")
+  tempdoc = Nokogiri::HTML("<div></div>")
 
   xmlroot = @doc.at_css("record")
   htmlroot = @newdoc.at_css("div")
 
-  children = root.children()
-
+  children = xmlroot.children()
   children.each do |child|
 
-      if child.children().empty?
+      if child['title'] != nil
+      if child.children().count == 1
 
         htmlroot.add_child("<p>"+child['title']+": "+child.text()+"</p>")
 
       else
 
         child2 = child.children()
-        htmlroot.add_child("<p>"+child['title']+": "+child.text()+"</p>")
-        node = Nokogiri::HTML::Node("<ul></ul>")
+        htmlroot.add_child("<p>"+child['title']+"</p>")
+        htmlroot.add_child("<ul></ul>")
 
         child2.each do |c|
 
-            node.add_child("<li>"+c.text()+"</li>")
+            node = @newdoc.xpath("//ul").last()
+            text = c.text.delete " "
+            if text.size != 1
+              node.add_child("<li>"+c.text()+"</li>")
+            end
 
         end
 
-        htmlroot.add_child(node)
-
+      end
       end
 
   end
 
-  mail(:to => "#{user.userName} <#{user.mail}>", :subject => "Recurso :"+title)
+  mail(:to => "#{user.userName} <#{user.email}>", :subject => "Recurso :"+xmlroot['title'])
 
   end
 
