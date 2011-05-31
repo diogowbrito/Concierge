@@ -37,8 +37,10 @@ class ServiceForwardController < ApplicationController
 
     nodes.each do |node|
       href = node['href']
-      link = href.gsub(serviceurl, "http://localhost:3000/services/"+@servicename)
-      node['href'] = link
+      if href != nil
+       link = href.gsub(serviceurl, "http://localhost:3000/services/"+@servicename)
+       node['href'] = link
+      end
     end
 
     respond_to :xml
