@@ -50,11 +50,13 @@ class SearchController < ApplicationController
       name = namenodes[0].content
       nodes = result.xpath("//item")
 
+      address = get_address
+
       nodes.each do |node|
         if counter >= @start then
         root = @doc.at_css "list"
         href = node['href']
-        link = href.gsub(homeurl, "http://localhost:3000/services/"+name)
+        link = href.gsub(homeurl, address+"services/"+name)
         node['href'] = link
           root.add_child(node)
         end
@@ -89,11 +91,13 @@ class SearchController < ApplicationController
     url = competence[0].competenceUrl
     @doc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start="+@start+"&end="+@end),nil, 'UTF-8')
 
+    address = get_address
+
     nodes = @doc.xpath("//item")
 
     nodes.each do |node|
       href = node['href']
-      link = href.gsub(homeurl, "http://localhost:3000/services")
+      link = href.gsub(homeurl, address+"/services")
       node['href'] = link
     end
 
