@@ -1,14 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user
+  helper_method :current_user, :get_address
 
-  $myApplicationURL = "http://193.136.122.76:80"
-
+#  $myApplicationURL = "http://193.136.122.76:80"
 
   before_filter :session_expiry, :except => [:login, :logout]
   before_filter :update_activity_time, :except => [:login, :logout]
 
   private
+
+  def get_address
+    port = request.port
+    host = request.host
+    return "http://"+host.to_s+":"+port.to_s+"/"
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

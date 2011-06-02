@@ -10,14 +10,16 @@ class ServiceForwardController < ApplicationController
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
     nodes = @doc.xpath("//link")
 
+    address = get_address
+
     nodes.each do |node|
       href = node['href']
-      link = href.gsub(homeurl, $myApplicationURL+"/services/"+@servicename)
+      link = href.gsub(homeurl, address+"services/"+@servicename)
       node['href'] = link
     end
 
     root = @doc.at_css "record"
-    root.add_child("<search>"+$myApplicationURL+"/services/"+@servicename+"/search?keyword=<search/>")
+    root.add_child("<search>"+address+"services/"+@servicename+"/search?keyword=<search/>")
 
     respond_to :xml
   end
@@ -35,10 +37,12 @@ class ServiceForwardController < ApplicationController
 
     nodes = @doc.xpath("//item")
 
+    address = get_address
+
     nodes.each do |node|
       href = node['href']
       if href != nil
-       link = href.gsub(serviceurl, $myApplicationURL + "/services/"+@servicename)
+       link = href.gsub(serviceurl, address + "services/"+@servicename)
        node['href'] = link
       end
     end
@@ -79,9 +83,9 @@ class ServiceForwardController < ApplicationController
 
       node.remove
       plus_value = value.gsub(" ", "+")
-      puts request.port
-      puts request.host
-      link = $myApplicationURL+'/'
+#      puts request.port
+#      puts request.host
+      link = get_address
 
       if service != nil then
         link += 'services/'+service+'search?keyword='+plus_value
@@ -102,6 +106,9 @@ class ServiceForwardController < ApplicationController
     end
 
     link_tag = @doc.xpath("//link")
+
+    address = get_address
+
     link_tag.each do |node|
 
       href = node['href']
@@ -109,7 +116,7 @@ class ServiceForwardController < ApplicationController
         node.name = "external_link"
         href = node['ehref']
       end
-      link = href.gsub(serviceurl, $myApplicationURL+"/services/"+@servicename)
+      link = href.gsub(serviceurl, address+"services/"+@servicename)
       node['href'] = link
 
     end
