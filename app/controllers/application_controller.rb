@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
 
-  $myApplicationURL = "http://193.136.122.76:80"
+  $myApplicationURL = "http://localhost:3000"
 
 
   before_filter :session_expiry, :except => [:login, :logout]

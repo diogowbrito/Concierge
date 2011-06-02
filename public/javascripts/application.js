@@ -81,7 +81,6 @@ function createPage(id) {
     var headerbody = "<a href='index.html' class='ui-btn-right' data-icon='gear' icon>Login</a>" +
             "<h1 id='logo' class='ui-title'>Concierge</h1>"
     var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
-
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
     var searchform = $('<form>').attr("id", "home_searchform").append(searchformbody);
