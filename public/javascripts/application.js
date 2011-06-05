@@ -77,6 +77,7 @@ function parseSearchList(xml) {
 function createPage(id) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
+    var url = "http://"+document.domain+":"+location.port+"/";
 
     <!-- Draw Header-->
     var headerbody = "<a href='index.html' class='ui-btn-right' data-icon='gear' icon>Login</a>" +
@@ -92,7 +93,7 @@ function createPage(id) {
 
     <!-- Draw Footer nav bar-->
 
-    var historytab = $("<li>").attr("style", "width:25%").append("<a href='history' data-icon='grid'>History</a>");
+    var historytab = $("<li>").attr("style", "width:25%").append("<a class='list' href='"+url+"history' data-icon='grid'>History</a>");
     var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
     var optionstab = $("<li>").attr("style", "width:25%").append("<a href='options' data-icon='gear'>Options</a>");
     var navbarul = $("<ul>").append(historytab).append(searchtab).append(optionstab);
