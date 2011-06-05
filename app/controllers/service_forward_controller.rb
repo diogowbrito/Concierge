@@ -68,7 +68,7 @@ class ServiceForwardController < ApplicationController
     title = record['title']
 
     if session[:user_id] != nil then
-      History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => $myApplicationURL + "/services/"+@servicename+"/"+@method+"/"+@id
+      History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => get_address + "/services/"+@servicename+"/"+@method+"/"+@id
     end
 
     entity = @doc.xpath("//entity");
