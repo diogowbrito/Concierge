@@ -33,6 +33,8 @@ class ServiceForwardController < ApplicationController
     serviceurl = service[0].url
 
     @url = serviceurl + "/" + @method + "?start=1&end=7"
+    puts "======================================="
+    puts @url
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
 
     nodes = @doc.xpath("//item")
