@@ -61,7 +61,7 @@ class ServiceForwardController < ApplicationController
     serviceurl = service[0].url
 
     link = serviceurl + "/" +@method+"/"+@id
-
+    puts link
     @doc = Nokogiri::XML(open(link), nil, 'UTF-8')
 
     record = @doc.at_css("record")

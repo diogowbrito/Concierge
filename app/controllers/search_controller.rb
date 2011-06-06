@@ -27,6 +27,7 @@ class SearchController < ApplicationController
     end
     list = []
     flag = 1
+    itemcounter = 0
     services.each do |service|
       competence = service.competences.where(:competenceType => "Search")
       url = competence[0].competenceUrl
@@ -34,13 +35,17 @@ class SearchController < ApplicationController
       name = service.serviceName
       tempdoc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start=1&end=5000"),nil, 'UTF-8')
       temproot = tempdoc.at_css "list"
+      items = tempdoc.xpath("//item")
+      itemcounter = itemcounter + items.count
       temproot.add_child("<home>"+homeurl+"</home>")
       temproot.add_child("<name>"+name+"</name")
       list << tempdoc
 
     end
 
-    @doc = Nokogiri::XML("<list title='"+params[:keyword]+"'></list>")
+    if itemcounter != 1 then
+    puts itemcounter
+    @doc = Nokogiri::XML("<list title='Keyword: "+params[:keyword]+"'></list>")
 
     list.each do |result|
 
@@ -72,9 +77,33 @@ class SearchController < ApplicationController
 
     end
 
-    respond_to :xml
+      respond_to :xml
 
-   end
+    else
+
+      list.each do |result|
+
+        homenodes = result.xpath("//home")
+        homeurl = homenodes[0].content
+        nodes = result.xpath("//item")
+
+        nodes.each do |node|
+          href = node['href']
+          link = href.gsub(homeurl, "temp")
+          linkarray = link.split("/")
+          @method = linkarray[1]
+          @id = linkarray[2]
+          namenodes = result.xpath("//name")
+          @service = namenodes[0].content
+        end
+
+      end
+
+      redirect_to "/searchrecord/#{@service}/#{@method}/#{@id}"
+
+    end
+
+  end
 
   def servicesearch
     require 'cgi'
@@ -94,14 +123,28 @@ class SearchController < ApplicationController
     address = get_address
 
     nodes = @doc.xpath("//item")
+    if nodes.count != 1 then
 
-    nodes.each do |node|
-      href = node['href']
-      link = href.gsub(homeurl, address+"/services")
-      node['href'] = link
-    end
+      nodes.each do |node|
+        href = node['href']
+        link = href.gsub(homeurl, address+"/services")
+        node['href'] = link
+      end
 
     respond_to :xml
+    else
+
+        nodes.each do |node|
+          href = node['href']
+          link = href.gsub(homeurl, "temp")
+          linkarray = link.split("/")
+          @method = linkarray[1]
+          @id = linkarray[2]
+        end
+
+      redirect_to "/searchrecord/#{@servicename}/#{@method}/#{@id}"
+
+    end
   end
 
 end

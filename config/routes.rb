@@ -7,6 +7,7 @@ Concierge::Application.routes.draw do
   root :to => "HomePage#index"
   match "index" => "HomePage#index"
   match "search" => "Search#search", :defaults => { :format => :xml}
+  match "searchrecord/:service/:method/:id" =>"ServiceForward#recordrequest", :as => "searchrecord", :defaults => { :format => :xml}
 
   #Service forward
   match "services/:service/search" => "Search#servicesearch", :defaults => { :format => :xml}
