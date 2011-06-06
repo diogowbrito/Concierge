@@ -13,6 +13,13 @@ class SearchController < ApplicationController
     @entity = params[:entity]
     counter = 1
 
+
+    user = User.find(session[:user_id])
+    if user.notAnonymus != nil
+      @logged = "true"
+    else @logged = "false"
+    end
+
     if @type != nil then
       services = Service.where(:servicetype => @type).order(:ranking)
     elsif @entity != nil then
@@ -44,8 +51,8 @@ class SearchController < ApplicationController
     end
 
     if itemcounter != 1 then
-    puts itemcounter
-    @doc = Nokogiri::XML("<list title='Keyword: "+params[:keyword]+"'></list>")
+
+    @doc = Nokogiri::XML("<list title='Keyword: "+params[:keyword]+"' logged='"+@logged+"'></list>")
 
     list.each do |result|
 
@@ -116,6 +123,12 @@ class SearchController < ApplicationController
     service = Service.where(:serviceName => @servicename)
     competence = service[0].competences.where(:competenceType => "Search")
     homeurl = service[0].url
+
+    user = User.find(session[:user_id])
+    if user.notAnonymus != nil
+      @logged = "true"
+    else @logged = "false"
+    end
 
     url = competence[0].competenceUrl
     @doc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start="+@start+"&end="+@end),nil, 'UTF-8')
