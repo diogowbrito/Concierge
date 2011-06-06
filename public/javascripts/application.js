@@ -148,7 +148,7 @@ function parseHomepage(xml) {
 function parseList(xml){
 
     var logged;
-    $(xml).find("record").each(function() {
+    $(xml).find("list").each(function() {
         logged = $(this).attr('logged');
     });
 
