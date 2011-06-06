@@ -44,7 +44,7 @@ function createPage(id) {
 
     <!-- Draw Footer nav bar-->
 
-    var historytab = $("<li>").attr("style", "width:25%").append("<a class='list' href='" + url + "history' data-icon='grid'>History</a>");
+    var historytab = $("<li>").attr("style", "width:25%").append("<a class='parse' href='" + url + "history' data-icon='grid'>History</a>");
     var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
     var optionstab = $("<li>").attr("style", "width:25%").append("<a href='options' data-icon='gear'>Options</a>");
     var navbarul = $("<ul>").append(historytab).append(searchtab).append(optionstab);
