@@ -25,14 +25,17 @@ function getParse(url) {
     });
 }
 
-function createPage(id) {
+function createPage(id, logged) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
     var url = "http://" + document.domain + ":" + location.port + "/";
-
+    var log;
     <!-- Draw Header-->
-    var headerbody = "<a href='index.html' class='ui-btn-right' data-icon='gear' icon>Login</a>" +
-            "<h1 id='logo' class='ui-title'>Concierge</h1>"
+    if(logged=='true')
+       log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
+    else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
+    var headerbody = log +
+            "<h1 id='logo' class='ui-title'>Concierge</h1>";
     var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
@@ -75,9 +78,13 @@ function parse(xml) {
 }
 
 function parseHomepage(xml) {
+    var logged;
+    $(xml).find("record").each(function() {
+        logged = $(this).attr('logged');
+    });
 
     var bla = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("homepage" + bla);
+    var page = createPage("homepage" + bla, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
     var list;
     var titleold;
@@ -139,8 +146,14 @@ function parseHomepage(xml) {
 }
 
 function parseList(xml){
+
+    var logged;
+    $(xml).find("list").each(function() {
+        logged = $(this).attr('logged');
+    });
+
     var bla = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("list" + bla);
+    var page = createPage("list" + bla, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
 
       $(xml).find("list").each(function() {
@@ -163,8 +176,14 @@ function parseList(xml){
 
 
 function parseRecord(xml) {
+
+    var logged;
+    $(xml).find("record").each(function() {
+        logged = $(this).attr('logged');
+    });
+
     var bla = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("record" + bla);
+    var page = createPage("record" + bla, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
     var title = $(xml).find("record").attr('title');

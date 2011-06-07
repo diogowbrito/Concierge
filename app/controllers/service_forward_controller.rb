@@ -6,9 +6,19 @@ class ServiceForwardController < ApplicationController
     service = Service.where(:serviceName => @servicename)
     competence = service[0].competences.where(:competenceType => "Home")
     homeurl = service[0].url
+
+    user = User.find(session[:user_id])
+    if user.notAnonymus != nil
+      @logged = "true"
+    else @logged = "false"
+    end
+
     @url = competence[0].competenceUrl
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
     nodes = @doc.xpath("//link")
+
+    root = @doc.root()
+    root['logged'] = @logged
 
     address = get_address
 
@@ -28,14 +38,20 @@ class ServiceForwardController < ApplicationController
 
     @servicename = params[:service]
     @method = params[:method]
-
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 
+    user = User.find(session[:user_id])
+    if user.notAnonymus != nil
+      @logged = "true"
+    else @logged = "false"
+    end
+
     @url = serviceurl + "/" + @method + "?start=1&end=7"
-    puts "======================================="
-    puts @url
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
+
+    root = @doc.at_css("list")
+    root['logged'] = @logged
 
     nodes = @doc.xpath("//item")
 
@@ -62,12 +78,20 @@ class ServiceForwardController < ApplicationController
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 
+    user = User.find(session[:user_id])
+    if user.notAnonymus != nil
+      @logged = "true"
+    else @logged = "false"
+    end
+
     link = serviceurl + "/" +@method+"/"+@id
     puts link
     @doc = Nokogiri::XML(open(link), nil, 'UTF-8')
 
     record = @doc.at_css("record")
     title = record['title']
+
+    record['logged'] = @logged
 
     if session[:user_id] != nil then
       History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => get_address + "/services/"+@servicename+"/"+@method+"/"+@id
@@ -85,8 +109,7 @@ class ServiceForwardController < ApplicationController
 
       node.remove
       plus_value = value.gsub(" ", "+")
-#      puts request.port
-#      puts request.host
+
       link = get_address
 
       if service != nil then
