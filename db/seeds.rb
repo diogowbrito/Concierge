@@ -17,3 +17,5 @@ Competence.create :competenceType => 'Home', :competenceUrl => 'http://localhost
 Competence.create :competenceType => 'Search', :competenceUrl => 'http://localhost:3002/search', :description => "boraa", :service_id => '2'
 InfEntity.create :entity => 'degree', :service_id => '2'
 InfEntity.create :entity => 'course', :service_id => '2'
+
+Service.create :serviceName => 'Geolocation', :provider => 'G06', :servicetype => 'location', :ranking => 2, :url => 'http://localhost:3006', :imgPath => 'TODO'
