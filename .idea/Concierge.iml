@@ -97,6 +97,8 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.0.7, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/activesupport-3.0.7)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] thor (v0.14.6, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/thor-0.14.6)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] actionmailer (v3.0.7, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionmailer-3.0.7)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.1.pre.1, /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/bundler-1.1.pre.1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.9.0.beta.5, /home/alaxid/.rvm/gems/ruby-1.9.2-p180/gems/rake-0.9.0.beta.5)" level="application" />
   </component>
 </module>
 
