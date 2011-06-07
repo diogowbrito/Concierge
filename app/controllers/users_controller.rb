@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   end
 
   def sendresource
-
+  puts session[:user_id].to_s+"aahaha"
   if session[:user_id] != nil
     user = User.find(session[:user_id])
     if user.notAnonymus != nil
@@ -81,23 +81,23 @@ class UsersController < ApplicationController
       @url = serviceurl+"/" +urlarray[5]+"/"+urlarray[6]
 
       @user = User.find(session[:user_id])
-      @msg = "O recurso foi enviado para o seu email com sucesso."
 
       UserMailer.sendres(@user, @url).deliver
+      @result = "sucess"
 
     else
 
-      @msg = "Não conseguimos enviar o recurso para o seu email"
+      @result = "fail_logged"
 
     end
 
   else
 
-    @msg = "Não conseguimos enviar o recurso para o seu email"
+    @msg = "fail_simple"
 
   end
 
-  respond_to :html
+  respond_to :xml
 
   end
 

@@ -25,6 +25,26 @@ function getParse(url) {
     });
 }
 
+function getWarning(url, id) {
+
+    var warning;
+    $.get(
+    url,
+    function(data) {
+        warning = $(data).find("status").text();
+        var page = $('#'+id);
+        var pageWritable = $("[data-role=content]", page.get(0));
+
+        if(warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio";
+        if(warning == "fail_logged") warning = "Faça login para realizar esta acção";
+        if(warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
+        pageWritable.append("<p>" + warning + "</p>");
+    },
+    "xml"
+    );
+
+}
+
 function createPage(id, logged) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
@@ -73,7 +93,6 @@ function parse(xml) {
     if ($(xml).find("record").length != 0) {
         parseRecord(xml);
     }
-
 
 }
 
@@ -187,6 +206,7 @@ function parseRecord(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
     var title = $(xml).find("record").attr('title');
+    var recordurl = $(xml).find("record").attr('url');
     pageWritable.append("<p>" + title + "</p>");
 
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
@@ -276,6 +296,11 @@ function parseRecord(xml) {
         }
     });
 
+    var url = "http://" + document.domain + ":" + location.port + "/";
+    var sendurl = url+"sendresource?url="+recordurl;
+    var mail_button = "<a id='sendmail' class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='http://aux.iconpedia.net/uploads/1025928073.png'/></a>";
+    pageWritable.append(mail_button);
+
     page.page();
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
@@ -290,6 +315,13 @@ $('.parse').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getParse($(this).attr('href'));
+    $.mobile.ajaxEnabled(false);
+});
+
+$('.warning').live('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    getWarning($(this).attr('href'), $(this).attr('pageid'));
     $.mobile.ajaxEnabled(false);
 });
 

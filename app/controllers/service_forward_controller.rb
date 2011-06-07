@@ -75,6 +75,9 @@ class ServiceForwardController < ApplicationController
     @id = params[:id]
     @method = params[:method]
 
+    address = get_address
+    @url = address+"services/"+@servicename+"/"+@method+"/"+@id
+
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 
@@ -92,6 +95,7 @@ class ServiceForwardController < ApplicationController
     title = record['title']
 
     record['logged'] = @logged
+    record['url'] = @url
 
     if session[:user_id] != nil then
       History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => get_address + "/services/"+@servicename+"/"+@method+"/"+@id
