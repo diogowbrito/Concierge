@@ -244,40 +244,49 @@ function parseList(xml){
 
 function parseMap(xml) {
 
+    console.log("mapiii");
+
+
     var logged;
-    $(xml).find("record").each(function() {
+    $(xml).find("map").each(function() {
         logged = $(this).attr('logged');
     });
+
     var page = createPage("map", logged);
+
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
-    pageWritable.append("<p>" + title + "</p>");
-    pageWritable.append("<div id='map_canvas'></div>");
+    pageWritable.append("<div id='map_canvas' style='height:500px;width:400px'></div>");
+
 
     $(xml).find("map").children().each(function(index, element) {
         switch (element.nodeName) {
             case 'link':
-                var attr = $(this).attr("href");
-                var myOptions = {
-                    zoom: 11,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
-
-                var map = new google.maps.Map($(".map_canvas"), myOptions);
-
-                var ctaLayer = new google.maps.KmlLayer(attr);
-                ctaLayer.setMap(map);
-                break;
+                kmlUrl = $(this).attr("href");
+             break;
         }
     });
 
      page.page();
+
+            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+        var myOptions = {
+            zoom: 4,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        cta_layer = new google.maps.KmlLayer(kmlUrl, {suppressInfoWindows: true,preserveViewport:true});
+        cta_layer.setMap(map);
+
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
 }
 
 function parseRecord(xml) {
 
+    console.log("parse record");
     var logged;
     $(xml).find("record").each(function() {
         logged = $(this).attr('logged');
@@ -431,7 +440,6 @@ $("#tab_bar_hp_search").live('click', function() {
 });
 
 
-
 $('#home_searchform').live('submit', function() {
     var searched = $('#search').val();
     searched = replaceAll(searched, " ", "+");
@@ -447,7 +455,6 @@ $('#home_searchform').live('submit', function() {
 
     return false;
 });
-
 
 $('.activeZero').live("click", function() {
     if ($(this).hasClass("0")) {
