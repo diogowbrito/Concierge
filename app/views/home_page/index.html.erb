@@ -8,9 +8,8 @@
         <% end %>
         <td>
           <% address = get_address %>
-         <img src="/images/letra-c.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+         <img class="service_icon" src="/images/buttons/service-default-icon.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>/>
          <p><%= service.serviceName %></p>
-         <!--  <%= link_to image_tag("/images/letra-c.png"), address +"services/"+service.serviceName+"/index", :id => "serviceLink" %> -->
         </td>
         <% counter = counter + 1 %>
         <% if (counter % 4 == 0) || (counter == @services.size) then %>

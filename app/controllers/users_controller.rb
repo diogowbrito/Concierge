@@ -39,11 +39,9 @@ class UsersController < ApplicationController
       @start = params[:start] || '0'
       @end = params[:end] || '7'
       @next = @end.to_i+1
-      puts session[:user_id]
       user = User.find(session[:user_id])
 
       history = user.histories.find(:all, :order =>"time", :offset =>@start.to_i, :limit => @end.to_i)
-      puts history.count
       @doc = Nokogiri::XML("<list title='Histórico'></list>")
       root = @doc.at_css "list"
 

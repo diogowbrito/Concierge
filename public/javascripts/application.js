@@ -134,18 +134,34 @@ function parseHomepage(xml) {
                             text = $(this).text();
                             if (element.nodeName == 'entity') {
                                 attr = $(this).attr('href');
-                                html += '<li class="slide_items '+ title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                ctitle = $(this).attr('title');
+                                if (ctitle != undefined)
+                                    html += '<li class="slide_items '+ title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                else
+                                    html += '<li class="slide_items '+ title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'text') {
-                                html += '<li class="slide_items ' + title + '">' + text + '</li>';
+                                ctitle = $(this).attr('title');
+                                if (ctitle != undefined)
+                                    html += '<li class="slide_items ' + title + '"><p>'+ctitle+'</p>' + text + '</li>';
+                                else
+                                    html += '<li class="slide_items ' + title + '">' + text + '</li>';
                             }
                             else if (element.nodeName == 'email') {
                                 attr = $(this).attr('href');
-                                html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                ctitle = $(this).attr('title');
+                                if (ctitle != undefined)
+                                    html += '<li class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                else
+                                    html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'link') {
                                 attr = $(this).attr('href');
-                                html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                ctitle = $(this).attr('title');
+                                if (ctitle != undefined)
+                                    html += '<li class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                else
+                                    html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
 
                         });
@@ -193,10 +209,19 @@ function parseList(xml){
 
             $(this).find("item").each(function() {
                 var attr = $(this).attr('href');
-                if (attr != undefined)
-                    list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "<p>" + $(this).attr("title") + "</p> </a></li>");
-                else
-                    list.append("<li class='parse'>" + $(this).text() + "<p>" + $(this).attr("title") + "</p></li>");
+                var title = $(this).attr('title');
+                if (attr != undefined) {
+                    if (title != undefined)
+                        list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() +" </a></li>");
+                    else
+                        list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() +"</a></li>");
+                }
+                else {
+                    if (title != undefined)
+                        list.append("<li class='parse'><p>" + $(this).attr("title") + "</p>" + $(this).text() + "</li>");
+                    else
+                        list.append("<li class='parse'>" + $(this).text() + "</li>");
+                }
             });
         });
      page.page();
@@ -238,7 +263,7 @@ function parseRecord(xml) {
                     if (title == undefined)
                         list.append('<li>' + text + '</li>');
                     else
-                        list.append('<li>' + text + '<p>' + title + '</p></li>');
+                        list.append('<li><p>' + title + '</p>' + text + '</li>');
                 }
                 else {
                     titleold = $(this).attr('title');
@@ -279,7 +304,7 @@ function parseRecord(xml) {
                 if (title == undefined)
                     list.append('<li><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else
-                    list.append('<li><a class="parse" href="' + attr + '">' + text + '<p>' + title + '</p></a></li>');
+                    list.append('<li><a class="parse" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
                 break;
 
             case 'email':
@@ -288,7 +313,7 @@ function parseRecord(xml) {
                 if (title == undefined)
                     list.append('<li><a class="email" href="' + attr + '">' + text + '</a></li>');
                 else
-                    list.append('<li><a class="email" href="' + attr + '">' + text + '<p>' + title + '</p></a></li>');
+                    list.append('<li><a class="email" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
                 break;
             case 'link':
                 text = $(this).text();
@@ -297,7 +322,7 @@ function parseRecord(xml) {
                 if (title == undefined)
                     list.append('<li><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else
-                    list.append('<li><a class="parse" href="' + attr + '">' + text + '<p>' + title + '</p></a></li>');
+                    list.append('<li><a class="parse" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
                 break;
             case 'external_link':
                 text = $(this).text();
@@ -306,7 +331,7 @@ function parseRecord(xml) {
                 if (title == undefined)
                     list.append('<li><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 else
-                    list.append('<li><a class="external_link" target="_blank" href="' + attr + '">' + text + '<p>' + title + '</p></a></li>');
+                    list.append('<li><a class="external_link" target="_blank" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
                 break;
 
         }
@@ -314,7 +339,7 @@ function parseRecord(xml) {
 
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url+"sendresource?url="+recordurl;
-    var mail_button = "<a id='sendmail' class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='http://aux.iconpedia.net/uploads/1025928073.png'/></a>";
+    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a>";
     pageWritable.append(mail_button);
 
     page.page();
