@@ -173,20 +173,24 @@ function parseHomepage(xml) {
                     break;
                 case 'link':
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
-
                     break;
             }
         });
     });
 
-      var divdatarole =   $('<div>').attr("data-role", "fieldcontain");
-      var search = $("<input>").attr("type", "search").attr("id", "foda-se").append(divdatarole);
-    pageWritable.append(search);
+    var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search");
+    var divdatarole =  $('<div>').attr("data-role", "fieldcontain").append(search);
+
+    var serviceSearchForm = $("<form>").attr("id", "homepage" + bla + "_service_search_form").append(divdatarole);
+          pageWritable.append(serviceSearchForm);
+
+
 
     page.page();
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
+    callServiceLive("homepage" + bla, $(xml).find("search").text());
     callLive("homepage" + bla);
 
     $.mobile.changePage("#" + page.attr("id"));
@@ -467,6 +471,27 @@ function replaceAll(string, token, newtoken) {
         string = string.replace(token, newtoken);
     }
     return string;
+}
+
+function callServiceLive(pageIdentification, searchLink) {
+
+        var page = $("#"+pageIdentification);
+
+        var searchForm = page.find("#"+pageIdentification + "_service_search_form");
+
+        searchForm.live('submit', function() {
+
+
+            var searched = page.find("#" + pageIdentification + "_service_search").val();
+
+            searched = replaceAll(searched, " ", "+");
+
+            var url = searchLink + searched;
+            getParse(url);
+            console.log(url);
+
+        return false;
+    });
 }
 
 function callLive(pageIdentification) {
