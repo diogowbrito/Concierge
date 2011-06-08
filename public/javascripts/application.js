@@ -187,7 +187,7 @@ function parseHomepage(xml) {
           pageWritable.append(serviceSearchForm);
 
 
-       var homeUrl =  "http://" + document.location + ":" + location.port/
+       var homeUrl =  "http://" + document.location;
     page.find(':jqmData(role="header")').append("<a href="+homeUrl+" class='ui-btn-left' data-icon='arrow-l'>Back</a>");
 
     page.page();
@@ -394,7 +394,7 @@ function parseRecord(xml) {
         }
     });
 
-    var url = "http://" + document.domain;
+    var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url+"sendresource?url="+recordurl;
     var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a>";
     pageWritable.append(mail_button);
