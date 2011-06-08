@@ -9,10 +9,7 @@ class BackOfficeController < ApplicationController
   def createservice
 
     @url = params[:url]
-    @icon = params[:icon]
-
-    puts "=============="
-    puts @icon
+    @icon = params[:service]
 
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
     @name = @doc.root['name']
@@ -52,7 +49,7 @@ class BackOfficeController < ApplicationController
       comp << acomp
     end
 
-    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :icon => @icon
+    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :imgPath => "TODO", :icon => @icon["icon"]
     service = Service.where(:serviceName => @name)
     id = service[0].id
     serviceurl = service[0].url

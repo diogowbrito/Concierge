@@ -1,7 +1,7 @@
-<%= form_tag(:action => "createservice", :multipart => true ) do %>
+<%= form_tag( {:action => "createservice"}, :multipart => true ) do %>
   <%= label_tag(:url, "Insert the new service meta-info url here:") %>
   <%= text_field_tag(:url) %>
   <%= label_tag(:icon, "Choose the new service icon here:") %>
-  <%= file_field_tag :icon %>
+  <%= file_field :service, :icon %>
   <%= submit_tag("Insert") %>
 <% end %>

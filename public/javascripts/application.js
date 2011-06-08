@@ -95,12 +95,9 @@ function parse(xml) {
         parseRecord(xml);
     }
 
-<<<<<<< HEAD
      if ($(xml).find("map").length != 0) {
         parseMap(xml);
     }
-=======
->>>>>>> 7aaa87d0a30b9d677cf715111866d9b3011c699d
 }
 
 function parseHomepage(xml) {
@@ -193,22 +190,6 @@ function parseList(xml) {
     var page = createPage("list" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
 
-<<<<<<< HEAD
-    $(xml).find("list").each(function() {
-        pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-        var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
-
-        $(this).find("item").each(function() {
-            var attr = $(this).attr('href');
-            if (attr != undefined)
-                list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "<p>" + $(this).attr("title") + "</p> </a></li>");
-            else
-                list.append("<li class='parse'>" + $(this).text() + "<p>" + $(this).attr("title") + "</p></li>");
-        });
-
-    });
-    page.page();
-=======
         $(xml).find("list").each(function() {
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
             var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
@@ -222,13 +203,9 @@ function parseList(xml) {
             });
         });
      page.page();
->>>>>>> 7aaa87d0a30b9d677cf715111866d9b3011c699d
     $.mobile.pageContainer.append(page);
-
     <!-- Add the search listener -->
     callLive("list" + pageRandomId);
-
-
     $.mobile.changePage("#" + page.attr("id"));
 
 }

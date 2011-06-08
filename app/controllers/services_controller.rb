@@ -42,6 +42,9 @@ class ServicesController < ApplicationController
   def create
     @service = Service.new(params[:service])
 
+    puts "========================"
+    puts params[:service]
+
     respond_to do |format|
       if @service.save
         format.html { redirect_to(@service, :notice => 'Service was successfully created.') }

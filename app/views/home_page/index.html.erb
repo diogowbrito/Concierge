@@ -8,8 +8,11 @@
         <% end %>
         <td>
           <% address = get_address %>
-          <!--<%= image_tag service.icon.url %>-->
-         <img src="/images/letra-c.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+          <% if service.icon.url == "/icons/original/missing.png" %>
+            <img src="./images/letter-c.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+          <% else %>
+             <img src=<%=service.icon.url%> id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+          <% end %>
          <p><%= service.serviceName %></p>
         </td>
         <% counter = counter + 1 %>
