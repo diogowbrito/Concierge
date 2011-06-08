@@ -25,6 +25,26 @@ function getParse(url) {
     });
 }
 
+function getWarning(url, id) {
+
+    var warning;
+    $.get(
+    url,
+    function(data) {
+        warning = $(data).find("status").text();
+        var page = $('#'+id);
+        var pageWritable = $("[data-role=content]", page.get(0));
+
+        if(warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio";
+        if(warning == "fail_logged") warning = "Faça login para realizar esta acção";
+        if(warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
+        pageWritable.append("<p>" + warning + "</p>");
+    },
+    "xml"
+    );
+
+}
+
 function createPage(id, logged) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
@@ -39,8 +59,8 @@ function createPage(id, logged) {
     var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
-    var searchform = $('<form>').attr("id", "home_searchform").append(searchformbody);
-    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_home_search").attr("style", "text-align:center; visibility:hidden").append(searchform);
+    var searchform = $('<form>').attr("id", "search_form").append(searchformbody);
+    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_search").attr("style", "text-align:center; visibility:hidden").append(searchform);
 
     <!-- Draw Content-->
     var content = $('<div>').attr("data-role", "content");
@@ -60,6 +80,7 @@ function createPage(id, logged) {
     <!-- Draw the final page-->
     var finalpage = page.append(header).append(content).append(search).append(footer);
 
+
     return $(finalpage)
 }
 
@@ -74,9 +95,12 @@ function parse(xml) {
         parseRecord(xml);
     }
 
+<<<<<<< HEAD
      if ($(xml).find("map").length != 0) {
         parseMap(xml);
     }
+=======
+>>>>>>> 7aaa87d0a30b9d677cf715111866d9b3011c699d
 }
 
 function parseHomepage(xml) {
@@ -91,6 +115,7 @@ function parseHomepage(xml) {
     var list;
     var titleold;
     var title;
+
 
     $(xml).find("record").each(function() {
         pageWritable.append("<p>" + $(this).attr('title') + "</p>");
@@ -136,13 +161,22 @@ function parseHomepage(xml) {
                     break;
                 case 'link':
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
+
                     break;
             }
         });
     });
 
+      var divdatarole =   $('<div>').attr("data-role", "fieldcontain");
+      var search = $("<input>").attr("type", "search").attr("id", "foda-se").append(divdatarole);
+    pageWritable.append(search);
+
     page.page();
     $.mobile.pageContainer.append(page);
+
+    <!-- Add the search listener -->
+    callLive("homepage" + bla);
+
     $.mobile.changePage("#" + page.attr("id"));
     $(".slide_items").hide();
 }
@@ -154,10 +188,12 @@ function parseList(xml) {
         logged = $(this).attr('logged');
     });
 
-    var bla = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("list" + bla, logged);
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+
+    var page = createPage("list" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
 
+<<<<<<< HEAD
     $(xml).find("list").each(function() {
         pageWritable.append("<p>" + $(this).attr('title') + "</p>");
         var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
@@ -172,10 +208,30 @@ function parseList(xml) {
 
     });
     page.page();
-    $.mobile.pageContainer.append(page);
-    $.mobile.changePage("#" + page.attr("id"));
-}
+=======
+        $(xml).find("list").each(function() {
+            pageWritable.append("<p>" + $(this).attr('title') + "</p>");
+            var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
+            $(this).find("item").each(function() {
+                var attr = $(this).attr('href');
+                if (attr != undefined)
+                    list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "<p>" + $(this).attr("title") + "</p> </a></li>");
+                else
+                    list.append("<li class='parse'>" + $(this).text() + "<p>" + $(this).attr("title") + "</p></li>");
+            });
+        });
+     page.page();
+>>>>>>> 7aaa87d0a30b9d677cf715111866d9b3011c699d
+    $.mobile.pageContainer.append(page);
+
+    <!-- Add the search listener -->
+    callLive("list" + pageRandomId);
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+}
 
 function parseMap(xml) {
 
@@ -218,11 +274,12 @@ function parseRecord(xml) {
         logged = $(this).attr('logged');
     });
 
-    var bla = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("record" + bla, logged);
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("record" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
     var title = $(xml).find("record").attr('title');
+    var recordurl = $(xml).find("record").attr('url');
     pageWritable.append("<p>" + title + "</p>");
 
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
@@ -312,8 +369,17 @@ function parseRecord(xml) {
         }
     });
 
+    var url = "http://" + document.domain + ":" + location.port + "/";
+    var sendurl = url+"sendresource?url="+recordurl;
+    var mail_button = "<a id='sendmail' class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='http://aux.iconpedia.net/uploads/1025928073.png'/></a>";
+    pageWritable.append(mail_button);
+
     page.page();
     $.mobile.pageContainer.append(page);
+
+     <!-- Add the search listener -->
+    callLive("record" + pageRandomId);
+
     $.mobile.changePage("#" + page.attr("id"));
     $(".slide_items").hide();
 }
@@ -329,6 +395,13 @@ $('.parse').live('click', function(event) {
     $.mobile.ajaxEnabled(false);
 });
 
+$('.warning').live('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    getWarning($(this).attr('href'), $(this).attr('pageid'));
+    $.mobile.ajaxEnabled(false);
+});
+
 $('.slide').live('click', function() {
     var t = "." + $(this).attr("title");
     $(t).slideToggle("slow");
@@ -337,31 +410,35 @@ $('.slide').live('click', function() {
 
 <!-- Pages scripts-->
 
-$("#tab_bar_search").live('click', function() {
-
-
+$("#tab_bar_hp_search").live('click', function() {
     if ($(".hidden_home_search").css("visibility") == "hidden") {
         $(".hidden_home_search").hide().css({visibility: "visible"}).fadeIn("slow");
     } else {
         $(".hidden_home_search").fadeOut("slow", function() {
             $(this).show().css({visibility: "hidden"});
-            $("#tab_bar_search").find("a").removeClass("ui-btn-active");
+            $("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
         });
-
     }
-
-
 });
 
-$('#home_searchform').submit(function() {
+
+
+$('#home_searchform').live('submit', function() {
+    var searched = $('#search').val();
+    searched = replaceAll(searched, " ", "+");
+
     $(".hidden_home_search").fadeOut("slow", function() {
         $(this).show().css({visibility: "hidden"});
-        $("#tab_bar_search").find("a").removeClass("ui-btn-active");
+        $("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
+
     });
 
+    var url = document.location+"search?keyword=" + searched;
+    getParse(url);
 
     return false;
 });
+
 
 $('.activeZero').live("click", function() {
     if ($(this).hasClass("0")) {
@@ -369,15 +446,11 @@ $('.activeZero').live("click", function() {
     } else {
         $(this).removeClass("ui-btn-active");
         $(this).addClass("0");
-
     }
-
 });
 
 function logOut() {
-
     $.mobile.hashListeningEnabled(false);
-
 }
 
 $('#login').live('click', function() {
@@ -389,4 +462,43 @@ function replaceAll(string, token, newtoken) {
         string = string.replace(token, newtoken);
     }
     return string;
+}
+
+function callLive(pageIdentification) {
+
+    var page = $("#"+pageIdentification);
+    var searchbar = page.find("#tab_bar_search");
+
+    searchbar.live('click', function() {
+        var navbardistancetotop = page.find('.ui-footer-fixed')[0].style.top.replace("px", "");
+        var hidden_home_search = page.find(".hidden_search");
+
+        if (hidden_home_search.css("visibility") == "hidden") {
+            hidden_home_search.css('top', (navbardistancetotop - 100) + 'px');
+            hidden_home_search.hide().css({visibility: "visible"}).fadeIn("slow");
+        } else {
+            hidden_home_search.fadeOut("slow", function() {
+                $(this).show().css({visibility: "hidden"});
+                $("#" + pageIdentification).find("#tab_bar_search").find("a").removeClass("ui-btn-active");
+            });
+        }
+    });
+
+    var searchForm = page.find("#search_form");
+    searchForm.live('submit', function() {
+
+        var searched = page.find('#search').val();
+        searched = replaceAll(searched, " ", "+");
+
+        page.find(".hidden_search").fadeOut("slow", function() {
+            $(this).show().css({visibility: "hidden"});
+            page.find("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
+        });
+
+        var url = "http://" + document.domain + ":" + location.port + "/" +"search?keyword=" + searched;
+        getParse(url);
+
+        return false;
+    });
+
 }
