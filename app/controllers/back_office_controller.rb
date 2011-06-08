@@ -49,7 +49,12 @@ class BackOfficeController < ApplicationController
       comp << acomp
     end
 
-    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :imgPath => "TODO", :icon => @icon["icon"]
+    if @icon != nil
+    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :icon => @icon["icon"]
+    else
+    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url
+    end
+
     service = Service.where(:serviceName => @name)
     id = service[0].id
     serviceurl = service[0].url
