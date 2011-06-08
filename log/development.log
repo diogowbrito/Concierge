@@ -18667,6 +18667,7 @@ Completed 200 OK in 79ms (Views: 17.1ms | ActiveRecord: 0.2ms)
 =======
 >>>>>>> 7aaa87d0a30b9d677cf715111866d9b3011c699d
 >>>>>>> 984cefcb1ebcaca1347edf07a0aa1b418a7cfc23
+<<<<<<< HEAD
 DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/alaxid/Desktop/PI/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/alaxid/Desktop/PI/Concierge/config/environment.rb:5)
 
 
@@ -20843,3 +20844,2786 @@ Started GET "/searchrecord/geolocation/geolocation/specific?building=Ed.I" for 1
 Rendered service_forward/recordrequest.xml.erb (1.1ms)
 Completed 200 OK in 458ms (Views: 15.2ms | ActiveRecord: 2.6ms)
 DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/alaxid/Desktop/PI/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/alaxid/Desktop/PI/Concierge/config/environment.rb:5)
+=======
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/jphorta/RubymineProjects/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/jphorta/RubymineProjects/Concierge/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:38:31 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 49 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (36.7ms)
+Completed   in 163ms
+
+ActionView::Template::Error (undefined method `icon_file_name' for #<Service:0x000000036c2d90>):
+    8:         <% end %>
+    9:         <td>
+    10:           <% address = get_address %>
+    11:           <% if service.icon.url == "/icons/original/missing.png" %>
+    12:             <img src="./images/letter-c.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+    13:           <% else %>
+    14:              <img src=<%=service.icon.url%> id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+  app/views/home_page/index.html.erb:11:in `block in _app_views_home_page_index_html_erb__676691673967115766_28683320__3760858380444804421'
+  app/views/home_page/index.html.erb:5:in `each'
+  app/views/home_page/index.html.erb:5:in `_app_views_home_page_index_html_erb__676691673967115766_28683320__3760858380444804421'
+  app/controllers/home_page_controller.rb:17:in `index'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (19.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (23.3ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:41:14 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 49 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 49 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mDELETE FROM `users` WHERE `users`.`id` = 49[0m
+  [1m[35mSQL (1.0ms)[0m  COMMIT
+  [1m[36mHistory Load (0.3ms)[0m  [1mSELECT `histories`.* FROM `histories` WHERE (`histories`.user_id = 49)[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mDELETE FROM `histories` WHERE `histories`.`id` = 207[0m
+  [1m[35mSQL (1.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  DELETE FROM `histories` WHERE `histories`.`id` = 208
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `histories` WHERE `histories`.`id` = 209[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 134ms (Views: 20.6ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/admin/destroyservice?id=7" for 127.0.0.1 at 2011-06-08 18:41:16 +0100
+  Processing by BackOfficeController#destroyservice as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 7 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+[paperclip] Deleting attachments.
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+Completed   in 62ms
+
+NoMethodError (undefined method `icon_file_name' for #<Service:0x00000001aec8a0>):
+  app/controllers/back_office_controller.rb:91:in `destroyservice'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.2ms)
+
+
+Started GET "/admin/destroyservice?id=7" for 127.0.0.1 at 2011-06-08 18:41:23 +0100
+  Processing by BackOfficeController#destroyservice as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 7 LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+[paperclip] Deleting attachments.
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+Completed   in 27ms
+
+NoMethodError (undefined method `icon_file_name' for #<Service:0x0000000263f9c8>):
+  app/controllers/back_office_controller.rb:91:in `destroyservice'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.6ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/jphorta/RubymineProjects/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/jphorta/RubymineProjects/Concierge/config/environment.rb:5)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:42:47 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mService Load (0.4ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Mysql2::Error: Table 'Concierge_development.services' doesn't exist: SELECT `services`.* FROM `services`
+Completed   in 16ms
+
+ActiveRecord::StatementInvalid (Mysql2::Error: Table 'Concierge_development.services' doesn't exist: SELECT `services`.* FROM `services`):
+  app/controllers/back_office_controller.rb:79:in `listservices'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (8.7ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/jphorta/RubymineProjects/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/jphorta/RubymineProjects/Concierge/config/environment.rb:5)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (3.9ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (2.8ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateRefEntities (20110509133857)
+  [1m[35mSQL (1.8ms)[0m  CREATE TABLE `ref_entities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `entity` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133857')[0m
+Migrating to CreateInfEntities (20110509133931)
+  [1m[35mSQL (2.3ms)[0m  CREATE TABLE `inf_entities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `entity` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133931')[0m
+Migrating to CreateCompetences (20110509133950)
+  [1m[35mSQL (1.7ms)[0m  CREATE TABLE `competences` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `competenceType` varchar(255), `competenceUrl` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133950')[0m
+Migrating to CreateTags (20110509134005)
+  [1m[35mSQL (1.7ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `tag` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509134005')[0m
+Migrating to CreateServices (20110511141419)
+  [1m[35mSQL (1.8ms)[0m  CREATE TABLE `services` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `serviceName` varchar(255), `provider` varchar(255), `servicetype` varchar(255), `ranking` int(11), `url` varchar(255), `imgPath` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110511141419')[0m
+Migrating to CreateUsers (20110522131256)
+  [1m[35mSQL (2.0ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `userName` varchar(255), `email` varchar(255), `passwordHash` varchar(255), `passwordSalt` varchar(255), `activateCode` int(11), `notAnonymus` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110522131256')[0m
+Migrating to CreateDataFiles (20110524134244)
+  [1m[35mSQL (1.7ms)[0m  CREATE TABLE `data_files` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110524134244')[0m
+Migrating to CreateHistories (20110529135715)
+  [1m[35mSQL (2.0ms)[0m  CREATE TABLE `histories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `time` datetime, `description` varchar(255), `url` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110529135715')[0m
+Migrating to AddAttachmentIconToServices (20110607172028)
+  [1m[35mSQL (22.1ms)[0m  ALTER TABLE `services` ADD `icon_file_name` varchar(255)
+  [1m[36mSQL (2.8ms)[0m  [1mALTER TABLE `services` ADD `icon_content_type` varchar(255)[0m
+  [1m[35mSQL (2.8ms)[0m  ALTER TABLE `services` ADD `icon_file_size` int(11)
+  [1m[36mSQL (2.5ms)[0m  [1mALTER TABLE `services` ADD `icon_updated_at` datetime[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20110607172028')
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.4ms)[0m  describe `competences`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `competences`[0m
+  [1m[35mSQL (0.3ms)[0m  describe `data_files`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `data_files`[0m
+  [1m[35mSQL (0.3ms)[0m  describe `histories`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `histories`[0m
+  [1m[35mSQL (0.3ms)[0m  describe `inf_entities`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `inf_entities`[0m
+  [1m[35mSQL (0.3ms)[0m  describe `ref_entities`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `ref_entities`[0m
+  [1m[35mSQL (0.4ms)[0m  describe `services`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `services`[0m
+  [1m[35mSQL (0.3ms)[0m  describe `tags`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `tags`[0m
+  [1m[35mSQL (0.4ms)[0m  describe `users`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `users`[0m
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/jphorta/RubymineProjects/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/jphorta/RubymineProjects/Concierge/config/environment.rb:5)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:43:50 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.3ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 127ms (Views: 6.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:43:52 +0100
+  Processing by BackOfficeController#newservice as HTML
+Rendered back_office/newservice.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:44:13 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3001/metainfo", "service"=>{"icon"=>#<ActionDispatch::Http::UploadedFile:0x00000003d2b858 @original_filename="people.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"service[icon]\"; filename=\"people.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:/tmp/RackMultipart20110608-12577-1oc4lnb>>}, "commit"=>"Insert"}
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `services`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `services` (`serviceName`, `provider`, `servicetype`, `ranking`, `url`, `imgPath`, `created_at`, `updated_at`, `icon_file_name`, `icon_content_type`, `icon_file_size`, `icon_updated_at`) VALUES ('people', 'G6', 'academics', 0, 'http://localhost:3001', 'TODO', '2011-06-08 17:44:13', '2011-06-08 17:44:13', 'people.png', 'image/png', 9180, '2011-06-08 17:44:13')
+[paperclip] Saving attachments.
+[paperclip] saving /home/jphorta/RubymineProjects/Concierge/public/system/icons/1/original/people.png
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  describe `tags`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (1, 'pessoas', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (1, 'professores', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (1, 'docentes', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `ref_entities`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'person', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'organizational unit', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'degree', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'course', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.5ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'room', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'building', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `inf_entities`
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n		', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, 'person', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (1, '\n ', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `competences`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Home', 'http://localhost:3001/index', 'Devolve a descrição do serviço', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+  [1m[36mSQL (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Status', 'http://localhost:3001/status', 'Devolve o estado o serviço', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Metainfo', 'http://localhost:3001/metainfo', 'Devolve a meta info do serviço', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Search', 'http://localhost:3001/search', 'Devolve os resultados de uma procura', '2011-06-08 17:44:13', '2011-06-08 17:44:13')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (1, 'Recomendation', 'http://localhost:3001/recomendation', 'Devolve as recomendações para uma palavra', '2011-06-08 17:44:13', '2011-06-08 17:44:13')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+Rendered back_office/createservice.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 225ms (Views: 5.3ms | ActiveRecord: 15.7ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:44:17 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.3ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (16.5ms)
+Completed 200 OK in 79ms (Views: 20.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:44:20 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'Anonymus62728') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'Anonymus62728') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  describe `users`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `notAnonymus`, `created_at`, `updated_at`) VALUES ('Anonymus62728', 'Anonymus62728', '$2a$10$cNnUV1xaME5IKjBtnd5Hlu5jgxVEQg48UhuGlWCCV.rT6RKxolDgG', '$2a$10$cNnUV1xaME5IKjBtnd5Hlu', NULL, NULL, '2011-06-08 17:44:21', '2011-06-08 17:44:21')[0m
+  [1m[35mSQL (1.2ms)[0m  COMMIT
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'Anonymus62728'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered home_page/index.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 187ms (Views: 16.0ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:44:27 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (23.1ms)
+Completed 200 OK in 96ms (Views: 26.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admin/destroyservice?id=1" for 127.0.0.1 at 2011-06-08 18:44:30 +0100
+  Processing by BackOfficeController#destroyservice as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`id` = 1 LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+[paperclip] Deleting attachments.
+[paperclip] deleting /home/jphorta/RubymineProjects/Concierge/public/system/icons/1/original/people.png
+  [1m[35mAREL (0.3ms)[0m  DELETE FROM `services` WHERE `services`.`id` = 1
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mCompetence Load (0.3ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`service_id` = 1
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  DELETE FROM `competences` WHERE `competences`.`id` = 1
+  [1m[36mSQL (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `competences` WHERE `competences`.`id` = 2[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `competences` WHERE `competences`.`id` = 3
+  [1m[36mSQL (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `competences` WHERE `competences`.`id` = 4[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `competences` WHERE `competences`.`id` = 5
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mRefEntity Load (0.2ms)[0m  SELECT `ref_entities`.* FROM `ref_entities` WHERE `ref_entities`.`service_id` = 1
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 1
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 2[0m
+  [1m[35mSQL (0.3ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 3
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 4[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 5
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 6[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 7
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 8[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 9
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 10[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 11
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 12[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  DELETE FROM `ref_entities` WHERE `ref_entities`.`id` = 13
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mInfEntity Load (0.3ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`service_id` = 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  DELETE FROM `inf_entities` WHERE `inf_entities`.`id` = 1
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `inf_entities` WHERE `inf_entities`.`id` = 2[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `inf_entities` WHERE `inf_entities`.`id` = 3
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mTag Load (0.2ms)[0m  SELECT `tags`.* FROM `tags` WHERE `tags`.`service_id` = 1
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  DELETE FROM `tags` WHERE `tags`.`id` = 1
+  [1m[36mSQL (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mDELETE FROM `tags` WHERE `tags`.`id` = 2[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM `tags` WHERE `tags`.`id` = 3
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/admin/listservices
+Completed 302 Found in 194ms
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:44:31 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.3ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (47.1ms)
+Completed 200 OK in 83ms (Views: 50.7ms | ActiveRecord: 13.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:44:38 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 37ms (Views: 11.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:44:47 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences`[0m
+Rendered back_office/listservices.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 44ms (Views: 11.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:44:48 +0100
+  Processing by BackOfficeController#newservice as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered back_office/newservice.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 25ms (Views: 12.6ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:44:55 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3001/metainfo", "service"=>{"icon"=>#<ActionDispatch::Http::UploadedFile:0x00000002d09a88 @original_filename="people.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"service[icon]\"; filename=\"people.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:/tmp/RackMultipart20110608-12577-9thy56>>}, "commit"=>"Insert"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `services`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `services` (`serviceName`, `provider`, `servicetype`, `ranking`, `url`, `imgPath`, `created_at`, `updated_at`, `icon_file_name`, `icon_content_type`, `icon_file_size`, `icon_updated_at`) VALUES ('people', 'G6', 'academics', 0, 'http://localhost:3001', 'TODO', '2011-06-08 17:44:56', '2011-06-08 17:44:56', 'people.png', 'image/png', 9180, '2011-06-08 17:44:56')
+[paperclip] Saving attachments.
+[paperclip] saving /home/jphorta/RubymineProjects/Concierge/public/system/icons/2/original/people.png
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `tags`
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (2, 'pessoas', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (2, 'professores', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (2, 'docentes', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `ref_entities`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n ', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'person', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n ', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'organizational unit', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n ', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'degree', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n		', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'course', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n		', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'room', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n		', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'building', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n ', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  describe `inf_entities`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n		', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (1.0ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, 'person', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (2, '\n ', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  describe `competences`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (2, 'Home', 'http://localhost:3001/index', 'Devolve a descrição do serviço', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (2, 'Status', 'http://localhost:3001/status', 'Devolve o estado o serviço', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (2, 'Metainfo', 'http://localhost:3001/metainfo', 'Devolve a meta info do serviço', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (2, 'Search', 'http://localhost:3001/search', 'Devolve os resultados de uma procura', '2011-06-08 17:44:56', '2011-06-08 17:44:56')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (2, 'Recomendation', 'http://localhost:3001/recomendation', 'Devolve as recomendações para uma palavra', '2011-06-08 17:44:56', '2011-06-08 17:44:56')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+Rendered back_office/createservice.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 245ms (Views: 13.2ms | ActiveRecord: 15.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:45:00 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (56.4ms)
+Completed 200 OK in 86ms (Views: 60.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:45:10 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mCompetence Load (0.3ms)[0m  [1mSELECT `competences`.* FROM `competences`[0m
+Rendered back_office/listservices.html.erb within layouts/application (60.4ms)
+Completed 200 OK in 97ms (Views: 64.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:45:12 +0100
+  Processing by BackOfficeController#newservice as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered back_office/newservice.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 24ms (Views: 13.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:46:36 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3002/metainfo", "commit"=>"Insert"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Completed   in 915ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.[]):
+  app/controllers/back_office_controller.rb:52:in `createservice'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (13.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.7ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:47:31 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (24.7ms)
+Completed 200 OK in 63ms (Views: 28.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:47:32 +0100
+  Processing by BackOfficeController#newservice as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered back_office/newservice.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 24ms (Views: 12.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:47:36 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3002/metainfo", "commit"=>"Insert"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Completed   in 107ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.[]):
+  app/controllers/back_office_controller.rb:54:in `createservice'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (12.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.4ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:48:12 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences`[0m
+Rendered back_office/listservices.html.erb within layouts/application (22.5ms)
+Completed 200 OK in 95ms (Views: 25.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:48:14 +0100
+  Processing by BackOfficeController#newservice as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered back_office/newservice.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 24ms (Views: 12.4ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:48:17 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3002/metainfo", "commit"=>"Insert"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Completed   in 87ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.[]):
+  app/controllers/back_office_controller.rb:55:in `createservice'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (14.3ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (20.7ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:48:39 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences`
+Rendered back_office/listservices.html.erb within layouts/application (22.8ms)
+Completed 200 OK in 97ms (Views: 26.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:48:40 +0100
+  Processing by BackOfficeController#newservice as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered back_office/newservice.html.erb within layouts/application (46.8ms)
+Completed 200 OK in 62ms (Views: 50.5ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:48:43 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3002/metainfo", "commit"=>"Insert"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Completed   in 36ms
+
+TypeError (can't convert String into Integer):
+  app/controllers/back_office_controller.rb:53:in `[]='
+  app/controllers/back_office_controller.rb:53:in `createservice'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (14.1ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (21.0ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:50:28 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences`[0m
+Rendered back_office/listservices.html.erb within layouts/application (61.6ms)
+Completed 200 OK in 99ms (Views: 65.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admin/newservice" for 127.0.0.1 at 2011-06-08 18:50:29 +0100
+  Processing by BackOfficeController#newservice as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered back_office/newservice.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 24ms (Views: 13.0ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/createservice" for 127.0.0.1 at 2011-06-08 18:50:31 +0100
+  Processing by BackOfficeController#createservice as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2rYySx7XpNgSV621lrNKRAwTtRNf9pP0B2MkiGbdLRI=", "url"=>"http://localhost:3002/metainfo", "commit"=>"Insert"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `services`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `services` (`serviceName`, `provider`, `servicetype`, `ranking`, `url`, `imgPath`, `created_at`, `updated_at`, `icon_file_name`, `icon_content_type`, `icon_file_size`, `icon_updated_at`) VALUES ('degreesandcourses', 'G6', 'academics', 0, 'http://localhost:3002', NULL, '2011-06-08 17:50:31', '2011-06-08 17:50:31', NULL, NULL, NULL, NULL)
+[paperclip] Saving attachments.
+  [1m[36mSQL (1.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `tags`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (3, 'cursos', '2011-06-08 17:50:31', '2011-06-08 17:50:31')[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (3, 'cadeiras', '2011-06-08 17:50:31', '2011-06-08 17:50:31')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `tags` (`service_id`, `tag`, `created_at`, `updated_at`) VALUES (3, 'disciplinas', '2011-06-08 17:50:31', '2011-06-08 17:50:31')[0m
+  [1m[35mSQL (0.2ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  describe `ref_entities`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n ', '2011-06-08 17:50:31', '2011-06-08 17:50:31')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, 'person', '2011-06-08 17:50:31', '2011-06-08 17:50:31')
+  [1m[36mSQL (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n ', '2011-06-08 17:50:31', '2011-06-08 17:50:31')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, 'organizational unit', '2011-06-08 17:50:31', '2011-06-08 17:50:31')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n ', '2011-06-08 17:50:31', '2011-06-08 17:50:31')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, 'degree', '2011-06-08 17:50:31', '2011-06-08 17:50:31')
+  [1m[36mSQL (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n		', '2011-06-08 17:50:31', '2011-06-08 17:50:31')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, 'course', '2011-06-08 17:50:32', '2011-06-08 17:50:32')
+  [1m[36mSQL (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `ref_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n ', '2011-06-08 17:50:32', '2011-06-08 17:50:32')[0m
+  [1m[35mSQL (0.5ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (37.3ms)[0m  describe `inf_entities`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n		', '2011-06-08 17:50:32', '2011-06-08 17:50:32')[0m
+  [1m[35mSQL (1.0ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, 'course', '2011-06-08 17:50:32', '2011-06-08 17:50:32')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `inf_entities` (`service_id`, `entity`, `created_at`, `updated_at`) VALUES (3, '\n ', '2011-06-08 17:50:32', '2011-06-08 17:50:32')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  describe `competences`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (3, 'Home', 'http://localhost:3002/index', 'Devolve a descrição do serviço', '2011-06-08 17:50:32', '2011-06-08 17:50:32')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (3, 'Status', 'http://localhost:3002/status', 'Devolve o estado o serviço', '2011-06-08 17:50:32', '2011-06-08 17:50:32')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (3, 'Metainfo', 'http://localhost:3002/metainfo', 'Devolve a meta info do serviço', '2011-06-08 17:50:32', '2011-06-08 17:50:32')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (3, 'Search', 'http://localhost:3002/search', 'Devolve os resultados de uma procura', '2011-06-08 17:50:32', '2011-06-08 17:50:32')
+  [1m[36mSQL (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO `competences` (`service_id`, `competenceType`, `competenceUrl`, `description`, `created_at`, `updated_at`) VALUES (3, 'Recomendation', 'http://localhost:3002/recomendation', 'Devolve as recomendações para uma palavra', '2011-06-08 17:50:32', '2011-06-08 17:50:32')[0m
+  [1m[35mSQL (0.1ms)[0m  COMMIT
+Rendered back_office/createservice.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 237ms (Views: 11.6ms | ActiveRecord: 51.1ms)
+
+
+Started GET "/admin/listservices" for 127.0.0.1 at 2011-06-08 18:50:35 +0100
+  Processing by BackOfficeController#listservices as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mService Load (0.5ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mCompetence Load (0.3ms)[0m  [1mSELECT `competences`.* FROM `competences`[0m
+Rendered back_office/listservices.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 100ms (Views: 28.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:50:43 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 90ms (Views: 23.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:51:41 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (17.9ms)
+Completed 200 OK in 85ms (Views: 21.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/icons/original/missing.png" for 127.0.0.1 at 2011-06-08 18:51:41 +0100
+
+ActionController::RoutingError (No route matches "/icons/original/missing.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:52:17 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (17.6ms)
+Completed 200 OK in 47ms (Views: 21.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/icons/original/missing.png" for 127.0.0.1 at 2011-06-08 18:52:17 +0100
+
+ActionController::RoutingError (No route matches "/icons/original/missing.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:52:30 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 49ms (Views: 23.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/icons/original/missing.png" for 127.0.0.1 at 2011-06-08 18:52:31 +0100
+
+ActionController::RoutingError (No route matches "/icons/original/missing.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:52:44 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (55.5ms)
+Completed 200 OK in 85ms (Views: 59.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/icons/original/missing.png" for 127.0.0.1 at 2011-06-08 18:52:44 +0100
+
+ActionController::RoutingError (No route matches "/icons/original/missing.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:53:34 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 86ms (Views: 22.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/icons/original/missing.png" for 127.0.0.1 at 2011-06-08 18:53:34 +0100
+
+ActionController::RoutingError (No route matches "/icons/original/missing.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:54:16 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 47ms (Views: 21.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/icons/original/missing.png" for 127.0.0.1 at 2011-06-08 18:54:16 +0100
+
+ActionController::RoutingError (No route matches "/icons/original/missing.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:54:27 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (57.8ms)
+Completed 200 OK in 88ms (Views: 61.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:55:29 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 93ms (Views: 27.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/images/service-default-icon.png" for 127.0.0.1 at 2011-06-08 18:55:29 +0100
+
+ActionController::RoutingError (No route matches "/images/service-default-icon.png"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:55:52 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.1ms)
+Completed 200 OK in 49ms (Views: 21.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:57:24 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 47ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 18:58:34 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (55.7ms)
+Completed 200 OK in 85ms (Views: 59.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 18:58:36 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.3ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 117ms (Views: 3.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 18:58:39 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.3ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 131ms (Views: 3.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 18:58:42 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 110ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 19:16:49 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.6ms)
+Completed 200 OK in 149ms (Views: 4.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 19:16:49 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.2ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.6ms)
+Completed 200 OK in 174ms (Views: 4.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 19:16:49 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.2ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 144ms (Views: 4.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 19:16:54 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 227ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:26:25 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'Anonymus93300') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'Anonymus93300') LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `users`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `notAnonymus`, `created_at`, `updated_at`) VALUES ('Anonymus93300', 'Anonymus93300', '$2a$10$alNASpEcaATfVpeaAuxju.D4DTgp1blZ/4kyoc2TEv0NocByPbiLq', '$2a$10$alNASpEcaATfVpeaAuxju.', NULL, NULL, '2011-06-08 19:26:25', '2011-06-08 19:26:25')
+  [1m[36mSQL (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`userName` = 'Anonymus93300'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered home_page/index.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 142ms (Views: 16.1ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:27:09 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 124ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:27:16 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 49ms (Views: 22.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:27:17 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 120ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:27:20 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 114ms (Views: 3.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:27:22 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 184ms (Views: 4.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:30:00 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 117ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:36:33 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 48ms (Views: 21.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:36:34 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 118ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:38:09 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (58.3ms)
+Completed 200 OK in 88ms (Views: 61.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:38:11 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 125ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:38:17 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.3ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 177ms (Views: 4.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:38:26 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (21.4ms)
+Completed 200 OK in 98ms (Views: 25.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:38:28 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 121ms (Views: 4.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:38:39 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (17.9ms)
+Completed 200 OK in 47ms (Views: 21.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:38:41 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:38:42 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 122ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:38:56 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (20.4ms)
+Completed 200 OK in 51ms (Views: 24.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:38:57 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 125ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:39:03 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 145ms (Views: 4.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:39:09 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (56.4ms)
+Completed 200 OK in 87ms (Views: 60.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:39:15 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.2ms)[0m  [1mDELETE FROM `users` WHERE `users`.`id` = 1[0m
+  [1m[35mSQL (1.3ms)[0m  COMMIT
+  [1m[36mHistory Load (0.2ms)[0m  [1mSELECT `histories`.* FROM `histories` WHERE (`histories`.user_id = 1)[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'Anonymus70396') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'Anonymus70396') LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mdescribe `users`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `notAnonymus`, `created_at`, `updated_at`) VALUES ('Anonymus70396', 'Anonymus70396', '$2a$10$NFa90uon.ZVit3/VYaJzTOiDYOZurmb1c3AqI.pb7qExCIICdO8uW', '$2a$10$NFa90uon.ZVit3/VYaJzTO', NULL, NULL, '2011-06-08 19:39:16', '2011-06-08 19:39:16')
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`userName` = 'Anonymus70396'
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 191ms (Views: 16.8ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:39:18 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 126ms (Views: 3.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:39:21 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 156ms (Views: 3.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:39:38 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 86ms (Views: 21.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:39:40 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 85ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:39:42 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 111ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:39:53 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (17.7ms)
+Completed 200 OK in 81ms (Views: 21.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/list931" for 127.0.0.1 at 2011-06-08 20:39:53 +0100
+
+ActionController::RoutingError (No route matches "/list931"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:39:55 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (20.9ms)
+Completed 200 OK in 87ms (Views: 24.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/list931" for 127.0.0.1 at 2011-06-08 20:39:55 +0100
+
+ActionController::RoutingError (No route matches "/list931"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:39:57 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 49ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:39:58 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 116ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:40:01 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 90ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:40:03 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 113ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:40:06 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 88ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:40:09 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 86ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:44:08 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 113ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 20:44:11 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 125ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:44:46 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 88ms (Views: 22.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:44:55 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 89ms (Views: 22.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:45:06 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.6ms)
+Completed 200 OK in 85ms (Views: 4.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:45:31 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 114ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:48:18 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 48ms (Views: 22.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:48:32 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (56.8ms)
+Completed 200 OK in 86ms (Views: 60.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:48:35 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 121ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:48:36 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 133ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:49:11 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.5ms)
+Completed 200 OK in 89ms (Views: 22.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/homepage" for 127.0.0.1 at 2011-06-08 20:49:11 +0100
+
+ActionController::RoutingError (No route matches "/homepage"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:49:16 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (2.7ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 87ms (Views: 22.3ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/homepage" for 127.0.0.1 at 2011-06-08 20:49:17 +0100
+
+ActionController::RoutingError (No route matches "/homepage"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:49:27 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 48ms (Views: 22.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/homepage" for 127.0.0.1 at 2011-06-08 20:49:28 +0100
+
+ActionController::RoutingError (No route matches "/homepage"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:51:00 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 48ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:51:05 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 118ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:51:51 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (53.6ms)
+Completed 200 OK in 83ms (Views: 57.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:52:50 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 91ms (Views: 22.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:52:54 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 49ms (Views: 21.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:07 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 52ms (Views: 23.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:25 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (58.6ms)
+Completed 200 OK in 88ms (Views: 62.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:28 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 86ms (Views: 60.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:36 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 84ms (Views: 21.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:39 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 49ms (Views: 23.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:52 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 48ms (Views: 22.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:53:55 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (65.5ms)
+Completed 200 OK in 98ms (Views: 69.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:54:11 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (55.6ms)
+Completed 200 OK in 86ms (Views: 59.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:54:54 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 86ms (Views: 22.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:55:18 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 48ms (Views: 21.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2011-06-08 20:55:19 +0100
+
+ActionController::RoutingError (No route matches "/home"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:55:24 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 81ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 20:55:27 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 48ms (Views: 22.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2011-06-08 20:55:28 +0100
+
+ActionController::RoutingError (No route matches "/home"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 20:58:40 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 149ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:00:33 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (57.8ms)
+Completed 200 OK in 88ms (Views: 61.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:00:34 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 121ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:00:47 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (20.7ms)
+Completed 200 OK in 95ms (Views: 24.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:00:49 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 79ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:01:02 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 48ms (Views: 22.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:01:04 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:01:27 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 49ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:01:29 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 145ms (Views: 3.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:01:44 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 97ms (Views: 69.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:01:46 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 129ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:02:40 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 94ms (Views: 23.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:02:41 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.2ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 81ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:03:30 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 49ms (Views: 22.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:03:32 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 125ms (Views: 3.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:04:28 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (57.8ms)
+Completed 200 OK in 89ms (Views: 61.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:04:31 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 124ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:04:45 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 180ms (Views: 4.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:04:57 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 89ms (Views: 61.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:04:59 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 120ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:05:15 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 87ms (Views: 21.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:05:17 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 84ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:05:37 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 81ms (Views: 3.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:06:37 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 50ms (Views: 23.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:06:39 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 153ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:07:04 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (58.4ms)
+Completed 200 OK in 89ms (Views: 62.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:07:06 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 123ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:07:49 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.5ms)
+Completed 200 OK in 90ms (Views: 22.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:07:52 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 120ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:08:35 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 50ms (Views: 22.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:08:37 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 82ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:10:24 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 49ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:10:26 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 83ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:10:42 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 49ms (Views: 22.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:10:43 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 114ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:10:49 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.4ms)
+Completed 200 OK in 51ms (Views: 23.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:10:51 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 130ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:12:22 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 50ms (Views: 22.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:12:24 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 122ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:12:51 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (58.9ms)
+Completed 200 OK in 91ms (Views: 62.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:12:53 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 121ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:16:34 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 92ms (Views: 22.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:16:50 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 48ms (Views: 21.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:16:52 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 84ms (Views: 4.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:16:54 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 51ms (Views: 22.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:16:55 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.5ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 151ms (Views: 3.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:17:12 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 49ms (Views: 22.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:17:14 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 122ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:17:33 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (58.4ms)
+Completed 200 OK in 89ms (Views: 62.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:17:35 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 127ms (Views: 3.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:18:04 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (24.6ms)
+Completed 200 OK in 97ms (Views: 29.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:18:06 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 82ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:18:07 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 48ms (Views: 21.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:18:09 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 114ms (Views: 5.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:18:10 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 49ms (Views: 22.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:18:16 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 135ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:18:38 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (59.1ms)
+Completed 200 OK in 89ms (Views: 62.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 21:18:40 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 123ms (Views: 3.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:18:41 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 89ms (Views: 63.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:19:35 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 89ms (Views: 22.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:19:36 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 81ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:19:47 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 101ms (Views: 4.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:20:22 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 90ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:20:24 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 117ms (Views: 4.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:20:35 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 51ms (Views: 23.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/homepage308" for 127.0.0.1 at 2011-06-08 21:20:36 +0100
+
+ActionController::RoutingError (No route matches "/homepage308"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:20:37 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 49ms (Views: 22.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:20:38 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (2.6ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 133ms (Views: 3.8ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:20:56 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (59.2ms)
+Completed 200 OK in 90ms (Views: 63.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:20:58 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 123ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:21:16 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 88ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:21:17 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 121ms (Views: 3.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:22:10 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 95ms (Views: 22.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:22:11 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 84ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/homepage521" for 127.0.0.1 at 2011-06-08 21:22:11 +0100
+
+ActionController::RoutingError (No route matches "/homepage521"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:24:30 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 114ms (Views: 3.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/homepage688" for 127.0.0.1 at 2011-06-08 21:24:30 +0100
+
+ActionController::RoutingError (No route matches "/homepage688"):
+  
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:24:32 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 48ms (Views: 22.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:26:11 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 50ms (Views: 22.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:26:12 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 126ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:26:29 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (59.9ms)
+Completed 200 OK in 89ms (Views: 63.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:26:32 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 130ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:27:27 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (62.7ms)
+Completed 200 OK in 94ms (Views: 66.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:27:28 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 138ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:28:18 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 91ms (Views: 22.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:28:20 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 123ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:29:33 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 49ms (Views: 21.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:29:35 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 112ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:29:36 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 49ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:29:51 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 55ms (Views: 23.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:29:53 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 133ms (Views: 4.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:29:54 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.5ms)
+Completed 200 OK in 166ms (Views: 52.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:30:01 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (19.3ms)
+Completed 200 OK in 50ms (Views: 23.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:30:03 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.9ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 130ms (Views: 4.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:30:04 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:30:07 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 48ms (Views: 22.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:30:08 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 107ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:30:10 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 49ms (Views: 22.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 21:30:11 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 124ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/degreesandcourses/degrees" for 127.0.0.1 at 2011-06-08 21:30:13 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"degrees"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 199ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:30:15 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 49ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:33:04 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 129ms (Views: 48.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:33:06 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 48ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/degreesandcourses/index" for 127.0.0.1 at 2011-06-08 21:33:07 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"degreesandcourses"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (0.1ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 3)
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 124ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:33:08 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.2ms)[0m  SELECT `services`.* FROM `services`
+Rendered home_page/index.html.erb within layouts/application (18.8ms)
+Completed 200 OK in 49ms (Views: 22.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:33:10 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mCompetence Load (2.0ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)
+Rendered service_forward/homepagerequest.xml.erb (0.5ms)
+Completed 200 OK in 176ms (Views: 4.1ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:33:12 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 86ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:33:14 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 47ms (Views: 21.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:33:23 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 84ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:33:24 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 112ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/1" for 127.0.0.1 at 2011-06-08 21:33:25 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (2, '2011-06-08 20:33:25', 'Recurso: Professor', 'http://localhost:3000/services/people/people/1', '2011-06-08 20:33:25', '2011-06-08 20:33:25')
+  [1m[36mSQL (0.9ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 132ms (Views: 4.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:33:28 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 46ms (Views: 21.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/index" for 127.0.0.1 at 2011-06-08 21:33:29 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 2)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 84ms (Views: 3.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/services/people/people" for 127.0.0.1 at 2011-06-08 21:33:30 +0100
+  Processing by ServiceForwardController#listrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered service_forward/listrequest.xml.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 3.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/services/people/people/1" for 127.0.0.1 at 2011-06-08 21:33:31 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"people", "method"=>"people", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'people'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (2, '2011-06-08 20:33:31', 'Recurso: Professor', 'http://localhost:3000/services/people/people/1', '2011-06-08 20:33:31', '2011-06-08 20:33:31')
+  [1m[36mSQL (1.0ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.4ms)
+Completed 200 OK in 201ms (Views: 3.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/search?keyword=Teoria+de+Sinais&entity=course" for 127.0.0.1 at 2011-06-08 21:33:34 +0100
+  Processing by SearchController#search as XML
+  Parameters: {"keyword"=>"Teoria de Sinais", "entity"=>"course"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mInfEntity Load (0.2ms)[0m  SELECT `inf_entities`.* FROM `inf_entities` WHERE `inf_entities`.`entity` = 'course'
+  [1m[36mService Load (0.2ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`id` = 3 LIMIT 1[0m
+  [1m[35mCompetence Load (0.2ms)[0m  SELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Search' AND (`competences`.service_id = 3)
+Rendered search/search.xml.erb (0.5ms)
+Completed 200 OK in 454ms (Views: 3.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/services/degreesandcourses/courses/1786" for 127.0.0.1 at 2011-06-08 21:33:35 +0100
+  Processing by ServiceForwardController#recordrequest as XML
+  Parameters: {"service"=>"degreesandcourses", "method"=>"courses", "id"=>"1786"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'degreesandcourses'
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `histories`[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO `histories` (`user_id`, `time`, `description`, `url`, `created_at`, `updated_at`) VALUES (2, '2011-06-08 20:33:36', 'Recurso: Cadeira', 'http://localhost:3000/services/degreesandcourses/courses/1786', '2011-06-08 20:33:36', '2011-06-08 20:33:36')
+  [1m[36mSQL (0.8ms)[0m  [1mCOMMIT[0m
+Rendered service_forward/recordrequest.xml.erb (0.6ms)
+Completed 200 OK in 124ms (Views: 4.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-08 21:33:39 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (20.3ms)
+Completed 200 OK in 50ms (Views: 23.9ms | ActiveRecord: 0.2ms)
+>>>>>>> f96484c9d6e3532c847e4d6a4a3fe9767ddea513

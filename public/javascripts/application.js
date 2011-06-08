@@ -56,6 +56,7 @@ function createPage(id, logged) {
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
             "<h1 id='logo' class='ui-title'>Concierge</h1>";
+
     var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
@@ -94,6 +95,7 @@ function parse(xml) {
     if ($(xml).find("record").length != 0) {
         parseRecord(xml);
     }
+
      if ($(xml).find("map").length != 0) {
         parseMap(xml);
     }
@@ -186,8 +188,13 @@ function parseHomepage(xml) {
 
 
 
+    page.find(':jqmData(role="header")').append("<a href='http://localhost:3000' class='ui-btn-left' data-icon='arrow-l'>Back</a>");
+
     page.page();
+
     $.mobile.pageContainer.append(page);
+
+
 
     <!-- Add the search listener -->
     callServiceLive("homepage" + bla, $(xml).find("search").text());
@@ -401,6 +408,10 @@ function parseRecord(xml) {
     $.mobile.changePage("#" + page.attr("id"));
     $(".slide_items").hide();
 }
+
+$('.show_name').live('click', function() {
+   alert($(this).data("teste"));
+});
 
 $('#serviceLink').live('click', function() {
     getHomepage($(this).attr('href'));
