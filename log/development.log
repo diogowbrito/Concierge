@@ -23627,3 +23627,60 @@ Started GET "/" for 127.0.0.1 at 2011-06-08 21:33:39 +0100
 Rendered home_page/index.html.erb within layouts/application (20.3ms)
 Completed 200 OK in 50ms (Views: 23.9ms | ActiveRecord: 0.2ms)
 >>>>>>> f96484c9d6e3532c847e4d6a4a3fe9767ddea513
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/alaxid/Desktop/PI/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/alaxid/Desktop/PI/Concierge/config/environment.rb:5)
+  [1m[36mSQL (0.8ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (128.4ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (22.2ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (61.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateRefEntities (20110509133857)
+  [1m[35mSQL (19.1ms)[0m  CREATE TABLE `ref_entities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `entity` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (19.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133857')[0m
+Migrating to CreateInfEntities (20110509133931)
+  [1m[35mSQL (105.8ms)[0m  CREATE TABLE `inf_entities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `entity` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (116.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133931')[0m
+Migrating to CreateCompetences (20110509133950)
+  [1m[35mSQL (41.0ms)[0m  CREATE TABLE `competences` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `competenceType` varchar(255), `competenceUrl` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (13.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509133950')[0m
+Migrating to CreateTags (20110509134005)
+  [1m[35mSQL (24.5ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `service_id` int(11), `tag` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (18.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110509134005')[0m
+Migrating to CreateServices (20110511141419)
+  [1m[35mSQL (29.0ms)[0m  CREATE TABLE `services` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `serviceName` varchar(255), `provider` varchar(255), `servicetype` varchar(255), `ranking` int(11), `url` varchar(255), `imgPath` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (3.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110511141419')[0m
+Migrating to CreateUsers (20110522131256)
+  [1m[35mSQL (26.2ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `userName` varchar(255), `email` varchar(255), `passwordHash` varchar(255), `passwordSalt` varchar(255), `activateCode` int(11), `notAnonymus` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (12.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110522131256')[0m
+Migrating to CreateDataFiles (20110524134244)
+  [1m[35mSQL (25.9ms)[0m  CREATE TABLE `data_files` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (12.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110524134244')[0m
+Migrating to CreateHistories (20110529135715)
+  [1m[35mSQL (24.6ms)[0m  CREATE TABLE `histories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `time` datetime, `description` varchar(255), `url` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (7.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110529135715')[0m
+Migrating to AddAttachmentIconToServices (20110607172028)
+  [1m[35mSQL (66.6ms)[0m  ALTER TABLE `services` ADD `icon_file_name` varchar(255)
+  [1m[36mSQL (72.2ms)[0m  [1mALTER TABLE `services` ADD `icon_content_type` varchar(255)[0m
+  [1m[35mSQL (86.9ms)[0m  ALTER TABLE `services` ADD `icon_file_size` int(11)
+  [1m[36mSQL (64.3ms)[0m  [1mALTER TABLE `services` ADD `icon_updated_at` datetime[0m
+  [1m[35mSQL (15.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20110607172028')
+  [1m[36mSQL (20.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations`
+  [1m[36mSQL (0.7ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (1.0ms)[0m  describe `competences`
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW KEYS FROM `competences`[0m
+  [1m[35mSQL (1.0ms)[0m  describe `data_files`
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW KEYS FROM `data_files`[0m
+  [1m[35mSQL (1.1ms)[0m  describe `histories`
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW KEYS FROM `histories`[0m
+  [1m[35mSQL (1.1ms)[0m  describe `inf_entities`
+  [1m[36mSQL (0.7ms)[0m  [1mSHOW KEYS FROM `inf_entities`[0m
+  [1m[35mSQL (0.9ms)[0m  describe `ref_entities`
+  [1m[36mSQL (0.6ms)[0m  [1mSHOW KEYS FROM `ref_entities`[0m
+  [1m[35mSQL (1.4ms)[0m  describe `services`
+  [1m[36mSQL (0.8ms)[0m  [1mSHOW KEYS FROM `services`[0m
+  [1m[35mSQL (1.0ms)[0m  describe `tags`
+  [1m[36mSQL (0.6ms)[0m  [1mSHOW KEYS FROM `tags`[0m
+  [1m[35mSQL (1.5ms)[0m  describe `users`
+  [1m[36mSQL (0.9ms)[0m  [1mSHOW KEYS FROM `users`[0m
