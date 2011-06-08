@@ -396,6 +396,10 @@ function parseRecord(xml) {
     $(".slide_items").hide();
 }
 
+$('.show_name').live('click', function() {
+   alert($(this).data("teste"));
+});
+
 $('#serviceLink').live('click', function() {
     getHomepage($(this).attr('href'));
 });
