@@ -187,7 +187,7 @@ function parseHomepage(xml) {
           pageWritable.append(serviceSearchForm);
 
 
-       var homeUrl =  "http://" + document.location;
+       var homeUrl = document.location;
     page.find(':jqmData(role="header")').append("<a href="+homeUrl+" class='ui-btn-left' data-icon='arrow-l'>Back</a>");
 
     page.page();
