@@ -94,7 +94,9 @@ function parse(xml) {
     if ($(xml).find("record").length != 0) {
         parseRecord(xml);
     }
-
+     if ($(xml).find("map").length != 0) {
+        parseMap(xml);
+    }
 }
 
 function parseHomepage(xml) {
@@ -225,6 +227,7 @@ function parseList(xml){
             });
         });
      page.page();
+
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
@@ -233,6 +236,40 @@ function parseList(xml){
 
     $.mobile.changePage("#" + page.attr("id"));
 
+}
+
+function parseMap(xml) {
+
+    var logged;
+    $(xml).find("record").each(function() {
+        logged = $(this).attr('logged');
+    });
+    var page = createPage("map", logged);
+    var pageWritable = $("[data-role=content]", page.get(0));
+    var title = $(xml).find("map").attr('title');
+    pageWritable.append("<p>" + title + "</p>");
+    pageWritable.append("<div id='map_canvas'></div>");
+
+    $(xml).find("map").children().each(function(index, element) {
+        switch (element.nodeName) {
+            case 'link':
+                var attr = $(this).attr("href");
+                var myOptions = {
+                    zoom: 11,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+
+                var map = new google.maps.Map($(".map_canvas"), myOptions);
+
+                var ctaLayer = new google.maps.KmlLayer(attr);
+                ctaLayer.setMap(map);
+                break;
+        }
+    });
+
+     page.page();
+    $.mobile.pageContainer.append(page);
+    $.mobile.changePage("#" + page.attr("id"));
 }
 
 function parseRecord(xml) {
