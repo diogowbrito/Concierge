@@ -56,6 +56,7 @@ function createPage(id, logged) {
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
             "<h1 id='logo' class='ui-title'>Concierge</h1>";
+
     var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
@@ -184,8 +185,13 @@ function parseHomepage(xml) {
       var search = $("<input>").attr("type", "search").attr("id", "foda-se").append(divdatarole);
     pageWritable.append(search);
 
+    page.find(':jqmData(role="header")').append("<a href='http://localhost:3000' class='ui-btn-left' data-icon='arrow-l'>Back</a>");
+
     page.page();
+
     $.mobile.pageContainer.append(page);
+
+
 
     <!-- Add the search listener -->
     callLive("homepage" + bla);
