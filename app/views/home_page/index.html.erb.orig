@@ -1,0 +1,25 @@
+
+  <table>
+    <tbody>
+    <% counter = 0 %>
+    <% @services.each do |service| %>
+        <% if counter % 4 == 0 then %>
+            <tr>
+        <% end %>
+        <td>
+          <% address = get_address %>
+<<<<<<< HEAD
+         <img class="service_icon" src="/images/buttons/service-default-icon.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>/>
+=======
+          <!--<%= image_tag service.icon.url %>-->
+         <img src="/images/letra-c.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+>>>>>>> 984cefcb1ebcaca1347edf07a0aa1b418a7cfc23
+         <p><%= service.serviceName %></p>
+        </td>
+        <% counter = counter + 1 %>
+        <% if (counter % 4 == 0) || (counter == @services.size) then %>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
