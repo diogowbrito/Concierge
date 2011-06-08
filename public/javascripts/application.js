@@ -31,8 +31,8 @@ function createPage(id, logged) {
     var url = "http://" + document.domain + ":" + location.port + "/";
     var log;
     <!-- Draw Header-->
-    if(logged=='true')
-       log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
+    if (logged == 'true')
+        log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
             "<h1 id='logo' class='ui-title'>Concierge</h1>";
@@ -74,7 +74,9 @@ function parse(xml) {
         parseRecord(xml);
     }
 
-
+     if ($(xml).find("map").length != 0) {
+        parseMap(xml);
+    }
 }
 
 function parseHomepage(xml) {
@@ -113,7 +115,7 @@ function parseHomepage(xml) {
                             text = $(this).text();
                             if (element.nodeName == 'entity') {
                                 attr = $(this).attr('href');
-                                html += '<li class="slide_items '+ title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'text') {
                                 html += '<li class="slide_items ' + title + '">' + text + '</li>';
@@ -145,7 +147,7 @@ function parseHomepage(xml) {
     $(".slide_items").hide();
 }
 
-function parseList(xml){
+function parseList(xml) {
 
     var logged;
     $(xml).find("list").each(function() {
@@ -156,7 +158,7 @@ function parseList(xml){
     var page = createPage("list" + bla, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
 
-      $(xml).find("list").each(function() {
+    $(xml).find("list").each(function() {
         pageWritable.append("<p>" + $(this).attr('title') + "</p>");
         var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
 
@@ -169,11 +171,45 @@ function parseList(xml){
         });
 
     });
-     page.page();
+    page.page();
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
 }
 
+
+function parseMap(xml) {
+
+    var logged;
+    $(xml).find("record").each(function() {
+        logged = $(this).attr('logged');
+    });
+    var page = createPage("map", logged);
+    var pageWritable = $("[data-role=content]", page.get(0));
+    var title = $(xml).find("map").attr('title');
+    pageWritable.append("<p>" + title + "</p>");
+    pageWritable.append("<div id='map_canvas'></div>");
+
+    $(xml).find("map").children().each(function(index, element) {
+        switch (element.nodeName) {
+            case 'link':
+                var attr = $(this).attr("href");
+                var myOptions = {
+                    zoom: 11,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+
+                var map = new google.maps.Map($(".map_canvas"), myOptions);
+
+                var ctaLayer = new google.maps.KmlLayer(attr);
+                ctaLayer.setMap(map);
+                break;
+        }
+    });
+
+     page.page();
+    $.mobile.pageContainer.append(page);
+    $.mobile.changePage("#" + page.attr("id"));
+}
 
 function parseRecord(xml) {
 

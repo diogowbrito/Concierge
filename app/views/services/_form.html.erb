@@ -1,4 +1,4 @@
-<%= form_for(@service) do |f| %>
+<%= form_for(@service, :html => { :multipart => true } ) do |f| %>
   <% if @service.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -20,8 +20,8 @@
     <%= f.text_field :provider %>
   </div>
   <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.label :servicetype %><br />
+    <%= f.text_field :servicetype %>
   </div>
   <div class="field">
     <%= f.label :ranking %><br />
@@ -31,6 +31,12 @@
     <%= f.label :imgPath %><br />
     <%= f.text_field :imgPath %>
   </div>
+
+     <div class="field">
+       <%= f.label :icon %><br />
+       <%= f.file_field :icon %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

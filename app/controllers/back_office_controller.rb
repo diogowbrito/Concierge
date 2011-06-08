@@ -9,6 +9,11 @@ class BackOfficeController < ApplicationController
   def createservice
 
     @url = params[:url]
+    @icon = params[:icon]
+
+    puts "=============="
+    puts @icon
+
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
     @name = @doc.root['name']
     url =  @doc.root['url']
@@ -47,7 +52,7 @@ class BackOfficeController < ApplicationController
       comp << acomp
     end
 
-    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :imgPath => 'TODO'
+    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :icon => @icon
     service = Service.where(:serviceName => @name)
     id = service[0].id
     serviceurl = service[0].url
@@ -112,11 +117,6 @@ class BackOfficeController < ApplicationController
       format.html { redirect_to(:action => 'listservices') }
     end
 
-  end
-
-  def uploadFile
-    post = DataFile.save(params[:upload])
-    render :text => "File has been uploaded successfully"
   end
 
 end
