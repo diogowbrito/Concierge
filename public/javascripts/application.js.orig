@@ -94,7 +94,10 @@ function parse(xml) {
     if ($(xml).find("record").length != 0) {
         parseRecord(xml);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> adc4a7329b180f60629520117b19947ee3497c55
      if ($(xml).find("map").length != 0) {
         parseMap(xml);
     }
@@ -228,13 +231,13 @@ function parseList(xml){
             });
         });
      page.page();
+<<<<<<< HEAD
+=======
 
+>>>>>>> adc4a7329b180f60629520117b19947ee3497c55
     $.mobile.pageContainer.append(page);
-
     <!-- Add the search listener -->
     callLive("list" + pageRandomId);
-
-
     $.mobile.changePage("#" + page.attr("id"));
 
 }

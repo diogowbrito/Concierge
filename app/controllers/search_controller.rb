@@ -37,8 +37,13 @@ class SearchController < ApplicationController
     itemcounter = 0
     services.each do |service|
       competence = service.competences.where(:competenceType => "Search")
-      puts competence[0].competenceUrl
+
+      if competence[0] != nil
       url = competence[0].competenceUrl
+      else
+      url = ""
+      end
+
       homeurl = service.url
       name = service.serviceName
       begin
@@ -126,6 +131,7 @@ class SearchController < ApplicationController
     @servicename = params[:service]
     service = Service.where(:serviceName => @servicename)
     competence = service[0].competences.where(:competenceType => "Search")
+
     homeurl = service[0].url
 
     user = User.find(session[:user_id])
@@ -135,6 +141,7 @@ class SearchController < ApplicationController
     end
 
     url = competence[0].competenceUrl
+
     begin
       @doc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start="+@start+"&end="+@end),nil, 'UTF-8')
 
