@@ -1,5 +1,5 @@
 
-  <table>
+  <table id="service_table">
     <tbody>
     <% counter = 0 %>
     <% @services.each do |service| %>
@@ -13,7 +13,7 @@
           <% else %>
              <img src=<%=service.icon.url%> id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
           <% end %>
-         <p><%= service.serviceName %></p>
+         <p class="service_name"><%= service.serviceName %></p>
         </td>
         <% counter = counter + 1 %>
         <% if (counter % 4 == 0) || (counter == @services.size) then %>
