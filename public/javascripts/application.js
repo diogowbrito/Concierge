@@ -394,7 +394,7 @@ function parseRecord(xml) {
         }
     });
 
-    var url = "http://" + document.domain + ":" + location.port + "/";
+    var url = "http://" + document.domain;
     var sendurl = url+"sendresource?url="+recordurl;
     var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a>";
     pageWritable.append(mail_button);
