@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      @rand = rand(2000)
+      @rand = rand(20000)
       @user[:activateCode] = @rand
       @user[:notAnonymus] = "yes"
       @user.save
