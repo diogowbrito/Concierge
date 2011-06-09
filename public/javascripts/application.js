@@ -287,44 +287,49 @@ function parseList(xml){
 
 function parseMap(xml) {
 
-    console.log("mapiii");
+  //  console.log("mapiii");
 
 
     var logged;
     $(xml).find("map").each(function() {
         logged = $(this).attr('logged');
+
     });
 
-    var page = createPage("map", logged);
+     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("map" + pageRandomId, logged);
 
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
-    pageWritable.append("<div id='map_canvas' style='height:500px;width:400px'></div>");
+    pageWritable.append("<div id='map_canvas' style='height:400px;width:300px'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
         switch (element.nodeName) {
             case 'link':
                 kmlUrl = $(this).attr("href");
+                    console.log($(this).attr("href"));
              break;
         }
     });
 
      page.page();
-
-            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-        var myOptions = {
-            zoom: 4,
-            center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-        cta_layer = new google.maps.KmlLayer(kmlUrl, {suppressInfoWindows: true,preserveViewport:true});
-        cta_layer.setMap(map);
-
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
+        var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
+        var myOptions = {
+            zoom: 22,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        }
+    //http://localhost:3006/kmlTrunk/Ed.I.kml
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var ctaLayer = new google.maps.KmlLayer(kmlUrl);
+        ctaLayer.setMap(map);
+
+//    var map = new google.maps.Map($("#map" + pageRandomId).find("map_canvas"), myOptions);
+ //    console.log(map);
+
 }
 
 function parseRecord(xml) {
@@ -432,7 +437,7 @@ function parseRecord(xml) {
 
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url+"sendresource?url="+recordurl;
-    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a>";
+    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a><a href='" + url + "logout' class='ui-btn-right' data-icon='check'>Gosto!</a>";
     pageWritable.append(mail_button);
 
     page.page();

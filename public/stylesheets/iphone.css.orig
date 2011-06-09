@@ -1,0 +1,32 @@
+
+#service_table {
+    margin: 0 auto 0 auto;
+    width: 100%;
+
+}
+
+#serviceLink { }
+<<<<<<< HEAD
+
+td {
+    text-align: center;
+}
+
+td p {
+    margin: 0 0 0 0;
+}
+
+.service_name {
+    font-family: "Arial", sans-serif;
+    font-size: 13px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    position: relative;
+    top: -5px;
+=======
+.service_name { font-size: 12px; }
+
+#teste {
+    text-overflow: ellipsis;
+>>>>>>> 98b69152aec85c862353ef41d1b71712506bae73
+}
