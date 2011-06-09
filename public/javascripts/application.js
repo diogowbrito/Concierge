@@ -308,7 +308,7 @@ function parseMap(xml) {
         switch (element.nodeName) {
             case 'link':
                 kmlUrl = $(this).attr("href");
-                    console.log($(this).attr("href"));
+                //    console.log($(this).attr("href"));
              break;
         }
     });
