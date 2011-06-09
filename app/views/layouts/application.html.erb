@@ -19,7 +19,7 @@
     <h1 id="logo" class="ui-title">Concierge</h1>
 
     <div data-role="controlgroup" class="ui-btn-right" data-type="horizontal" >
-
+      <h1><%= get_address %></h1>
       <% if current_user  && current_user.notAnonymus %>
         <a id="login" href=<%= get_address %>"logout" data-role="button" data-icon="gear">Logout</a>
       <% else %>
