@@ -297,7 +297,7 @@ function parseMap(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
                            var mapId = "map_canvas" + pageRandomId;
-    pageWritable.append("<div id="+mapId+" style='height:400px;width:300px;'></div>");
+    pageWritable.append("<div id="+mapId+" style='height:380px;width:320px;'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
