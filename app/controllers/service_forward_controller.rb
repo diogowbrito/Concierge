@@ -27,10 +27,12 @@ class ServiceForwardController < ApplicationController
       link = href.gsub(homeurl, address+"services/"+@servicename)
       node['href'] = link
     end
+    search = service[0].competences.where(:competenceType => "Search")
 
+    if search[0] != nil then
     root = @doc.at_css "record"
-    root.add_child("<search>"+address+"services/"+@servicename+"/search?keyword=")
-
+    root.add_child("<search>"+address+"services/"+@servicename+"/"+search[0].competenceUrl+"?keyword=")
+    end
     respond_to :xml
   end
 
