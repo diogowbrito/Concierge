@@ -411,7 +411,7 @@ function parseRecord(xml) {
 
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url+"sendresource?url="+recordurl;
-    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a><a href='" + url + "logout' class='ui-btn-right' data-icon='check'>Gosto!</a>";
+    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a><a class='like' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/like.png'/></a>";
     pageWritable.append(mail_button);
 
     page.page();
