@@ -29,7 +29,7 @@ class ServiceForwardController < ApplicationController
     end
 
     root = @doc.at_css "record"
-    root.add_child("<search>"+address+"services/"+@servicename+"/search?keyword=<search/>")
+    root.add_child("<search>"+address+"services/"+@servicename+"/search?keyword=")
 
     respond_to :xml
   end
@@ -86,10 +86,22 @@ class ServiceForwardController < ApplicationController
       @logged = "true"
     else @logged = "false"
     end
+    querystring = ""
+    params.each_pair do |key, value|
+      if key.to_s != "format" && key.to_s != "controller" && key.to_s != "action" && key.to_s != "service" && key.to_s != "method" && key.to_s != "id" then
+        querystring = querystring + "&" + key.to_s + "=" + value.to_s
+      end
+    end
 
-    link = serviceurl + "/" +@method+"/"+@id
-    puts link
+    if querystring == ""
+      link = serviceurl + "/" +@method+"/"+@id
+    else
+      link = serviceurl + "/" +@method+"/"+@id+"?"+querystring
+    end
+
     @doc = Nokogiri::XML(open(link), nil, 'UTF-8')
+
+    if @doc.at_css("record") then
 
     record = @doc.at_css("record")
     title = record['title']
@@ -149,8 +161,11 @@ class ServiceForwardController < ApplicationController
       node['href'] = link
 
     end
+
+  elsif @doc.at_css("map")
   end
 
   respond_to :xml
 
+  end
 end

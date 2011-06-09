@@ -175,17 +175,20 @@ function parseHomepage(xml) {
                     break;
                 case 'link':
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
-
                     break;
             }
         });
     });
 
-      var divdatarole =   $('<div>').attr("data-role", "fieldcontain");
-      var search = $("<input>").attr("type", "search").attr("id", "foda-se").append(divdatarole);
-    pageWritable.append(search);
+    var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search");
+    var divdatarole =  $('<div>').attr("data-role", "fieldcontain").append(search);
 
-    page.find(':jqmData(role="header")').append("<a href='http://localhost:3000' class='ui-btn-left' data-icon='arrow-l'>Back</a>");
+    var serviceSearchForm = $("<form>").attr("id", "homepage" + bla + "_service_search_form").append(divdatarole);
+          pageWritable.append(serviceSearchForm);
+
+
+       var homeUrl = document.location;
+    page.find(':jqmData(role="header")').append("<a href="+homeUrl+" class='ui-btn-left' data-icon='arrow-l'>Back</a>");
 
     page.page();
 
@@ -194,6 +197,7 @@ function parseHomepage(xml) {
 
 
     <!-- Add the search listener -->
+    callServiceLive("homepage" + bla, $(xml).find("search").text());
     callLive("homepage" + bla);
 
     $.mobile.changePage("#" + page.attr("id"));
@@ -247,40 +251,49 @@ function parseList(xml){
 
 function parseMap(xml) {
 
+    console.log("mapiii");
+
+
     var logged;
-    $(xml).find("record").each(function() {
+    $(xml).find("map").each(function() {
         logged = $(this).attr('logged');
     });
+
     var page = createPage("map", logged);
+
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
-    pageWritable.append("<p>" + title + "</p>");
-    pageWritable.append("<div id='map_canvas'></div>");
+    pageWritable.append("<div id='map_canvas' style='height:500px;width:400px'></div>");
+
 
     $(xml).find("map").children().each(function(index, element) {
         switch (element.nodeName) {
             case 'link':
-                var attr = $(this).attr("href");
-                var myOptions = {
-                    zoom: 11,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
-
-                var map = new google.maps.Map($(".map_canvas"), myOptions);
-
-                var ctaLayer = new google.maps.KmlLayer(attr);
-                ctaLayer.setMap(map);
-                break;
+                kmlUrl = $(this).attr("href");
+             break;
         }
     });
 
      page.page();
+
+            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+        var myOptions = {
+            zoom: 4,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        cta_layer = new google.maps.KmlLayer(kmlUrl, {suppressInfoWindows: true,preserveViewport:true});
+        cta_layer.setMap(map);
+
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
 }
 
 function parseRecord(xml) {
 
+    console.log("parse record");
     var logged;
     $(xml).find("record").each(function() {
         logged = $(this).attr('logged');
@@ -438,7 +451,6 @@ $("#tab_bar_hp_search").live('click', function() {
 });
 
 
-
 $('#home_searchform').live('submit', function() {
     var searched = $('#search').val();
     searched = replaceAll(searched, " ", "+");
@@ -454,7 +466,6 @@ $('#home_searchform').live('submit', function() {
 
     return false;
 });
-
 
 $('.activeZero').live("click", function() {
     if ($(this).hasClass("0")) {
@@ -478,6 +489,27 @@ function replaceAll(string, token, newtoken) {
         string = string.replace(token, newtoken);
     }
     return string;
+}
+
+function callServiceLive(pageIdentification, searchLink) {
+
+        var page = $("#"+pageIdentification);
+
+        var searchForm = page.find("#"+pageIdentification + "_service_search_form");
+
+        searchForm.live('submit', function() {
+
+
+            var searched = page.find("#" + pageIdentification + "_service_search").val();
+
+            searched = replaceAll(searched, " ", "+");
+
+            var url = searchLink + searched;
+            getParse(url);
+            console.log(url);
+
+        return false;
+    });
 }
 
 function callLive(pageIdentification) {
