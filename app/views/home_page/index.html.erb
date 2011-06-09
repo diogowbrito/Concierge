@@ -11,7 +11,7 @@
           <% if service.icon.url == "/icons/original/missing.png" %>
             <img src="./images/buttons/letra c1.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
           <% else %>
-             <img src=<%=service.icon.url%> id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+             <img src=<%=service.icon.url %> id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
           <% end %>
          <p class="service_name"><%= service.serviceName %></p>
         </td>
