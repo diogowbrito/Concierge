@@ -47,7 +47,7 @@ function getWarning(url, id) {
 
 function createPage(id, logged) {
 
-    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
+    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
     var url = "http://" + document.domain + ":" + location.port + "/";
     var log;
     <!-- Draw Header-->
@@ -176,6 +176,27 @@ function parseHomepage(xml) {
                 case 'link':
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
+                case 'list':
+                        var titleList = $(this).attr('title');
+                        html = '<li class="slide activeZero 0" title="' + titleList + '">';
+
+                        if (titleList != undefined)
+                            html += '<a href="">' + titleList + '</a>';
+
+                        html += '</li>';
+
+                        $(this).children().each(function() {
+                            var href = $(this).attr('href');
+                            var title = $(this).attr('title');
+                            var href_img = $(this).children().attr('href');
+                            var size_img = $(this).children().attr('size');
+                            html += '<li class="slide_items '+titleList+'"><a class="parse" href="'+href+'">' +
+                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
+
+                        });
+
+                        list.append(html);
+                    break;
             }
         });
     });
@@ -233,7 +254,7 @@ function parseList(xml){
 
         $(xml).find("list").each(function() {
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-            var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+            var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="d"></ul>').find('ul');
 
             $(this).find("item").each(function() {
                 var attr = $(this).attr('href');
@@ -266,44 +287,49 @@ function parseList(xml){
 
 function parseMap(xml) {
 
-    console.log("mapiii");
+  //  console.log("mapiii");
 
 
     var logged;
     $(xml).find("map").each(function() {
         logged = $(this).attr('logged');
+
     });
 
-    var page = createPage("map", logged);
+     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("map" + pageRandomId, logged);
 
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
-    pageWritable.append("<div id='map_canvas' style='height:500px;width:400px'></div>");
+    pageWritable.append("<div id='map_canvas' style='height:400px;width:300px'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
         switch (element.nodeName) {
             case 'link':
                 kmlUrl = $(this).attr("href");
+                    console.log($(this).attr("href"));
              break;
         }
     });
 
      page.page();
-
-            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-        var myOptions = {
-            zoom: 4,
-            center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-        cta_layer = new google.maps.KmlLayer(kmlUrl, {suppressInfoWindows: true,preserveViewport:true});
-        cta_layer.setMap(map);
-
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
+        var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
+        var myOptions = {
+            zoom: 22,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        }
+    //http://localhost:3006/kmlTrunk/Ed.I.kml
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var ctaLayer = new google.maps.KmlLayer(kmlUrl);
+        ctaLayer.setMap(map);
+
+//    var map = new google.maps.Map($("#map" + pageRandomId).find("map_canvas"), myOptions);
+ //    console.log(map);
+
 }
 
 function parseRecord(xml) {
@@ -356,11 +382,11 @@ function parseRecord(xml) {
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -447,6 +473,7 @@ $('.warning').live('click', function(event) {
 });
 
 $('.slide').live('click', function() {
+
     var t = "." + $(this).attr("title");
     $(t).slideToggle("slow");
 

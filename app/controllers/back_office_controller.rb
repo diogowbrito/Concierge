@@ -13,7 +13,7 @@ class BackOfficeController < ApplicationController
 
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
     @name = @doc.root['name']
-    url =  @doc.root['url']
+    url = @doc.root['url']
     provider = @doc.at_css("provider").text()
     type = @doc.at_css("type").text()
     tags = @doc.xpath("//tag")
@@ -43,16 +43,18 @@ class BackOfficeController < ApplicationController
 
     competences.each do |competence|
       acomp = []
-      acomp << competence['path']
-      acomp << competence.at_css("description").text()
-      acomp << competence.at_css("ctype").text()
-      comp << acomp
+      if competence['path'] != ""
+        acomp << competence['path']
+        acomp << competence.at_css("description").text()
+        acomp << competence.at_css("ctype").text()
+        comp << acomp
+      end
     end
 
     if @icon != nil
-    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :icon => @icon["icon"]
+      Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url, :icon => @icon["icon"]
     else
-    Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url
+      Service.create :serviceName => @name, :provider => provider, :servicetype => type, :ranking => 0, :url => url
     end
 
     service = Service.where(:serviceName => @name)
