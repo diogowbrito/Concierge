@@ -47,7 +47,7 @@ function getWarning(url, id) {
 
 function createPage(id, logged) {
 
-    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
+    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
     var url = "http://" + document.domain + ":" + location.port + "/";
     var log;
     <!-- Draw Header-->
@@ -176,6 +176,27 @@ function parseHomepage(xml) {
                 case 'link':
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
+                case 'list':
+                        var titleList = $(this).attr('title');
+                        html = '<li class="slide activeZero 0" title="' + titleList + '">';
+
+                        if (titleList != undefined)
+                            html += '<a href="">' + titleList + '</a>';
+
+                        html += '</li>';
+
+                        $(this).children().each(function() {
+                            var href = $(this).attr('href');
+                            var title = $(this).attr('title');
+                            var href_img = $(this).children().attr('href');
+                            var size_img = $(this).children().attr('size');
+                            html += '<li class="slide_items '+titleList+'"><a class="parse" href="'+href+'">' +
+                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
+
+                        });
+
+                        list.append(html);
+                    break;
             }
         });
     });
@@ -233,7 +254,7 @@ function parseList(xml){
 
         $(xml).find("list").each(function() {
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-            var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+            var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="d"></ul>').find('ul');
 
             $(this).find("item").each(function() {
                 var attr = $(this).attr('href');
@@ -361,11 +382,11 @@ function parseRecord(xml) {
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -416,7 +437,7 @@ function parseRecord(xml) {
 
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url+"sendresource?url="+recordurl;
-    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a><a href='" + url + "logout' class='ui-btn-right' data-icon='check'>Gosto!</a>";
+    var mail_button = "<a class='warning' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/mail2.png'/></a><a class='like' href='"+sendurl+"' pageid='"+page.attr("id")+"'><img src='/images/buttons/like.png'/></a>";
     pageWritable.append(mail_button);
 
     page.page();
@@ -452,6 +473,7 @@ $('.warning').live('click', function(event) {
 });
 
 $('.slide').live('click', function() {
+
     var t = "." + $(this).attr("title");
     $(t).slideToggle("slow");
 

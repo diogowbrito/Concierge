@@ -15,6 +15,7 @@ class ServiceForwardController < ApplicationController
 
     @url = competence[0].competenceUrl
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
+
     nodes = @doc.xpath("//link")
 
     root = @doc.root()

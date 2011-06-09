@@ -6,6 +6,7 @@
 }
 
 #serviceLink { }
+<<<<<<< HEAD
 
 td {
     text-align: center;
@@ -22,4 +23,10 @@ td p {
     text-shadow: 1px 1px 1px black;
     position: relative;
     top: -5px;
+=======
+.service_name { font-size: 12px; }
+
+#teste {
+    text-overflow: ellipsis;
+>>>>>>> 98b69152aec85c862353ef41d1b71712506bae73
 }
