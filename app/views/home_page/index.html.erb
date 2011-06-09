@@ -16,7 +16,7 @@
          <p class="service_name"><%= service.serviceName %></p>
         </td>
         <% counter = counter + 1 %>
-        <% if (counter % 4 == 0) || (counter == @services.size) then %>
+        <% if (counter % 3 == 0) || (counter == @services.size) then %>
             </tr>
         <% end %>
     <% end %>
