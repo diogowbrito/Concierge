@@ -320,8 +320,14 @@ function parseMap(xml) {
     $.mobile.changePage("#" + page.attr("id"));
         var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
         var myOptions = {
-            zoom: 40,
+            zoom: 20,
             center: center,
+            panControl : false,
+            zoomControl : false,
+            mapTypeControl : false,
+            scaleControl : false,
+            streetViewControl : false,
+            overviewMapControl : false,
             mapTypeId: google.maps.MapTypeId.SATELLITE
         }
       //  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
