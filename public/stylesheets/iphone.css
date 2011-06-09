@@ -2,3 +2,7 @@
 #service_table { text-align: center; }
 #serviceLink { }
 .service_name { font-size: 12px; }
+
+#teste {
+    text-overflow: ellipsis;
+}
