@@ -176,6 +176,27 @@ function parseHomepage(xml) {
                 case 'link':
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
+                case 'list':
+                        title = $(this).attr('title');
+                        html = '<li class="slide activeZero 0" title="' + title + '">';
+
+//                        if (title != undefined)
+//                            html += '<a href="">' + title + '</a>';
+
+                        html += '</li>';
+
+                        $(this).children().each(function() {
+                            var href = $(this).attr('href');
+                            title = $(this).attr('title');
+                            var href_img = $(this).children().attr('href');
+                            var size_img = $(this).children().attr('size');
+                            list.append('<li class="slide_items"><a class="parse" href="'+href+'">' +
+                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>');
+
+                        });
+
+                        list.append(html);
+                    break;
             }
         });
     });

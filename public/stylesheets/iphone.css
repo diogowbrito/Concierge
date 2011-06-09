@@ -1,4 +1,4 @@
 
 #service_table { text-align: center; }
 #serviceLink { }
-.service_name { font-size: 12px; }
+.service_name { font-size: 12px; text-shadow: 0 0.15em black; }
