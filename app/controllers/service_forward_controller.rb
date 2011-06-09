@@ -28,10 +28,12 @@ class ServiceForwardController < ApplicationController
       link = href.gsub(homeurl, address+"services/"+@servicename)
       node['href'] = link
     end
+    search = service[0].competences.where(:competenceType => "Search")
 
+    if search[0] != nil then
     root = @doc.at_css "record"
-    root.add_child("<search>"+address+"services/"+@servicename+"/search?keyword=")
-
+    root.add_child("<search>"+address+"services/"+@servicename+"/"+search[0].competenceUrl+"?keyword=")
+    end
     respond_to :xml
   end
 
@@ -111,7 +113,7 @@ class ServiceForwardController < ApplicationController
     record['url'] = @url
 
     if session[:user_id] != nil then
-      History.create :user_id => session[:user_id], :time => Time.now, :description => "Recurso: "+title, :url => get_address + "services/"+@servicename+"/"+@method+"/"+@id
+      History.create :user_id => session[:user_id], :time => Time.now, :description => title, :url => get_address + "services/"+@servicename+"/"+@method+"/"+@id
     end
 
     entity = @doc.xpath("//entity");

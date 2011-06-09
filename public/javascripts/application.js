@@ -201,6 +201,8 @@ function parseHomepage(xml) {
         });
     });
 
+    if($(xml).find("search").text() != "") {
+
     var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search");
     var divdatarole =  $('<div>').attr("data-role", "fieldcontain").append(search);
 
@@ -208,7 +210,7 @@ function parseHomepage(xml) {
           pageWritable.append(serviceSearchForm);
 
 
-       var homeUrl = document.location;
+    var homeUrl = document.location;
     page.find(':jqmData(role="header")').append("<a href="+homeUrl+" class='ui-btn-left' data-icon='arrow-l'>Back</a>");
 
     page.page();
@@ -220,6 +222,19 @@ function parseHomepage(xml) {
     <!-- Add the search listener -->
     callServiceLive("homepage" + bla, $(xml).find("search").text());
     callLive("homepage" + bla);
+
+    }
+
+    else {
+
+    var homeUrl = document.location;
+    page.find(':jqmData(role="header")').append("<a href="+homeUrl+" class='ui-btn-left' data-icon='arrow-l'>Back</a>");
+
+    page.page();
+
+    $.mobile.pageContainer.append(page);
+
+    }
 
     $.mobile.changePage("#" + page.attr("id"));
     $(".slide_items").hide();
