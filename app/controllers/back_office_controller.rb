@@ -43,7 +43,7 @@ class BackOfficeController < ApplicationController
 
     competences.each do |competence|
       acomp = []
-      if competence['path'] != nil
+      if competence['path'] != ""
         acomp << competence['path']
         acomp << competence.at_css("description").text()
         acomp << competence.at_css("ctype").text()

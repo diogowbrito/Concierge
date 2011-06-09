@@ -47,7 +47,7 @@ function getWarning(url, id) {
 
 function createPage(id, logged) {
 
-    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline");
+    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
     var url = "http://" + document.domain + ":" + location.port + "/";
     var log;
     <!-- Draw Header-->
@@ -177,21 +177,21 @@ function parseHomepage(xml) {
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
                 case 'list':
-                        title = $(this).attr('title');
-                        html = '<li class="slide activeZero 0" title="' + title + '">';
+                        var titleList = $(this).attr('title');
+                        html = '<li class="slide activeZero 0" title="' + titleList + '">';
 
-//                        if (title != undefined)
-//                            html += '<a href="">' + title + '</a>';
+                        if (titleList != undefined)
+                            html += '<a href="">' + titleList + '</a>';
 
                         html += '</li>';
 
                         $(this).children().each(function() {
                             var href = $(this).attr('href');
-                            title = $(this).attr('title');
+                            var title = $(this).attr('title');
                             var href_img = $(this).children().attr('href');
                             var size_img = $(this).children().attr('size');
-                            list.append('<li class="slide_items"><a class="parse" href="'+href+'">' +
-                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>');
+                            html += '<li class="slide_items '+titleList+'"><a class="parse" href="'+href+'">' +
+                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
 
                         });
 
@@ -254,7 +254,7 @@ function parseList(xml){
 
         $(xml).find("list").each(function() {
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-            var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+            var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="d"></ul>').find('ul');
 
             $(this).find("item").each(function() {
                 var attr = $(this).attr('href');
@@ -377,11 +377,11 @@ function parseRecord(xml) {
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -468,6 +468,7 @@ $('.warning').live('click', function(event) {
 });
 
 $('.slide').live('click', function() {
+
     var t = "." + $(this).attr("title");
     $(t).slideToggle("slow");
 

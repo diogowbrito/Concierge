@@ -113,6 +113,9 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] multi_json (v1.0.3, /home/pedro/.rvm/gems/ruby-1.9.2-p180@global/gems/multi_json-1.0.3)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] arel (v2.0.10, /home/pedro/.rvm/gems/ruby-1.9.2-p180/gems/arel-2.0.10)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] highline (v1.6.2, /home/pedro/.rvm/gems/ruby-1.9.2-p180/gems/highline-1.6.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] builder (v3.0.0, /home/pedro/.rvm/gems/ruby-1.9.2-p180@global/gems/builder-3.0.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activemodel (v3.1.0.rc1, /home/pedro/.rvm/gems/ruby-1.9.2-p180@global/gems/activemodel-3.1.0.rc1)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] arel (v2.1.1, /home/pedro/.rvm/gems/ruby-1.9.2-p180@global/gems/arel-2.1.1)" level="application" />
   </component>
 </module>
 
