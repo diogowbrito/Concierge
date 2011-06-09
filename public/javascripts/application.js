@@ -325,9 +325,10 @@ function parseMap(xml) {
             mapTypeId: google.maps.MapTypeId.SATELLITE
         }
       //  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var map = new google.maps.Map(document.getElementById(mapId), myOptions);
         var ctaLayer = new google.maps.KmlLayer(kmlUrl);
         ctaLayer.setMap(map);
-    var map = new google.maps.Map(document.getElementById(mapId), myOptions);
+
     page.find('.ui-content').css({'padding':'0'});
 
 
