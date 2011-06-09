@@ -17,7 +17,7 @@
   <div data-role="header" data-position="fixed">
 
     <h1 id="logo" class="ui-title">Concierge</h1>
-    <%= address = get_address %>
+    <% address = get_address %>
     <div data-role="controlgroup" class="ui-btn-right" data-type="horizontal" >
       <% if current_user  && current_user.notAnonymus %>
         <a id="login" href='<%= address + "logout" %>' data-role="button" data-icon="gear">Logout</a>

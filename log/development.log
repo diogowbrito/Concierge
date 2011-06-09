@@ -24649,3 +24649,81 @@ ActionView::Template::Error (undefined local variable or method `get_adress' for
 Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
 Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.7ms)
 Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (14.2ms)
+DEPRECATION WARNING: Use toplevel init.rb; rails/init.rb is deprecated: /home/jphorta/RubymineProjects/Concierge/vendor/plugins/paperclip/rails/init.rb. (called from <top (required)> at /home/jphorta/RubymineProjects/Concierge/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-09 15:02:49 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1
+Completed   in 227ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with ID=7):
+  app/controllers/application_controller.rb:18:in `current_user'
+  app/controllers/application_controller.rb:24:in `session_expiry'
+
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (8.8ms)
+Rendered /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-09 15:03:26 +0100
+  Processing by HomePageController#index as HTML
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`userName` = BINARY 'Anonymus92660') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'Anonymus92660') LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  describe `users`
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO `users` (`userName`, `email`, `passwordHash`, `passwordSalt`, `activateCode`, `notAnonymus`, `created_at`, `updated_at`) VALUES ('Anonymus92660', 'Anonymus92660', '$2a$10$QrMKQf9W09UgkkQ/XxLtYuBv2n86UhTRf7O60sH3opwwHNyz8Nbrq', '$2a$10$QrMKQf9W09UgkkQ/XxLtYu', NULL, NULL, '2011-06-09 14:03:27', '2011-06-09 14:03:27')[0m
+  [1m[35mSQL (1.9ms)[0m  COMMIT
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`userName` = 'Anonymus92660'[0m
+  [1m[35mService Load (0.1ms)[0m  SELECT `services`.* FROM `services`
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+Rendered home_page/index.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 245ms (Views: 17.1ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2011-06-09 15:03:43 +0100
+  Processing by UsersController#new as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1
+Rendered users/new.html.erb within layouts/application (106.7ms)
+Completed 200 OK in 124ms (Views: 111.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-06-09 15:03:46 +0100
+  Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+Rendered sessions/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 24ms (Views: 13.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-09 15:05:28 +0100
+  Processing by HomePageController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services`[0m
+Rendered home_page/index.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 83ms (Views: 22.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2011-06-09 15:05:31 +0100
+  Processing by UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1
+Rendered users/new.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 28ms (Views: 15.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2011-06-09 15:05:33 +0100
+  Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+Rendered sessions/new.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 60ms (Views: 13.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/services/meteofct/index" for 127.0.0.1 at 2011-06-09 15:05:36 +0100
+  Processing by ServiceForwardController#homepagerequest as XML
+  Parameters: {"service"=>"meteofct"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1
+  [1m[36mService Load (0.1ms)[0m  [1mSELECT `services`.* FROM `services` WHERE `services`.`serviceName` = 'meteofct'[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1
+  [1m[36mCompetence Load (0.1ms)[0m  [1mSELECT `competences`.* FROM `competences` WHERE `competences`.`competenceType` = 'Home' AND (`competences`.service_id = 6)[0m
+Rendered service_forward/homepagerequest.xml.erb (0.4ms)
+Completed 200 OK in 1453ms (Views: 3.8ms | ActiveRecord: 0.3ms)
