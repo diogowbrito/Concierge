@@ -251,8 +251,10 @@ function parseList(xml){
 
     var page = createPage("list" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
+    var next_url;
 
         $(xml).find("list").each(function() {
+            next_url = $(this).attr('next');
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
             var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="d"></ul>').find('ul');
 
@@ -271,9 +273,12 @@ function parseList(xml){
                     else
                         list.append("<li class='parse'>" + $(this).text() + "</li>");
                 }
+
             });
+            pageWritable.append('<a class="next">next</a>');
         });
      page.page();
+
 
     $.mobile.pageContainer.append(page);
 
@@ -283,6 +288,8 @@ function parseList(xml){
 
     $.mobile.changePage("#" + page.attr("id"));
 
+//    $("ul").append('<li class="tttt"></li>');
+    $(".next").data("teste", next_url);
 }
 
 function parseMap(xml) {
@@ -454,9 +461,41 @@ function parseRecord(xml) {
     $(".slide_items").hide();
 }
 
-$('.show_name').live('click', function() {
-   alert($(this).data("teste"));
+$(".next").live('click', function(){
+     $.ajax({
+            type: "GET",
+            url: $(this).data("teste"),
+            dataType: "xml",
+            success: moreList
+        });
 });
+
+function moreList(xml){
+         var next_url;
+         $(xml).find("list").each(function() {
+            next_url = $(this).attr('next');
+
+            $(this).find("item").each(function() {
+                var attr = $(this).attr('href');
+                var title = $(this).attr('title');
+                if (attr != undefined) {
+                    if (title != undefined)
+                        $("ul").append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() +" </a></li>");
+                    else
+                        $("ul").append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() +"</a></li>");
+                }
+                else {
+                    if (title != undefined)
+                        $("ul").append("<li class='parse'><p>" + $(this).attr("title") + "</p>" + $(this).text() + "</li>");
+                    else
+                        $("ul").append("<li class='parse'>" + $(this).text() + "</li>");
+                }
+
+            });
+        });
+
+    $(".next").data("teste", next_url);
+}
 
 $('#serviceLink').live('click', function() {
     getHomepage($(this).attr('href'));

@@ -46,7 +46,11 @@ class BackOfficeController < ApplicationController
       if competence['path'] != ""
         acomp << competence['path']
         acomp << competence.at_css("description").text()
-        acomp << competence.at_css("ctype").text()
+          if competence.at_css("ctype") == nil
+            acomp << "Home"
+          else
+          acomp << competence.at_css("ctype").text()
+          end
         comp << acomp
       end
     end

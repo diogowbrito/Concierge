@@ -2,7 +2,7 @@ Concierge::Application.routes.draw do
 
   resources :users
   resources :sessions
-  resources :services
+#  resources :services
 
   #Concierge Defaults
   root :to => "HomePage#index"
