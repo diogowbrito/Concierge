@@ -15,10 +15,10 @@
 </head>
 <body>
 
-<div data-role="page" data-position="inline" data-theme="a">
+<div id="web_homepage" data-role="page" data-position="inline" data-theme="a">
   <div data-role="header" data-position="fixed">
 
-   <h1 id="logo" class="ui-title link_to_homepage">Concierge</h1>
+   <h1 id="logo" class="ui-title link_to_homepage"><img src="http://files-cdn.formspring.me/profile/20110405/n4d9bb96d7faae_medium.jpg" alt=""></h1>
 
     <% address = get_address %>
 
@@ -46,10 +46,9 @@
   <div data-role="footer" data-id="navbar" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li style="width:25%"><a class="parse" href='<%= address + "history" %>' data-icon="grid">History</a></li>
-        <li id="tab_bar_hp_search" style="width:50%">
-          <a href="" data-icon="search">Search</a></li>
-        <li style="width:25%"><a href="b.html" data-icon="gear">Options</a></li>
+        <li ><a href="http://di76.di.fct.unl.pt" class="home_btn" data-icon="home">Home</a></li>
+        <li ><a class="parse" href='<%= address + "history" %>' data-icon="grid">History</a></li>
+        <li ><a href="b.html" data-icon="gear">Options</a></li>
       </ul>
     </div>
     <!-- /navbar -->
@@ -63,11 +62,13 @@
 
 <script type="text/javascript">
 
+  $('.home_btn').live('click', function() {
+      console.log('ling');
+      $('.home_btn').removeClass('ui-btn-active');
+  })
 
   $('.link_to_homepage').live('click', function() {
-      window.location="http://google.pt"
-      return false;
-
+      $.mobile.changePage('#web_homepage');
   })
 
 </script>

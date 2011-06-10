@@ -649,8 +649,10 @@ function callLive(pageIdentification) {
         return false;
     });
 
-  $('.link_to_homepage').live('click', function() {
-    window.location = '/';
-  })
 
+
+
+      $('.link_to_homepage').live('click', function() {
+      $.mobile.changePage('#web_homepage');
+  })
 }
