@@ -140,14 +140,24 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
+<<<<<<< HEAD
                                     html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
                                     html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+=======
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>' + ctitle + '</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                else
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+>>>>>>> ac689a341b580ce722f3765e9ad90511dafcaa77
                             }
                             else if (element.nodeName == 'text') {
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
+<<<<<<< HEAD
                                     html += '<li data-theme="d"><p>'+ctitle+'</p>' + text + '</li>';
+=======
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>' + ctitle + '</p>' + text + '</li>';
+>>>>>>> ac689a341b580ce722f3765e9ad90511dafcaa77
                                 else
                                     html += '<li data-theme="d">' + text + '</li>';
                             }
@@ -185,6 +195,7 @@ function parseHomepage(xml) {
 
                         html += '</li>';
 
+<<<<<<< HEAD
                         $(this).children().each(function() {
                             var href = $(this).attr('href');
                             var title = $(this).attr('title');
@@ -192,10 +203,19 @@ function parseHomepage(xml) {
                             var size_img = $(this).children().attr('size');
                             html += '<li data-theme="c"><a class="parse" href="'+href+'">' +
                                     '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
+=======
+                    $(this).children().each(function() {
+                        var href = $(this).attr('href');
+                        var title = $(this).attr('title');
+                        var href_img = $(this).children().attr('href');
+                        var size_img = $(this).children().attr('size');
+                        html += '<li class="slide_items ' + titleList + '"><a class="parse" href="' + href + '">' +
+                                '<img src="' + href_img + '" size="' + size_img + '" />' + title + '</a></li>';
+>>>>>>> ac689a341b580ce722f3765e9ad90511dafcaa77
 
-                        });
+                    });
 
-                        list.append(html);
+                    list.append(html);
                     break;
             }
         });
@@ -252,7 +272,14 @@ function parseList(xml) {
     page.attr("class", "teste");
     var pageWritable = $("[data-role=content]", page.get(0));
 
+<<<<<<< HEAD
+        $(xml).find("list").each(function() {
+            next_url = $(this).attr('next');
+            pageWritable.append("<p>" + $(this).attr('title') + "</p>");
+            var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="c"></ul>').find('ul');
+=======
     var next_url;
+>>>>>>> ac689a341b580ce722f3765e9ad90511dafcaa77
 
     $(xml).find("list").each(function() {
         next_url = $(this).attr('next');
