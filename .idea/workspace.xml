@@ -27,7 +27,7 @@
       <file leaf-file-name="application.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="299" column="70" selection-start="11929" selection-end="11929" vertical-scroll-proportion="0.32520324">
+            <state line="299" column="70" selection-start="11929" selection-end="11929" vertical-scroll-proportion="0.20325203">
               <folding />
             </state>
           </provider>
@@ -633,13 +633,6 @@
         <state line="12" column="42" selection-start="365" selection-end="365" vertical-scroll-proportion="0.33027524" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="82" selection-start="1167" selection-end="1167" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/home_page_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0" />
@@ -680,9 +673,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="82" selection-start="1167" selection-end="1167" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="299" column="70" selection-start="11929" selection-end="11929" vertical-scroll-proportion="0.32520324">
+        <state line="299" column="70" selection-start="11929" selection-end="11929" vertical-scroll-proportion="0.20325203">
           <folding />
         </state>
       </provider>

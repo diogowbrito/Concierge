@@ -297,7 +297,7 @@ function parseMap(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
                            var mapId = "map_canvas" + pageRandomId;
-    pageWritable.append("<div id="+mapId+" style='height:380px;width:620px;'></div>");
+    pageWritable.append("<div id="+mapId+" style='height:380px;width:520px;'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
@@ -312,11 +312,6 @@ function parseMap(xml) {
 
 
     page.page();
-
-
-
-    $.mobile.pageContainer.append(page);
-    $.mobile.changePage("#" + page.attr("id"));
 
         var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
         var myOptions = {
@@ -337,6 +332,8 @@ function parseMap(xml) {
 
     page.find('.ui-content').css({'padding':'0'});
 
+    $.mobile.pageContainer.append(page);
+    $.mobile.changePage("#" + page.attr("id"));
 
         //    var map = new google.maps.Map($("#map" + pageRandomId).find("map_canvas"), myOptions);
 
