@@ -45,6 +45,25 @@ function getWarning(url, id) {
 
 }
 
+function getLike(url, id) {
+
+    var warning;
+    $.get(
+            url,
+            function(data) {
+                warning = $(data).find("status").text();
+                var page = $('#' + id);
+                var pageWritable = $("[data-role=content]", page.get(0));
+
+                if (warning == "sucess") warning = "Obrigado pelo seu voto!";
+                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
+                pageWritable.append("<p>" + warning + "</p>");
+            },
+            "xml"
+            );
+
+}
+
 function createPage(id, logged) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
@@ -123,12 +142,12 @@ function parseHomepage(xml) {
                 case 'text':
                     if ($(this).children().size() == 0) {
                         pageWritable.append("<p>" + $(this).text() + "</p>");
-                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='c'></ul>").find('ul');
                     }
                     else {
                         titleold = $(this).attr('title');
                         title = replaceAll(titleold, " ", "_");
-                        var html = '<li class="slide activeZero 0" title="' + title + '">';
+                        var html = '<li class="slide" title="' + title + '">';
 
                         if (title != undefined)
                             html += '<a href="">' + titleold + '</a>';
@@ -141,32 +160,32 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>' + ctitle + '</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'text') {
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>' + ctitle + '</p>' + text + '</li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p>' + text + '</li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '">' + text + '</li>';
+                                    html += '<li data-theme="d">' + text + '</li>';
                             }
                             else if (element.nodeName == 'email') {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'link') {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
 
                         });
@@ -179,24 +198,24 @@ function parseHomepage(xml) {
                     break;
                 case 'list':
                         var titleList = $(this).attr('title');
-                        html = '<li class="slide activeZero 0" title="' + titleList + '">';
+                        html = '<li title="' + titleList + '">';
 
                         if (titleList != undefined)
                             html += '<a href="">' + titleList + '</a>';
 
                         html += '</li>';
 
-                    $(this).children().each(function() {
-                        var href = $(this).attr('href');
-                        var title = $(this).attr('title');
-                        var href_img = $(this).children().attr('href');
-                        var size_img = $(this).children().attr('size');
-                        html += '<li class="slide_items ' + titleList + '"><a class="parse" href="' + href + '">' +
-                                '<img src="' + href_img + '" size="' + size_img + '" />' + title + '</a></li>';
+                        $(this).children().each(function() {
+                            var href = $(this).attr('href');
+                            var title = $(this).attr('title');
+                            var href_img = $(this).children().attr('href');
+                            var size_img = $(this).children().attr('size');
+                            html += '<li data-theme="c"><a class="parse" href="'+href+'">' +
+                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
 
-                    });
+                        });
 
-                    list.append(html);
+                        list.append(html);
                     break;
             }
         });
@@ -237,7 +256,7 @@ function parseHomepage(xml) {
     }
 
     $.mobile.changePage("#" + page.attr("id"));
-    //$(".slide_items").hide();
+
 }
 
 function parseList(xml) {
@@ -394,27 +413,25 @@ function parseRecord(xml) {
                 else {
                     titleold = $(this).attr('title');
                     title = replaceAll(titleold, " ", "_");
-                    var html = '<li class="slide activeZero 0" title="' + title + '">';
-                    if (title != undefined)
-                        html += '<a href="">' + titleold + '</a>';
+                    var html = '<li><h3>' + titleold + '</h3></li>';
 
                     $(this).children().each(function(index, element) {
 
                         text = $(this).text();
                         if (element.nodeName == 'entity') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li data-theme="c"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'text') {
-                            html += '<li class="slide_items ' + title + '">' + text + '</li>';
+                            html += '<li data-theme="c">' + text + '</li>';
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -475,7 +492,6 @@ function parseRecord(xml) {
     callLive("record" + pageRandomId);
 
     $.mobile.changePage("#" + page.attr("id"));
-    $(".slide_items").hide();
 }
 
 $(".teste").live('pageshow', function(){
@@ -546,11 +562,11 @@ $('.warning').live('click', function(event) {
     $.mobile.ajaxEnabled(false);
 });
 
-$('.slide').live('click', function() {
-
-    var t = "." + $(this).attr("title");
-    $(t).slideToggle("slow");
-
+$('.like').live('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    getLike($(this).attr('href'), $(this).attr('pageid'));
+    $.mobile.ajaxEnabled(false);
 });
 
 <!-- Pages scripts-->
