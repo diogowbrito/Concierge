@@ -551,22 +551,13 @@ $('.slide').live('click', function() {
 
 <!-- Pages scripts-->
 
-
-$('#home_searchform').live('submit', function() {
-    var searched = $('#search').val();
-    searched = replaceAll(searched, " ", "+");
-
-    $(".hidden_home_search").fadeOut("slow", function() {
-        $(this).show().css({visibility: "hidden"});
-        $("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
-
+    $("#home_searchform").live('submit', function() {
+        var searched = $(this).find('#search').val();
+        searched = replaceAll(searched, " ", "+");
+        var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
+        getParse(url);
+        return false;
     });
-
-    var url = document.location + "search?keyword=" + searched;
-    getParse(url);
-
-    return false;
-});
 
 $('.activeZero').live("click", function() {
     if ($(this).hasClass("0")) {
@@ -587,14 +578,6 @@ $('#login').live('click', function() {
 
    $('.link_to_homepage').live('click', function() {
       $.mobile.changePage('#web_homepage');
-    });
-
-
-
-
-    $(document).ready(function() {
-
-
     });
 
 
@@ -623,10 +606,3 @@ function callServiceLive(pageIdentification, searchLink) {
 }
 
 
-    $("#home_searchform").live('submit', function() {
-        var searched = $(this).find('#search').val();
-        searched = replaceAll(searched, " ", "+");
-        var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
-        getParse(url);
-        return false;
-    });
