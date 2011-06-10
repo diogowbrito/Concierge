@@ -287,6 +287,8 @@ function parseList(xml){
 
 
     $.mobile.changePage("#" + page.attr("id"));
+
+//    $("ul").append('<li class="tttt"></li>');
     $(".next").data("teste", next_url);
 }
 
@@ -460,8 +462,40 @@ function parseRecord(xml) {
 }
 
 $(".next").live('click', function(){
-    getParse($(this).data("teste"));
+     $.ajax({
+            type: "GET",
+            url: $(this).data("teste"),
+            dataType: "xml",
+            success: moreList
+        });
 });
+
+function moreList(xml){
+         var next_url;
+         $(xml).find("list").each(function() {
+            next_url = $(this).attr('next');
+
+            $(this).find("item").each(function() {
+                var attr = $(this).attr('href');
+                var title = $(this).attr('title');
+                if (attr != undefined) {
+                    if (title != undefined)
+                        $("ul").append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() +" </a></li>");
+                    else
+                        $("ul").append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() +"</a></li>");
+                }
+                else {
+                    if (title != undefined)
+                        $("ul").append("<li class='parse'><p>" + $(this).attr("title") + "</p>" + $(this).text() + "</li>");
+                    else
+                        $("ul").append("<li class='parse'>" + $(this).text() + "</li>");
+                }
+
+            });
+        });
+
+    $(".next").data("teste", next_url);
+}
 
 $('#serviceLink').live('click', function() {
     getHomepage($(this).attr('href'));
