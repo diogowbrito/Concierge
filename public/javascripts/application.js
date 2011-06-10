@@ -313,7 +313,6 @@ function parseMap(xml) {
 
     page.page();
     $.mobile.pageContainer.append(page);
-    $.mobile.changePage("#" + page.attr("id"));
 
         var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
         var myOptions = {
@@ -327,15 +326,14 @@ function parseMap(xml) {
             overviewMapControl : false,
             mapTypeId: google.maps.MapTypeId.SATELLITE
         }
-      //  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
     var map = new google.maps.Map(document.getElementById(mapId), myOptions);
     var ctaLayer = new google.maps.KmlLayer(kmlUrl);
-
     ctaLayer.setMap(map);
+
+
+    $.mobile.changePage("#" + page.attr("id"));
     page.find('.ui-content').css({'padding':'0'});
-
-        //    var map = new google.maps.Map($("#map" + pageRandomId).find("map_canvas"), myOptions);
-
 }
 
 function parseRecord(xml) {
