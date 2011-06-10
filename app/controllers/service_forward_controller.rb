@@ -18,6 +18,20 @@ class ServiceForwardController < ApplicationController
     @url = homeurl
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
 
+    if @doc.root().name() == "list"
+
+      root = @doc.root()
+      rootchildren = root.children
+      rootchildren.each do |rc|
+        rc.node_name = "link"
+        href = rc['href']
+        link = href.gsub(homeurl, address+"directrecord/"+@servicename)
+        rc['href'] = link
+      end
+      newroot.node_name = "record"
+
+    end
+
     nodes = @doc.xpath("//link")
 
     root = @doc.root()
@@ -30,6 +44,15 @@ class ServiceForwardController < ApplicationController
       link = href.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "%"))
       node['href'] = link
     end
+
+    nodes2 = @doc.xpath("//item")
+
+    nodes2.each do |node|
+      href = node['href']
+      item = href.gsub(homeurl, address+"directrecord/"+@servicename)
+      node['href'] = item
+    end
+
     search = service[0].competences.where(:competenceType => "Search")
 
     if search[0] != nil then
@@ -80,6 +103,7 @@ class ServiceForwardController < ApplicationController
     end
 
     respond_to :xml
+
   end
 
 

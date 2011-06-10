@@ -3,6 +3,7 @@
 class SearchController < ApplicationController
 
    def search
+
     require 'cgi'
 
     text = CGI.escape(params[:keyword].to_s)
