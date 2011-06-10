@@ -297,7 +297,7 @@ function parseMap(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
                            var mapId = "map_canvas" + pageRandomId;
-    pageWritable.append("<div id="+mapId+" style='height:380px;width:320px;'></div>");
+    pageWritable.append("<div id="+mapId+" style='height:380px;width:620px;'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
@@ -312,15 +312,15 @@ function parseMap(xml) {
 
 
     page.page();
-    console.log(page.find('.ui-content'));
 
 
 
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
+
         var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
         var myOptions = {
-            zoom: 20,
+            zoom: 15,
             center: center,
             panControl : false,
             zoomControl : false,
@@ -332,8 +332,8 @@ function parseMap(xml) {
         }
       //  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     var map = new google.maps.Map(document.getElementById(mapId), myOptions);
-        var ctaLayer = new google.maps.KmlLayer(kmlUrl);
-        ctaLayer.setMap(map);
+    var ctaLayer = new google.maps.KmlLayer(kmlUrl);
+    ctaLayer.setMap(map);
 
     page.find('.ui-content').css({'padding':'0'});
 
