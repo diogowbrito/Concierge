@@ -283,8 +283,8 @@ function parseList(xml) {
 
 
     if (listTitle == "Histórico") {
-   //   page.find('.link_to_history').addClass('ui-btn-active');
-      page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
+        page.find('.link_to_history').addClass('ui-btn-active');
+        page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
 
 
@@ -300,7 +300,7 @@ function parseList(xml) {
 }
 
 $('.link_back').live('click', function() {
-    console.log('goiun back');
+    $('.link_to_history').removeCLass('ui-btn-active');
     history.back();
     return false;
 });
@@ -586,9 +586,10 @@ $('#login').live('click', function() {
 });
 
    $('.link_to_homepage').live('click', function() {
-
       $.mobile.changePage('#web_homepage');
     });
+
+
 
 
     $(document).ready(function() {
