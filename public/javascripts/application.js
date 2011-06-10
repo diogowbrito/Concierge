@@ -15,14 +15,14 @@ function getHomepage(url) {
 }
 
 function getParse(url) {
-    $(document).ready(function() {
-        $.ajax({
+
+        return $.ajax({
             type: "GET",
             url: url,
             dataType: "xml",
             success: parse
         });
-    });
+
 }
 
 function getWarning(url, id) {
@@ -32,13 +32,13 @@ function getWarning(url, id) {
             url,
             function(data) {
                 warning = $(data).find("status").text();
-                var page = $('#' + id);
-                var pageWritable = $("[data-role=content]", page.get(0));
 
-                if (warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio";
-                if (warning == "fail_logged") warning = "Faça login para realizar esta acção";
-                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
-                pageWritable.append("<p>" + warning + "</p>");
+                if (warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio.";
+                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta competência.";
+                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
+                var par = $("#"+id+"warning");
+                par.html(warning);
+
             },
             "xml"
             );
@@ -52,12 +52,12 @@ function getLike(url, id) {
             url,
             function(data) {
                 warning = $(data).find("status").text();
-                var page = $('#' + id);
-                var pageWritable = $("[data-role=content]", page.get(0));
 
                 if (warning == "sucess") warning = "Obrigado pelo seu voto!";
-                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
-                pageWritable.append("<p>" + warning + "</p>");
+                if (warning == "already_vote") warning = "Já votou num recurso deste serviço. Obrigado.";
+                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
+                var par = $("#"+id+"warning");
+                par.html(warning);
             },
             "xml"
             );
@@ -465,8 +465,10 @@ function parseRecord(xml) {
 
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url + "sendresource?url=" + recordurl;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a><a class='like' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>";
-    pageWritable.append(mail_button);
+    var voteurl = url + "rateservice?url=" + recordurl;
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a><a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>";
+    var paragraph = "<p id='"+page.attr("id")+"warning'></p>";
+    pageWritable.append(mail_button).append(paragraph);
 
     page.page();
     $.mobile.pageContainer.append(page);
@@ -478,7 +480,7 @@ function parseRecord(xml) {
 }
 
 $(".teste").live('pageshow', function(){
-        alert("oi");
+
 });
 
 $(document).bind('scrollstop', function() {
@@ -535,7 +537,7 @@ $('.parse').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     $.mobile.pageLoading();
-    getParse($(this).attr('href'));
+    getParse($(this).attr('href')).error();
     $.mobile.ajaxEnabled(false);
 });
 

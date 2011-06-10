@@ -19,8 +19,8 @@ class ServiceForwardController < ApplicationController
 
     if @doc.root().name() == "list"
       puts @doc
-
-      items =
+      root = @doc.root()
+      rootchildren = root.children
       puts rootchildren
       rootchildren.each do |rc|
         rc.node_name = "link"
@@ -66,7 +66,7 @@ class ServiceForwardController < ApplicationController
     @servicename = params[:service].gsub("_", " ")
     @method = params[:method]
     @start = (params[:start] || "1")
-    @end = (params[:end] || "15 ")
+    @end = (params[:end] || "7")
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 
