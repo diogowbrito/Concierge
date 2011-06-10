@@ -454,7 +454,7 @@
 	color: 					#111;
 	text-shadow: 0 1px 1px 	#ffffff;
 	background-image: -moz-linear-gradient(top, 
-							#eeeeee, 
+							#eeeeee,
 							#ffffff);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#eeeeee),
@@ -468,7 +468,7 @@
 	color: 					#111;
 	text-shadow: none;
 	background-image: -moz-linear-gradient(top, 
-							#cccccc, 
+							#cccccc,
 							#eeeeee);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#cccccc),
