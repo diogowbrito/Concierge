@@ -106,4 +106,22 @@ class UsersController < ApplicationController
 
   end
 
+  def rateservice
+
+    if session[:user_id] != nil
+      user = User.find(session[:user_id])
+      if user.notAnonymus != nil
+        urlraw = params[:url]
+        urlarray = urlraw.split('/')
+        service = Service.where(:serviceName => urlarray[4])
+        service[0].ranking = service[0].ranking+1
+        @result = "sucess"
+      else
+        @result = "fail_logged"
+      end
+    else
+      @msg = "fail_simple"
+    end
+  end
+
 end
