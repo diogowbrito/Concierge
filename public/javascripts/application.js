@@ -283,8 +283,7 @@ function parseList(xml) {
 
 
     if (listTitle == "Histórico") {
-      console.log('histing');
-      page.find('.link_to_history').addClass('ui-btn-active');
+   //   page.find('.link_to_history').addClass('ui-btn-active');
       page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
 
