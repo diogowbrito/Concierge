@@ -122,12 +122,12 @@ function parseHomepage(xml) {
                 case 'text':
                     if ($(this).children().size() == 0) {
                         pageWritable.append("<p>" + $(this).text() + "</p>");
-                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='c'></ul>").find('ul');
                     }
                     else {
                         titleold = $(this).attr('title');
                         title = replaceAll(titleold, " ", "_");
-                        var html = '<li class="slide activeZero 0" title="' + title + '">';
+                        var html = '<li class="slide" title="' + title + '">';
 
                         if (title != undefined)
                             html += '<a href="">' + titleold + '</a>';
@@ -140,32 +140,32 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items '+ title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items '+ title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'text') {
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p>' + text + '</li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p>' + text + '</li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '">' + text + '</li>';
+                                    html += '<li data-theme="d">' + text + '</li>';
                             }
                             else if (element.nodeName == 'email') {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'link') {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
 
                         });
@@ -178,7 +178,7 @@ function parseHomepage(xml) {
                     break;
                 case 'list':
                         var titleList = $(this).attr('title');
-                        html = '<li class="slide activeZero 0" title="' + titleList + '">';
+                        html = '<li title="' + titleList + '">';
 
                         if (titleList != undefined)
                             html += '<a href="">' + titleList + '</a>';
@@ -190,7 +190,7 @@ function parseHomepage(xml) {
                             var title = $(this).attr('title');
                             var href_img = $(this).children().attr('href');
                             var size_img = $(this).children().attr('size');
-                            html += '<li data-theme="c" class="slide_items '+titleList+'"><a class="parse" href="'+href+'">' +
+                            html += '<li data-theme="c"><a class="parse" href="'+href+'">' +
                                     '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
 
                         });
@@ -237,7 +237,7 @@ function parseHomepage(xml) {
     }
 
     $.mobile.changePage("#" + page.attr("id"));
-    //$(".slide_items").hide();
+
 }
 
 function parseList(xml){
@@ -256,7 +256,7 @@ function parseList(xml){
         $(xml).find("list").each(function() {
             next_url = $(this).attr('next');
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
-            var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="d"></ul>').find('ul');
+            var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="c"></ul>').find('ul');
 
             $(this).find("item").each(function() {
                 var attr = $(this).attr('href');
