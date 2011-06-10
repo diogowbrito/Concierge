@@ -74,7 +74,7 @@ function createPage(id, logged) {
        log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
-            "<h1 id='logo' class='ui-title'>Concierge</h1>";
+            "<h1 id='logo' class='ui-title link_to_homepage'>Concierge</h1>";
 
     var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
     <!-- Draw Search-->
@@ -665,4 +665,10 @@ function callLive(pageIdentification) {
         return false;
     });
 
+
+
+
+      $('.link_to_homepage').live('click', function() {
+      $.mobile.changePage('#web_homepage');
+  })
 }
