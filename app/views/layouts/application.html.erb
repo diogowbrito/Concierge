@@ -18,7 +18,7 @@
 <div id="web_homepage" data-role="page" data-position="inline" data-theme="a">
   <div data-role="header" data-position="fixed">
 
-   <h1 id="logo" class="ui-title link_to_homepage"><img src="http://files-cdn.formspring.me/profile/20110405/n4d9bb96d7faae_medium.jpg" alt=""></h1>
+   <h1 id="logo" class="ui-title">Concierge</h1>
 
     <% address = get_address %>
 
@@ -33,21 +33,25 @@
 
   </div>
 
-  <div id="content" data-role="content">
-    <%= yield %>
-  </div>
 
-    <div data-role='fieldcontain' width="100%" class="hidden_home_search" style="text-align:center; visibility:hidden">
-      <form id='home_searchform'>
+    <div data-role="fieldcontain"  style="text-align:center;">
+      <form id="home_searchform">
         <input type='search' id='search' value='' width="100%"/>
       </form>
     </div>
 
+
+
+  <div id="content" data-role="content">
+    <%= yield %>
+  </div>
+
+
   <div data-role="footer" data-id="navbar" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li ><a href="http://di76.di.fct.unl.pt" class="home_btn" data-icon="home">Home</a></li>
-        <li ><a class="parse" href='<%= address + "history" %>' data-icon="grid">History</a></li>
+        <li><a href="" class="home_btn ui-btn-active" data-icon="home">Home</a></li>
+        <li ><a class="parse link_to_history" href='<%= address + "history" %>' data-icon="grid">History</a></li>
         <li ><a href="b.html" data-icon="gear">Options</a></li>
       </ul>
     </div>
@@ -62,14 +66,7 @@
 
 <script type="text/javascript">
 
-  $('.home_btn').live('click', function() {
-      console.log('ling');
-      $('.home_btn').removeClass('ui-btn-active');
-  })
 
-  $('.link_to_homepage').live('click', function() {
-      $.mobile.changePage('#web_homepage');
-  })
 
 </script>
 </html>

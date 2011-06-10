@@ -87,10 +87,11 @@ function createPage(id, logged) {
 
     <!-- Draw Footer nav bar-->
 
-    var historytab = $("<li>").attr("style", "width:25%").append("<a class='parse' href='" + url + "history' data-icon='grid'>History</a>");
-    var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").attr("style", "width:25%").append("<a href='options' data-icon='gear'>Options</a>");
-    var navbarul = $("<ul>").append(historytab).append(searchtab).append(optionstab);
+    var hometab = $("<li>").append("<a class='link_to_homepage' data-icon='home' href=''>Home</a>");
+    var historytab = $("<li>").append("<a class='parse link_to_history' href='" + url + "history' data-icon='grid'>History</a>");
+  //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
+    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
+    var navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
 
     <!-- Draw footer and append nav bar-->
@@ -141,12 +142,12 @@ function parseHomepage(xml) {
                 case 'text':
                     if ($(this).children().size() == 0) {
                         pageWritable.append("<p>" + $(this).text() + "</p>");
-                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='c'></ul>").find('ul');
+                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
                     }
                     else {
                         titleold = $(this).attr('title');
                         title = replaceAll(titleold, " ", "_");
-                        var html = '<li class="slide" title="' + title + '">';
+                        var html = '<li>';
 
                         if (title != undefined)
                             html += '<a href="">' + titleold + '</a>';
@@ -222,7 +223,7 @@ function parseHomepage(xml) {
 
     if ($(xml).find("search").text() != "") {
 
-        var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search").attr("data-theme", "c");
+        var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search");
         var divdatarole = $('<div>').attr("data-role", "fieldcontain").append(search);
 
         var serviceSearchForm = $("<form>").attr("id", "homepage" + bla + "_service_search_form").append(divdatarole);
@@ -230,7 +231,7 @@ function parseHomepage(xml) {
 
 
         var homeUrl = document.location;
-        page.find(':jqmData(role="header")').append("<a href=" + homeUrl + " class='ui-btn-left' data-icon='arrow-l'>Back</a>");
+        page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
 
         page.page();
 
@@ -239,14 +240,13 @@ function parseHomepage(xml) {
 
         <!-- Add the search listener -->
         callServiceLive("homepage" + bla, $(xml).find("search").text());
-        callLive("homepage" + bla);
 
     }
 
     else {
 
         var homeUrl = document.location;
-        page.find(':jqmData(role="header")').append("<a href=" + homeUrl + " class='ui-btn-left' data-icon='arrow-l'>Back</a>");
+        page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
 
         page.page();
 
@@ -266,20 +266,23 @@ function parseList(xml) {
     });
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+
     var page = createPage("list" + pageRandomId, logged);
     page.attr("class", "list_page");
     var pageWritable = $("[data-role=content]", page.get(0));
 
     var next_url;
-
+    var listTitle;
     $(xml).find("list").each(function() {
         next_url = $(this).attr('next');
-        pageWritable.append("<p>" + $(this).attr('title') + "</p>");
+        listTitle = $(this).attr('title')
+        pageWritable.append("<p>" + listTitle + "</p>");
         var list = pageWritable.append('<ul class="list_class" data-role="listview" data-inset="false" data-theme="d"></ul>').find('ul');
 
         $(this).find("item").each(function() {
             var attr = $(this).attr('href');
-            var title = $(this).attr('title');
+            title = $(this).attr('title');
+
             if (attr != undefined) {
                 if (title != undefined)
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() + " </a></li>");
@@ -295,13 +298,20 @@ function parseList(xml) {
 
         });
     });
+
+
+    if (listTitle == "Histórico") {
+        page.find('.link_to_history').addClass('ui-btn-active');
+        page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
+    }
+
+
     page.page();
 
 
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
-    callLive("list" + pageRandomId);
 
 
     $.mobile.changePage("#" + page.attr("id"));
@@ -309,7 +319,16 @@ function parseList(xml) {
     $(".list_class").data("url", next_url);
 }
 
+$('.link_back').live('click', function() {
+    history.back();
+
+
+    $('.link_to_history').removeClass('ui-btn-active');
+    return false;
+});
+
 function parseMap(xml) {
+
     var logged;
     $(xml).find("map").each(function() {
         logged = $(this).attr('logged');
@@ -470,7 +489,6 @@ function parseRecord(xml) {
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
-    callLive("record" + pageRandomId);
 
     $.mobile.changePage("#" + page.attr("id"));
 }
@@ -560,42 +578,15 @@ $('.like').live('click', function(event) {
 
 <!-- Pages scripts-->
 
-$("#tab_bar_hp_search").live('click', function() {
-    if ($(".hidden_home_search").css("visibility") == "hidden") {
-        $(".hidden_home_search").hide().css({visibility: "visible"}).fadeIn("slow");
-    } else {
-        $(".hidden_home_search").fadeOut("slow", function() {
-            $(this).show().css({visibility: "hidden"});
-            $("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
-        });
-    }
-});
-
-
-$('#home_searchform').live('submit', function() {
-    var searched = $('#search').val();
-    searched = replaceAll(searched, " ", "+");
-
-    $(".hidden_home_search").fadeOut("slow", function() {
-        $(this).show().css({visibility: "hidden"});
-        $("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
-
+    $("#home_searchform").live('submit', function() {
+        var searched = $(this).find('#search').val();
+        searched = replaceAll(searched, " ", "+");
+        var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
+        getParse(url);
+        return false;
     });
 
-    var url = document.location + "search?keyword=" + searched;
-    getParse(url);
 
-    return false;
-});
-
-$('.activeZero').live("click", function() {
-    if ($(this).hasClass("0")) {
-        $(this).removeClass("0");
-    } else {
-        $(this).removeClass("ui-btn-active");
-        $(this).addClass("0");
-    }
-});
 
 function logOut() {
     $.mobile.hashListeningEnabled(false);
@@ -604,6 +595,11 @@ function logOut() {
 $('#login').live('click', function() {
     logOut();
 });
+
+   $('.link_to_homepage').live('click', function() {
+      $.mobile.changePage('#web_homepage');
+    });
+
 
 function replaceAll(string, token, newtoken) {
     while (string.indexOf(token) != -1) {
@@ -619,12 +615,8 @@ function callServiceLive(pageIdentification, searchLink) {
     var searchForm = page.find("#" + pageIdentification + "_service_search_form");
 
     searchForm.live('submit', function() {
-
-
         var searched = page.find("#" + pageIdentification + "_service_search").val();
-
         searched = replaceAll(searched, " ", "+");
-
         var url = searchLink + searched;
         getParse(url);
         console.log(url);
@@ -633,45 +625,4 @@ function callServiceLive(pageIdentification, searchLink) {
     });
 }
 
-function callLive(pageIdentification) {
 
-    var page = $("#" + pageIdentification);
-    var searchbar = page.find("#tab_bar_search");
-
-    searchbar.live('click', function() {
-        var navbardistancetotop = page.find('.ui-footer-fixed')[0].style.top.replace("px", "");
-        var hidden_home_search = page.find(".hidden_search");
-
-        if (hidden_home_search.css("visibility") == "hidden") {
-            hidden_home_search.css('top', (navbardistancetotop - 100) + 'px');
-            hidden_home_search.hide().css({visibility: "visible"}).fadeIn("slow");
-        } else {
-            hidden_home_search.fadeOut("slow", function() {
-                $(this).show().css({visibility: "hidden"});
-                $("#" + pageIdentification).find("#tab_bar_search").find("a").removeClass("ui-btn-active");
-            });
-        }
-    });
-
-    var searchForm = page.find("#search_form");
-    searchForm.live('submit', function() {
-
-        var searched = page.find('#search').val();
-        searched = replaceAll(searched, " ", "+");
-
-        page.find(".hidden_search").fadeOut("slow", function() {
-            $(this).show().css({visibility: "hidden"});
-            page.find("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
-        });
-
-        var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
-        getParse(url);
-
-        return false;
-    });
-
-
-    $('.link_to_homepage').live('click', function() {
-        $.mobile.changePage('#web_homepage');
-    })
-}
