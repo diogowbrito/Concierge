@@ -14,6 +14,8 @@ class BackOfficeController < ApplicationController
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
     @name = @doc.root['name']
     url = @doc.root['url']
+    puts @doc
+    puts @doc.at_css("provider")
     provider = @doc.at_css("provider").text()
     type = @doc.at_css("type").text()
     tags = @doc.xpath("//tag")
