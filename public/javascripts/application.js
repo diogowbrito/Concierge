@@ -45,25 +45,6 @@ function getWarning(url, id) {
 
 }
 
-function getLike(url, id) {
-
-    var warning;
-    $.get(
-            url,
-            function(data) {
-                warning = $(data).find("status").text();
-                var page = $('#' + id);
-                var pageWritable = $("[data-role=content]", page.get(0));
-
-                if (warning == "sucess") warning = "Obrigado pelo seu voto!";
-                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
-                pageWritable.append("<p>" + warning + "</p>");
-            },
-            "xml"
-            );
-
-}
-
 function createPage(id, logged) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
@@ -142,12 +123,12 @@ function parseHomepage(xml) {
                 case 'text':
                     if ($(this).children().size() == 0) {
                         pageWritable.append("<p>" + $(this).text() + "</p>");
-                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='c'></ul>").find('ul');
+                        list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
                     }
                     else {
                         titleold = $(this).attr('title');
                         title = replaceAll(titleold, " ", "_");
-                        var html = '<li class="slide" title="' + title + '">';
+                        var html = '<li class="slide activeZero 0" title="' + title + '">';
 
                         if (title != undefined)
                             html += '<a href="">' + titleold + '</a>';
@@ -160,32 +141,32 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>' + ctitle + '</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'text') {
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p>' + text + '</li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>' + ctitle + '</p>' + text + '</li>';
                                 else
-                                    html += '<li data-theme="d">' + text + '</li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '">' + text + '</li>';
                             }
                             else if (element.nodeName == 'email') {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'link') {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
-                                    html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="c" class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
 
                         });
@@ -198,24 +179,24 @@ function parseHomepage(xml) {
                     break;
                 case 'list':
                         var titleList = $(this).attr('title');
-                        html = '<li title="' + titleList + '">';
+                        html = '<li class="slide activeZero 0" title="' + titleList + '">';
 
                         if (titleList != undefined)
                             html += '<a href="">' + titleList + '</a>';
 
                         html += '</li>';
 
-                        $(this).children().each(function() {
-                            var href = $(this).attr('href');
-                            var title = $(this).attr('title');
-                            var href_img = $(this).children().attr('href');
-                            var size_img = $(this).children().attr('size');
-                            html += '<li data-theme="c"><a class="parse" href="'+href+'">' +
-                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
+                    $(this).children().each(function() {
+                        var href = $(this).attr('href');
+                        var title = $(this).attr('title');
+                        var href_img = $(this).children().attr('href');
+                        var size_img = $(this).children().attr('size');
+                        html += '<li class="slide_items ' + titleList + '"><a class="parse" href="' + href + '">' +
+                                '<img src="' + href_img + '" size="' + size_img + '" />' + title + '</a></li>';
 
-                        });
+                    });
 
-                        list.append(html);
+                    list.append(html);
                     break;
             }
         });
@@ -240,7 +221,6 @@ function parseHomepage(xml) {
 
         <!-- Add the search listener -->
         callServiceLive("homepage" + bla, $(xml).find("search").text());
-        callLive("homepage" + bla);
 
     }
 
@@ -256,7 +236,7 @@ function parseHomepage(xml) {
     }
 
     $.mobile.changePage("#" + page.attr("id"));
-
+    //$(".slide_items").hide();
 }
 
 function parseList(xml) {
@@ -313,7 +293,6 @@ function parseList(xml) {
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
-    callLive("list" + pageRandomId);
 
 
     $.mobile.changePage("#" + page.attr("id"));
@@ -413,25 +392,27 @@ function parseRecord(xml) {
                 else {
                     titleold = $(this).attr('title');
                     title = replaceAll(titleold, " ", "_");
-                    var html = '<li><h3>' + titleold + '</h3></li>';
+                    var html = '<li class="slide activeZero 0" title="' + title + '">';
+                    if (title != undefined)
+                        html += '<a href="">' + titleold + '</a>';
 
                     $(this).children().each(function(index, element) {
 
                         text = $(this).text();
                         if (element.nodeName == 'entity') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="c"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'text') {
-                            html += '<li data-theme="c">' + text + '</li>';
+                            html += '<li class="slide_items ' + title + '">' + text + '</li>';
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -489,9 +470,9 @@ function parseRecord(xml) {
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
-    callLive("record" + pageRandomId);
 
     $.mobile.changePage("#" + page.attr("id"));
+    $(".slide_items").hide();
 }
 
 $(".teste").live('pageshow', function(){
@@ -562,11 +543,11 @@ $('.warning').live('click', function(event) {
     $.mobile.ajaxEnabled(false);
 });
 
-$('.like').live('click', function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    getLike($(this).attr('href'), $(this).attr('pageid'));
-    $.mobile.ajaxEnabled(false);
+$('.slide').live('click', function() {
+
+    var t = "." + $(this).attr("title");
+    $(t).slideToggle("slow");
+
 });
 
 <!-- Pages scripts-->
@@ -575,6 +556,12 @@ $('.like').live('click', function(event) {
 $('#home_searchform').live('submit', function() {
     var searched = $('#search').val();
     searched = replaceAll(searched, " ", "+");
+
+    $(".hidden_home_search").fadeOut("slow", function() {
+        $(this).show().css({visibility: "hidden"});
+        $("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
+
+    });
 
     var url = document.location + "search?keyword=" + searched;
     getParse(url);
@@ -635,41 +622,11 @@ function callServiceLive(pageIdentification, searchLink) {
     });
 }
 
-function callLive(pageIdentification) {
 
-    var page = $("#" + pageIdentification);
-    var searchbar = page.find("#tab_bar_search");
-
-    searchbar.live('click', function() {
-        var navbardistancetotop = page.find('.ui-footer-fixed')[0].style.top.replace("px", "");
-        var hidden_home_search = page.find(".hidden_search");
-
-        if (hidden_home_search.css("visibility") == "hidden") {
-            hidden_home_search.css('top', (navbardistancetotop - 100) + 'px');
-            hidden_home_search.hide().css({visibility: "visible"}).fadeIn("slow");
-        } else {
-            hidden_home_search.fadeOut("slow", function() {
-                $(this).show().css({visibility: "hidden"});
-                $("#" + pageIdentification).find("#tab_bar_search").find("a").removeClass("ui-btn-active");
-            });
-        }
-    });
-
-    var searchForm = page.find("#search_form");
-    searchForm.live('submit', function() {
-
-        var searched = page.find('#search').val();
+    $("#home_searchform").live('submit', function() {
+        var searched = $(this).find('#search').val();
         searched = replaceAll(searched, " ", "+");
-
-        page.find(".hidden_search").fadeOut("slow", function() {
-            $(this).show().css({visibility: "hidden"});
-            page.find("#tab_bar_hp_search").find("a").removeClass("ui-btn-active");
-        });
-
         var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
         getParse(url);
-
         return false;
     });
-
-}
