@@ -2,12 +2,11 @@ class ServiceForwardController < ApplicationController
 
   def homepagerequest
 
-    @servicename = params[:service].gsub("-", " ")
-    puts "========="
-    puts @servicename
+    @servicename = params[:service].gsub("_", " ")
     service = Service.where(:serviceName => @servicename)
     competence = service[0].competences.where(:competenceType => "Home")
     homeurl = service[0].url
+    address = get_address
 
     user = User.find(session[:user_id])
     if user.notAnonymus != nil
@@ -19,13 +18,14 @@ class ServiceForwardController < ApplicationController
     @doc = Nokogiri::XML(open(@url), nil, 'UTF-8')
 
     if @doc.root().name() == "list"
+      puts @doc
 
-      root = @doc.root()
-      rootchildren = root.children
+      items =
+      puts rootchildren
       rootchildren.each do |rc|
         rc.node_name = "link"
         href = rc['href']
-        link = href.gsub(homeurl, address+"directrecord/"+@servicename)
+        link = href.gsub(homeurl, address+"directrecord/"+@servicename.gsub(" ", "_"))
         rc['href'] = link
       end
       newroot.node_name = "record"
@@ -37,11 +37,9 @@ class ServiceForwardController < ApplicationController
     root = @doc.root()
     root['logged'] = @logged
 
-    address = get_address
-
     nodes.each do |node|
       href = node['href']
-      link = href.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "%"))
+      link = href.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "_"))
       node['href'] = link
     end
 
@@ -49,14 +47,14 @@ class ServiceForwardController < ApplicationController
 
     nodes2.each do |node|
       href = node['href']
-      item = href.gsub(homeurl, address+"directrecord/"+@servicename)
+      item = href.gsub(homeurl, address+"directrecord/"+@servicename.gsub(" ", "_"))
       node['href'] = item
     end
 
     search = service[0].competences.where(:competenceType => "Search")
 
     if search[0] != nil then
-    search_link = search[0].competenceUrl.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "%"))
+    search_link = search[0].competenceUrl.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "_"))
     root = @doc.at_css "record"
     root.add_child("<search>"+search_link+"?keyword=")
     end
@@ -65,7 +63,7 @@ class ServiceForwardController < ApplicationController
 
   def listrequest
 
-    @servicename = params[:service]
+    @servicename = params[:service].gsub("_", " ")
     @method = params[:method]
     @start = (params[:start] || "1")
     @end = (params[:end] || "15 ")
@@ -88,7 +86,7 @@ class ServiceForwardController < ApplicationController
     address = get_address
 
     next_url = root['next']
-    next_url = next_url.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "%"))
+    next_url = next_url.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
     root['next'] = next_url
     nodes = @doc.xpath("//item")
 
@@ -97,7 +95,7 @@ class ServiceForwardController < ApplicationController
     nodes.each do |node|
       href = node['href']
       if href != nil
-       link = href.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "%"))
+       link = href.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
        node['href'] = link
       end
     end
@@ -109,7 +107,7 @@ class ServiceForwardController < ApplicationController
 
   def recordrequest
 
-    @servicename = params[:service].gsub("%", " ")
+    @servicename = params[:service].gsub("_", " ")
     @id = params[:id]
     @method = params[:method]
 
@@ -148,7 +146,7 @@ class ServiceForwardController < ApplicationController
     record['url'] = @url
 
     if session[:user_id] != nil then
-      History.create :user_id => session[:user_id], :time => Time.now, :description => title, :url => get_address + "services/"+@servicename.gsub(" ", "%")+"/"+@method+"/"+@id
+      History.create :user_id => session[:user_id], :time => Time.now, :description => title, :url => get_address + "services/"+@servicename.gsub(" ", "_")+"/"+@method+"/"+@id
     end
 
     entity = @doc.xpath("//entity");
@@ -195,7 +193,7 @@ class ServiceForwardController < ApplicationController
         node.name = "external_link"
         href = node['ehref']
       end
-      link = href.gsub(serviceurl, address+"services/"+@servicename.gsub(" ", "%"))
+      link = href.gsub(serviceurl, address+"services/"+@servicename.gsub(" ", "_"))
       node['href'] = link
 
     end
