@@ -66,12 +66,12 @@ function getLike(url, id) {
 
 function createPage(id, logged) {
 
-    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
+    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme", "a");
     var url = "http://" + document.domain + ":" + location.port + "/";
     var log;
     <!-- Draw Header-->
-    if(logged=='true')
-       log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
+    if (logged == 'true')
+        log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
             "<h1 id='logo' class='ui-title link_to_homepage'>Concierge</h1>";
@@ -115,7 +115,7 @@ function parse(xml) {
         parseRecord(xml);
     }
 
-     if ($(xml).find("map").length != 0) {
+    if ($(xml).find("map").length != 0) {
         parseMap(xml);
     }
 }
@@ -159,14 +159,14 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>' + ctitle + '</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
                                     html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
                             else if (element.nodeName == 'text') {
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p>' + text + '</li>';
+                                    html += '<li data-theme="d"><p>' + ctitle + '</p>' + text + '</li>';
                                 else
                                     html += '<li data-theme="d">' + text + '</li>';
                             }
@@ -174,7 +174,7 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>' + ctitle + '</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
                                     html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
@@ -182,7 +182,7 @@ function parseHomepage(xml) {
                                 attr = $(this).attr('href');
                                 ctitle = $(this).attr('title');
                                 if (ctitle != undefined)
-                                    html += '<li data-theme="d"><p>'+ctitle+'</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                                    html += '<li data-theme="d"><p>' + ctitle + '</p><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                                 else
                                     html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                             }
@@ -196,25 +196,25 @@ function parseHomepage(xml) {
                     list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
                 case 'list':
-                        var titleList = $(this).attr('title');
-                        html = '<li title="' + titleList + '">';
+                    var titleList = $(this).attr('title');
+                    html = '<li title="' + titleList + '">';
 
-                        if (titleList != undefined)
-                            html += '<a href="">' + titleList + '</a>';
+                    if (titleList != undefined)
+                        html += '<a href="">' + titleList + '</a>';
 
-                        html += '</li>';
+                    html += '</li>';
 
-                        $(this).children().each(function() {
-                            var href = $(this).attr('href');
-                            var title = $(this).attr('title');
-                            var href_img = $(this).children().attr('href');
-                            var size_img = $(this).children().attr('size');
-                            html += '<li data-theme="c"><a class="parse" href="'+href+'">' +
-                                    '<img src="'+href_img+'" size="'+size_img+'" />'+title+'</a></li>';
+                    $(this).children().each(function() {
+                        var href = $(this).attr('href');
+                        var title = $(this).attr('title');
+                        var href_img = $(this).children().attr('href');
+                        var size_img = $(this).children().attr('size');
+                        html += '<li data-theme="c"><a class="parse" href="' + href + '">' +
+                                '<img src="' + href_img + '" size="' + size_img + '" />' + title + '</a></li>';
 
-                        });
+                    });
 
-                        list.append(html);
+                    list.append(html);
                     break;
             }
         });
@@ -222,7 +222,7 @@ function parseHomepage(xml) {
 
     if ($(xml).find("search").text() != "") {
 
-        var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search");
+        var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search").attr("data-theme", "c");
         var divdatarole = $('<div>').attr("data-role", "fieldcontain").append(search);
 
         var serviceSearchForm = $("<form>").attr("id", "homepage" + bla + "_service_search_form").append(divdatarole);
@@ -266,9 +266,8 @@ function parseList(xml) {
     });
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-
     var page = createPage("list" + pageRandomId, logged);
-    page.attr("class", "teste");
+    page.attr("class", "list_page");
     var pageWritable = $("[data-role=content]", page.get(0));
 
     var next_url;
@@ -295,7 +294,6 @@ function parseList(xml) {
             }
 
         });
-//        pageWritable.append('<button class="next">next</button>');
     });
     page.page();
 
@@ -378,7 +376,7 @@ function parseRecord(xml) {
     var recordurl = $(xml).find("record").attr('url');
     pageWritable.append("<p>" + title + "</p>");
 
-    var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d'></ul>").find('ul');
+    var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='c'></ul>").find('ul');
 
     $(xml).find("record").children().each(function(index, element) {
         var text;
@@ -403,18 +401,18 @@ function parseRecord(xml) {
                         text = $(this).text();
                         if (element.nodeName == 'entity') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="c"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'text') {
-                            html += '<li data-theme="c">' + text + '</li>';
+                            html += '<li>' + text + '</li>';
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li><a href="' + attr + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -437,9 +435,9 @@ function parseRecord(xml) {
                 text = $(this).text();
                 title = $(this).attr('title');
                 if (title == undefined)
-                    list.append('<li><a class="email" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li><a href="mailto:' + text + '" >' + text + '</a></li>');
                 else
-                    list.append('<li><a class="email" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
+                    list.append('<li><a href="mailto:' + text + '" >' + text + '</a></li>');
                 break;
             case 'link':
                 text = $(this).text();
@@ -477,17 +475,25 @@ function parseRecord(xml) {
     $.mobile.changePage("#" + page.attr("id"));
 }
 
-$(".teste").live('pageshow', function(){
-        alert("oi");
+$(".list_page").live('pageshow', function() {
+    scroll();
 });
 
-$(document).bind('scrollstop', function() {
-    var x = $('body').height() + $(document).scrollTop();
-    var y = $(document).height();
-    if (x >= y) {
-       next();
-    }
+$(".list_page").live('pagebeforehide', function() {
+   $(document).unbind('scrollstop');
 });
+
+function scroll() {
+    $(document).unbind('scrollstop');
+    $(document).bind('scrollstop', function()
+    {
+        var x = $('body').height() + $(document).scrollTop();
+        var y = $(document).height();
+        if (x + 61 >= y) {
+            next();
+        }
+    });
+}
 
 function next() {
     $.ajax({
@@ -500,7 +506,7 @@ function next() {
 
 function moreList(xml) {
     var next_url;
-    $("li.ui-corner-bottom").removeClass("ui-corner-bottom");
+//    $(".list_page li.ui-corner-bottom").removeClass("ui-corner-bottom");
     $(xml).find("list").each(function() {
         next_url = $(this).attr('next');
         $(this).find("item").each(function() {
@@ -523,7 +529,6 @@ function moreList(xml) {
     });
 
     $(".list_class").data("url", next_url);
-
     $("ul", $(".ui-page-active")).listview("refresh");
 }
 
@@ -666,9 +671,7 @@ function callLive(pageIdentification) {
     });
 
 
-
-
-      $('.link_to_homepage').live('click', function() {
-      $.mobile.changePage('#web_homepage');
-  })
+    $('.link_to_homepage').live('click', function() {
+        $.mobile.changePage('#web_homepage');
+    })
 }
