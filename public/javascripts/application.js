@@ -45,6 +45,25 @@ function getWarning(url, id) {
 
 }
 
+function getLike(url, id) {
+
+    var warning;
+    $.get(
+            url,
+            function(data) {
+                warning = $(data).find("status").text();
+                var page = $('#' + id);
+                var pageWritable = $("[data-role=content]", page.get(0));
+
+                if (warning == "sucess") warning = "Obrigado pelo seu voto!";
+                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso";
+                pageWritable.append("<p>" + warning + "</p>");
+            },
+            "xml"
+            );
+
+}
+
 function createPage(id, logged) {
 
     var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme","a");
@@ -377,27 +396,25 @@ function parseRecord(xml) {
                 else {
                     titleold = $(this).attr('title');
                     title = replaceAll(titleold, " ", "_");
-                    var html = '<li class="slide activeZero 0" title="' + title + '">';
-                    if (title != undefined)
-                        html += '<a href="">' + titleold + '</a>';
+                    var html = '<li><h3>' + titleold + '</h3></li>';
 
                     $(this).children().each(function(index, element) {
 
                         text = $(this).text();
                         if (element.nodeName == 'entity') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li data-theme="c"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'text') {
-                            html += '<li class="slide_items ' + title + '">' + text + '</li>';
+                            html += '<li data-theme="c">' + text + '</li>';
                         }
                         else if (element.nodeName == 'email') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li class="slide_items ' + title + '"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            html += '<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -458,7 +475,6 @@ function parseRecord(xml) {
     callLive("record" + pageRandomId);
 
     $.mobile.changePage("#" + page.attr("id"));
-    $(".slide_items").hide();
 }
 
 $(".teste").live('pageshow', function(){
@@ -530,11 +546,11 @@ $('.warning').live('click', function(event) {
     $.mobile.ajaxEnabled(false);
 });
 
-$('.slide').live('click', function() {
-
-    var t = "." + $(this).attr("title");
-    $(t).slideToggle("slow");
-
+$('.like').live('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    getLike($(this).attr('href'), $(this).attr('pageid'));
+    $.mobile.ajaxEnabled(false);
 });
 
 <!-- Pages scripts-->
