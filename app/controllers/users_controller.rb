@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   end
 
   def sendresource
-  puts session[:user_id].to_s+"aahaha"
+
   if session[:user_id] != nil
     user = User.find(session[:user_id])
     if user.notAnonymus != nil
