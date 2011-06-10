@@ -291,50 +291,54 @@ function parseList(xml){
 }
 
 function parseMap(xml) {
-
-  //  console.log("mapiii");
-
-
     var logged;
     $(xml).find("map").each(function() {
         logged = $(this).attr('logged');
-
     });
 
-     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("map" + pageRandomId, logged);
 
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
-    pageWritable.append("<div id='map_canvas' style='height:400px;width:300px'></div>");
+                           var mapId = "map_canvas" + pageRandomId;
+    pageWritable.append("<div id="+mapId+" style='height:380px;width:520px;'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
         switch (element.nodeName) {
             case 'link':
                 kmlUrl = $(this).attr("href");
-                    console.log($(this).attr("href"));
              break;
         }
     });
 
-     page.page();
+  //  page.find(':jqmData(role="content")').css({'padding' : ''});
+
+
+    page.page();
     $.mobile.pageContainer.append(page);
-    $.mobile.changePage("#" + page.attr("id"));
+
         var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937) ;
         var myOptions = {
-            zoom: 22,
+            zoom: 15,
             center: center,
-            mapTypeId: google.maps.MapTypeId.TERRAIN
+            panControl : false,
+            zoomControl : false,
+            mapTypeControl : false,
+            scaleControl : false,
+            streetViewControl : false,
+            overviewMapControl : false,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
         }
-    //http://localhost:3006/kmlTrunk/Ed.I.kml
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        var ctaLayer = new google.maps.KmlLayer(kmlUrl);
-        ctaLayer.setMap(map);
 
-//    var map = new google.maps.Map($("#map" + pageRandomId).find("map_canvas"), myOptions);
- //    console.log(map);
+    var map = new google.maps.Map(document.getElementById(mapId), myOptions);
+    var ctaLayer = new google.maps.KmlLayer(kmlUrl);
+    ctaLayer.setMap(map);
 
+
+    $.mobile.changePage("#" + page.attr("id"));
+    page.find('.ui-content').css({'padding':'0'});
 }
 
 function parseRecord(xml) {
