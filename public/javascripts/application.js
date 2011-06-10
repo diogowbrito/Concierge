@@ -251,8 +251,10 @@ function parseList(xml){
 
     var page = createPage("list" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
+    var next_url;
 
         $(xml).find("list").each(function() {
+            next_url = $(this).attr('next');
             pageWritable.append("<p>" + $(this).attr('title') + "</p>");
             var list = pageWritable.append('<ul data-role="listview" data-inset="true" data-theme="d"></ul>').find('ul');
 
@@ -271,9 +273,12 @@ function parseList(xml){
                     else
                         list.append("<li class='parse'>" + $(this).text() + "</li>");
                 }
+
             });
+            pageWritable.append('<a class="next">next</a>');
         });
      page.page();
+
 
     $.mobile.pageContainer.append(page);
 
@@ -282,7 +287,7 @@ function parseList(xml){
 
 
     $.mobile.changePage("#" + page.attr("id"));
-
+    $(".next").data("teste", next_url);
 }
 
 function parseMap(xml) {
@@ -450,8 +455,8 @@ function parseRecord(xml) {
     $(".slide_items").hide();
 }
 
-$('.show_name').live('click', function() {
-   alert($(this).data("teste"));
+$(".next").live('click', function(){
+    getParse($(this).data("teste"));
 });
 
 $('#serviceLink').live('click', function() {

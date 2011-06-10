@@ -9,7 +9,7 @@
         <td>
           <% address = get_address %>
           <% if service.icon.url == "/icons/original/missing.png" %>
-            <img src="./images/buttons/letra c1.png" id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
+            <img src="./images/buttons/letra c1.png" id="serviceLink" href=<%=address +"services/"+service.serviceName.gsub(" ", "-")+"/index"%>>
           <% else %>
              <img src=<%=service.icon.url %> id="serviceLink" href=<%=address +"services/"+service.serviceName+"/index"%>>
           <% end %>
