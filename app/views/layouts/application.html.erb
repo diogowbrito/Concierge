@@ -16,7 +16,10 @@
 </head>
 <body>
 
+
+
 <div id="web_homepage" data-role="page" data-position="inline" data-theme="a">
+
   <div data-role="header" data-position="fixed">
 
    <h1 id="logo" class="ui-title">Concierge</h1>
@@ -33,14 +36,6 @@
   </div>
 
 
-    <div data-role="fieldcontain"  style="text-align:center;">
-      <form id="home_searchform">
-        <input data-theme="c" type='search' id='search' value='' width="100%"/>
-      </form>
-    </div>
-
-
-
   <div id="content" data-role="content">
     <%= yield %>
   </div>
@@ -54,12 +49,11 @@
         <li ><a href="b.html" data-icon="gear">Options</a></li>
       </ul>
     </div>
-    <!-- /navbar -->
   </div>
-  <!-- /footer -->
 
-</div>
 
+
+ </div>
 
 </body>
 
