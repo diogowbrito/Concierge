@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
 
       history.each do |hist|
-        root.add_child("<item title='"+hist.time.to_s+"' href='"+hist.url+"'>"+hist.description+"</item>")
+        root.add_child("<item title='"+hist.time.strftime("%m/%d/%Y %H:%M")+"' href='"+hist.url+"'>"+hist.description+"</item>")
       end
 
       if history.count != 7 then
