@@ -93,7 +93,7 @@ class UsersController < ApplicationController
 
       favourites.each do |fav|
 
-        root.add_child("<item href='"+fav.url+"'>"+fav.titlen+"</item>")
+        root.add_child("<item href='"+fav.url+"'>"+fav.title+"</item>")
       end
 
       if favourites.count != 7 then
@@ -174,7 +174,7 @@ class UsersController < ApplicationController
       if user.notAnonymus != nil
         url = params[:url]
         title = params[:title]
-        if Favorite.where(:user_id => session[:user_id])[0] == nil
+        if Favorite.where(:user_id => session[:user_id], :url => url)[0] == nil
           Favorite.create :user_id => session[:user_id], :url => url, :title => title
           @result = "sucess"
         else

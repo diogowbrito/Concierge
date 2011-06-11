@@ -72,7 +72,7 @@ function getFavourite(url, id) {
             function(data) {
                 warning = $(data).find("status").text();
 
-                if (warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio.";
+                if (warning == "sucess") warning = "O recurso foi adicionado com sucesso aos favoritos.";
                 if (warning == "already_favorite") warning = "Já adicionou este recurso como favorito.";
                 if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta funcionalidade.";
                 if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
