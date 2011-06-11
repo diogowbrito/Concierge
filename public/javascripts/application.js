@@ -16,12 +16,12 @@ function getHomepage(url) {
 
 function getParse(url) {
 
-        return $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "xml",
-            success: parse
-        });
+    return $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "xml",
+        success: parse
+    });
 
 }
 
@@ -117,10 +117,10 @@ function createPage(id, logged) {
     var navbarul;
 
     if (logged == 'true') {
-       navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
+        navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
-       navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+        navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
     }
 
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
@@ -347,7 +347,7 @@ function parseList(xml) {
 
 
 $(document).ready(function() {
-  $('.home_btn').addClass('ui-btn-active');
+    $('.home_btn').addClass('ui-btn-active');
 });
 
 $('.link_back').live('click', function() {
@@ -468,8 +468,8 @@ function parseRecord(xml) {
                         else if (element.nodeName == 'email') {
                             text = $(this).text();
                             title = $(this).attr('title');
-                            if (title != undefined){
-                                html += '<li>'+title+'</li>';
+                            if (title != undefined) {
+                                html += '<li>' + title + '</li>';
                                 html += '<li data-theme="d"><a href="mailto:' + text + '" >' + text + '</a></li>';
                             }
                             else
@@ -525,7 +525,7 @@ function parseRecord(xml) {
                 title = $(this).attr('title');
                 if (title == undefined)
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
-                else{
+                else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 }
@@ -537,10 +537,10 @@ function parseRecord(xml) {
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
-    var favouriteurl = url + "addfavourite?url=" + recordurl +"&title=" + recordtitle;
+    var favouriteurl = url + "addfavourite?url=" + recordurl + "&title=" + recordtitle;
     var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a>" +
             "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>"
-            +"<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/favourite.png'/></a>";
+            + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/favourite.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
     pageWritable.append(mail_button).append(paragraph);
 
@@ -565,19 +565,21 @@ function scroll() {
     $(document).bind('scrollstop', function() {
         var x = $('body').height() + $(document).scrollTop();
         var y = $(document).height();
-        if (x + 61 >= y) {
+        if (x >= y) {
             next();
         }
     });
 }
 
 function next() {
-    $.ajax({
-        type: "GET",
-        url: $(".list_class").data("url"),
-        dataType: "xml",
-        success: moreList
-    });
+    if ($(".list_class").data('url') != "") {
+        $.ajax({
+            type: "GET",
+            url: $(".list_class").data("url"),
+            dataType: "xml",
+            success: moreList
+        });
+    }
 }
 
 function moreList(xml) {
@@ -666,21 +668,21 @@ function replaceAll(string, token, newtoken) {
     return string;
 }
 
-    function callServiceLive(pageIdentification, searchLink) {
+function callServiceLive(pageIdentification, searchLink) {
 
-        var page = $("#" + pageIdentification);
+    var page = $("#" + pageIdentification);
 
-        var searchForm = page.find("#" + pageIdentification + "_service_search_form");
+    var searchForm = page.find("#" + pageIdentification + "_service_search_form");
 
-        searchForm.live('submit', function() {
-            var searched = page.find("#" + pageIdentification + "_service_search").val();
-            searched = replaceAll(searched, " ", "+");
-            var url = searchLink + searched;
-            getParse(url);
-            console.log(url);
+    searchForm.live('submit', function() {
+        var searched = page.find("#" + pageIdentification + "_service_search").val();
+        searched = replaceAll(searched, " ", "+");
+        var url = searchLink + searched;
+        getParse(url);
+        console.log(url);
 
-            return false;
-        });
-    }
+        return false;
+    });
+}
 
 
