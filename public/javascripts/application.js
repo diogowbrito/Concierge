@@ -307,8 +307,6 @@ function parseList(xml) {
 
 
     page.page();
-
-
     $.mobile.pageContainer.append(page);
 
     <!-- Add the search listener -->
@@ -320,13 +318,25 @@ function parseList(xml) {
 }
 
 $('.link_back').live('click', function() {
-    history.back();
+
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
-    return false;
+
+    console.log('should had found');
+    console.log($("#web_homepage").find('.home_btn'));
+
+    history.back();
+    return true;
 });
 
 $('.link_to_homepage').live('click', function() {
-   $.mobile.changePage('#web_homepage');
+
+   $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    console.log('should had found');
+    console.log($("#web_homepage").find('.home_btn'));
+   $('.link_to_history').removeClass('ui-btn-active');
+     $.mobile.changePage('#web_homepage');
+    return true;
 });
 
 function parseMap(xml) {
@@ -563,21 +573,21 @@ $('.parse').live('click', function(event) {
     event.preventDefault();
     $.mobile.pageLoading();
     getParse($(this).attr('href')).error();
-    $.mobile.ajaxEnabled(false);
+    $.mobile.ajaxEnabled = false;
 });
 
 $('.warning').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getWarning($(this).attr('href'), $(this).attr('pageid'));
-    $.mobile.ajaxEnabled(false);
+    $.mobile.ajaxEnabled = false;
 });
 
 $('.like').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getLike($(this).attr('href'), $(this).attr('pageid'));
-    $.mobile.ajaxEnabled(false);
+    $.mobile.ajaxEnabled = false;
 });
 
 <!-- Pages scripts-->

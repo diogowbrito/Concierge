@@ -22,14 +22,12 @@
 
     <% address = get_address %>
 
-    <div data-role="controlgroup" class="ui-btn-right" data-type="horizontal" >
 
       <% if current_user  && current_user.notAnonymus %>
-        <a id="login" href='<%= address + "logout" %>' data-role="button" data-icon="gear">Logout</a>
+        <a id="login" href='<%= address + "logout" %>' class="ui-btn-right" data-role="button" data-icon="gear">Logout</a>
       <% else %>
-        <a href='<%= address + "login" %>' data-role="button"  data-icon="gear">Login</a>
+        <a href='<%= address + "login" %>' class="ui-btn-right"  data-role="button"  data-icon="gear">Login</a>
       <% end %>
-    </div>
 
   </div>
 
