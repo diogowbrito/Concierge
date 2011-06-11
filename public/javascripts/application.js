@@ -321,21 +321,15 @@ $('.link_back').live('click', function() {
 
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
-
-    console.log('should had found');
-    console.log($("#web_homepage").find('.home_btn'));
-
     history.back();
     return true;
 });
 
 $('.link_to_homepage').live('click', function() {
 
-   $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    console.log('should had found');
-    console.log($("#web_homepage").find('.home_btn'));
-   $('.link_to_history').removeClass('ui-btn-active');
-     $.mobile.changePage('#web_homepage');
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $.mobile.changePage('#web_homepage');
     return true;
 });
 
