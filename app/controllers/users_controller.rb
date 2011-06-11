@@ -120,15 +120,11 @@ class UsersController < ApplicationController
 
   end
 
-  def options
-
-    respond_to :html
-
-  end
-
   def editfavourites
 
-    address = get_address
+    if session[:user_id] != nil then
+
+      address = get_address
 
       @start = (params[:start] || '1').to_i
       @end = (params[:end] || '10').to_i
@@ -143,11 +139,9 @@ class UsersController < ApplicationController
       favourites = user.favorites.find(:all, :offset =>@start-1, :limit => @end)
       @doc = Nokogiri::XML("<list title='Favoritos'></list>")
       root = @doc.at_css "list"
-      puts "aroo"
-      puts favourites
       favourites.each do |fav|
         newurl = address + "destroyfavorite?url=" + fav.url
-        root.add_child("<item class="desfav" href='"+newurl+"'>"+fav.title+"</item>")
+        root.add_child("<item option='delete' href='"+newurl+"'>"+fav.title+"</item>")
       end
 
       if favourites.count != 10 then
@@ -259,8 +253,13 @@ class UsersController < ApplicationController
       end
     end
 
-    redirect_to "/favourites"
+    redirect_to "/editfavourites"
 
+  end
+
+
+  def options
+    respond_to :html
   end
 
 end

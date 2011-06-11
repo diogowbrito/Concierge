@@ -113,7 +113,7 @@ function createPage(id, logged) {
     var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
 
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").append("<a class='link_to_options' href='" + url + "options data-icon='gear'>Options</a>");
+    var optionstab = $("<li>").append("<a class='link_to_options' href='" + url + "options' data-icon='gear'>Options</a>");
     var navbarul = $("<ul>").append(hometab).append(historytab);
 
     if (logged == 'true') {
@@ -298,18 +298,22 @@ function parseList(xml) {
     var listTitle;
     $(xml).find("list").each(function() {
         next_url = $(this).attr('next');
-        listTitle = $(this).attr('title')
+        listTitle = $(this).attr('title');
         pageWritable.append("<p>" + listTitle + "</p>");
         var list = pageWritable.append('<ul class="list_class" data-role="listview" data-inset="false" data-theme="c"></ul>').find('ul');
 
         $(this).find("item").each(function() {
             var attr = $(this).attr('href');
             title = $(this).attr('title');
-
+            var opt = $(this).attr('option');
+            console.log(opt);
             if (attr != undefined) {
                 if (title != undefined)
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() + " </a></li>");
                 else
+                    if (opt != undefined)
+                        list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
+                    else
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
             }
             else {
