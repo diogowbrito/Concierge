@@ -208,7 +208,7 @@ function parseHomepage(xml) {
                     $(this).children().each(function() {
                         var href = $(this).attr('href');
                         var title = $(this).attr('title');
-                        var href_img = $(this).children().attr('href');
+                        var href_img = $(this).children().attr('src');
                         var size_img = $(this).children().attr('size');
                         html += '<li data-theme="c"><a class="parse" href="' + href + '">' +
                                 '<img src="' + href_img + '" size="' + size_img + '" />' + title + '</a></li>';
