@@ -36,9 +36,12 @@ Concierge::Application.routes.draw do
   match "activation" => "users#activate"
   match "history" => "Users#history", :defaults => { :format => :xml}
   match "favourites" => "Users#favourites", :defaults => { :format => :xml}
+  match "options" => "Users#options"
+  match "editfavourites" => "Users#editfavourites", :defaults => { :format => :xml}
   match "sendresource" => "Users#sendresource", :defaults => { :format => :xml}
   match "rateservice" => "Users#rateservice", :defaults => { :format => :xml}
   match "addfavourite" => "Users#addfavourite", :defaults => { :format => :xml}
+  match "destroyfavorite" => "Users#destroyfavourite", :defaults => { :format => :xml}
 
 #  match "services/:service/:id" => "Record#record"
 #  match "record" => "Record#record", :defaults => { :format => :xml}
