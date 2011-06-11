@@ -110,9 +110,19 @@ function createPage(id, logged) {
 
     var hometab = $("<li>").append("<a class='link_to_homepage' data-icon='home' href=''>Home</a>");
     var historytab = $("<li>").append("<a class='parse link_to_history' href='" + url + "history' data-icon='grid'>History</a>");
+    var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
+
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
     var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
-    var navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+    var navbarul;
+
+    if (logged == 'true') {
+       navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
+    }
+    else {
+       navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+    }
+
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
 
     <!-- Draw footer and append nav bar-->
@@ -169,11 +179,6 @@ function parseHomepage(xml) {
                         titleold = $(this).attr('title');
                         title = replaceAll(titleold, " ", "_");
                         var html = '<li data-role="list-divider">' + titleold + '</li>';
-
-//                        if (title != undefined)
-//                            html += '<a href="">' +  + '</a>';
-//
-//                        html += '</li>';
 
                         $(this).children().each(function(index, element) {
                             text = $(this).text();
@@ -340,8 +345,12 @@ function parseList(xml) {
     $(".list_class").data("url", next_url);
 }
 
-$('.link_back').live('click', function() {
 
+$(document).ready(function() {
+  $('.home_btn').addClass('ui-btn-active');
+});
+
+$('.link_back').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
     history.back();
