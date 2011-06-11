@@ -16,12 +16,12 @@ function getHomepage(url) {
 
 function getParse(url) {
 
-    return $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "xml",
-        success: parse
-    });
+        return $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "xml",
+            success: parse
+        });
 
 }
 
@@ -320,13 +320,19 @@ function parseList(xml) {
 }
 
 $('.link_back').live('click', function() {
-    history.back();
+
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
-    return false;
+    history.back();
+    return true;
 });
 
 $('.link_to_homepage').live('click', function() {
+
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
     $.mobile.changePage('#web_homepage');
+    return true;
 });
 
 function parseMap(xml) {
@@ -570,21 +576,21 @@ $('.parse').live('click', function(event) {
     event.preventDefault();
     $.mobile.pageLoading();
     getParse($(this).attr('href')).error();
-    $.mobile.ajaxEnabled(false);
+    $.mobile.ajaxEnabled = false;
 });
 
 $('.warning').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getWarning($(this).attr('href'), $(this).attr('pageid'));
-    $.mobile.ajaxEnabled(false);
+    $.mobile.ajaxEnabled = false;
 });
 
 $('.like').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getLike($(this).attr('href'), $(this).attr('pageid'));
-    $.mobile.ajaxEnabled(false);
+    $.mobile.ajaxEnabled = false;
 });
 
 <!-- Pages scripts-->
