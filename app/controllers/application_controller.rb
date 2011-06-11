@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
         id = session[:user_id]
         old_user = User.find(id)
         if old_user.notAnonymus == nil then
-          puts "entrou"
           histories = old_user.histories
           old_user.destroy
           histories.each do |h|

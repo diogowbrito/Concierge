@@ -72,6 +72,46 @@ class UsersController < ApplicationController
 
   end
 
+  def favourites
+
+  if session[:user_id] != nil then
+
+      @start = params[:start] || '0'
+      @end = params[:end] || '7'
+      @next = @end.to_i+1
+      user = User.find(session[:user_id])
+
+      if user.notAnonymus != nil
+        @logged = "true"
+      else @logged = "false"
+      end
+
+      favourites = user.favorites.find(:all, :offset =>@start.to_i, :limit => @end.to_i)
+      @doc = Nokogiri::XML("<list title='Favoritos'></list>")
+      root = @doc.at_css "list"
+      root['logged'] = @logged
+
+      favourites.each do |fav|
+
+        root.add_child("<item href='"+fav.url+"'>"+fav.title+"</item>")
+      end
+
+      if favourites.count != 7 then
+      @next = ""
+
+    end
+
+    else
+
+      @next = ""
+      @doc = Nokogiri::XML("<list title='Utilizador não registado'></list>")
+
+    end
+
+    respond_to :xml
+
+  end
+
   def sendresource
 
   if session[:user_id] != nil
@@ -98,7 +138,7 @@ class UsersController < ApplicationController
 
   else
 
-    @msg = "fail_simple"
+    @result = "fail_simple"
 
   end
 
@@ -123,8 +163,32 @@ class UsersController < ApplicationController
         @result = "already_vote"
       end
     else
-      @msg = "fail_simple"
+      @result = "fail_simple"
     end
+  end
+
+  def addfavourite
+
+    if session[:user_id] != nil
+      user = User.find(session[:user_id])
+      if user.notAnonymus != nil
+        url = params[:url]
+        title = params[:title]
+        if Favorite.where(:user_id => session[:user_id], :url => url)[0] == nil
+          Favorite.create :user_id => session[:user_id], :url => url, :title => title
+          @result = "sucess"
+        else
+          @result = "already_favorite"
+        end
+      else
+        @result = "fail_logged"
+      end
+    else
+      @result = "fail_simple"
+    end
+
+    respond_to :xml
+
   end
 
 end

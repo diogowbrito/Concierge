@@ -34,7 +34,7 @@ function getWarning(url, id) {
                 warning = $(data).find("status").text();
 
                 if (warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio.";
-                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta competência.";
+                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta funcionalidade.";
                 if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
                 var par = $("#" + id + "warning");
                 par.html(warning);
@@ -58,6 +58,27 @@ function getLike(url, id) {
                 if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
                 var par = $("#" + id + "warning");
                 par.html(warning);
+            },
+            "xml"
+            );
+
+}
+
+function getFavourite(url, id) {
+
+    var warning;
+    $.get(
+            url,
+            function(data) {
+                warning = $(data).find("status").text();
+
+                if (warning == "sucess") warning = "O recurso foi adicionado com sucesso aos favoritos.";
+                if (warning == "already_favorite") warning = "Já adicionou este recurso como favorito.";
+                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta funcionalidade.";
+                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
+                var par = $("#" + id + "warning");
+                par.html(warning);
+
             },
             "xml"
             );
@@ -89,9 +110,19 @@ function createPage(id, logged) {
 
     var hometab = $("<li>").append("<a class='link_to_homepage' data-icon='home' href=''>Home</a>");
     var historytab = $("<li>").append("<a class='parse link_to_history' href='" + url + "history' data-icon='grid'>History</a>");
+    var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
+
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
     var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
-    var navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+    var navbarul;
+
+    if (logged == 'true') {
+       navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
+    }
+    else {
+       navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+    }
+
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
 
     <!-- Draw footer and append nav bar-->
@@ -148,11 +179,6 @@ function parseHomepage(xml) {
                         titleold = $(this).attr('title');
                         title = replaceAll(titleold, " ", "_");
                         var html = '<li data-role="list-divider">' + titleold + '</li>';
-
-//                        if (title != undefined)
-//                            html += '<a href="">' +  + '</a>';
-//
-//                        html += '</li>';
 
                         $(this).children().each(function(index, element) {
                             text = $(this).text();
@@ -319,8 +345,12 @@ function parseList(xml) {
     $(".list_class").data("url", next_url);
 }
 
-$('.link_back').live('click', function() {
 
+$(document).ready(function() {
+  $('.home_btn').addClass('ui-btn-active');
+});
+
+$('.link_back').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
     history.back();
@@ -399,9 +429,9 @@ function parseRecord(xml) {
     var page = createPage("record" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
-    var title = $(xml).find("record").attr('title');
+    var recordtitle = $(xml).find("record").attr('title');
     var recordurl = $(xml).find("record").attr('url');
-    pageWritable.append("<p>" + title + "</p>");
+    pageWritable.append("<p>" + recordtitle + "</p>");
 
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d' data-dividertheme='d'></ul>").find('ul');
 
@@ -507,7 +537,10 @@ function parseRecord(xml) {
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a><a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>";
+    var favouriteurl = url + "addfavourite?url=" + recordurl +"&title=" + recordtitle;
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a>" +
+            "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>"
+            +"<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
     pageWritable.append(mail_button).append(paragraph);
 
@@ -597,6 +630,13 @@ $('.like').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getLike($(this).attr('href'), $(this).attr('pageid'));
+    $.mobile.ajaxEnabled = false;
+});
+
+$('.favourite').live('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    getFavourite($(this).attr('href'), $(this).attr('pageid'));
     $.mobile.ajaxEnabled = false;
 });
 

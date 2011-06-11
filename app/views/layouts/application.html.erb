@@ -44,8 +44,13 @@
   <div data-role="footer" data-id="navbar" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="" class="home_btn ui-btn-active" data-icon="home">Home</a></li>
+        <li><a href="" class="home_btn link_to_homepage" data-icon="home">Home</a></li>
         <li ><a class="parse link_to_history" href='<%= address + "history" %>' data-icon="grid">History</a></li>
+
+         <% if current_user  && current_user.notAnonymus %>
+            <li ><a class="parse link_to_favourites" href='<%= address + "favourites" %>' data-icon="star">Favourites</a></li>
+         <% end %>
+
         <li ><a href="b.html" data-icon="gear">Options</a></li>
       </ul>
     </div>
