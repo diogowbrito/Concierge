@@ -1,0 +1,7 @@
+<%= form_tag(:action => "update") do %>
+  <%= label_tag(:password, "Insert the new password here:") %>
+  <%= password_field_tag(:password) %>
+  <%= label_tag(:password_confirmation, "Confirm the new password:") %>
+  <%= password_field_tag(:password_confirmation) %>
+  <%= submit_tag("Update") %>
+<% end %>

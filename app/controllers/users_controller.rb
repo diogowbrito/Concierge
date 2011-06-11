@@ -262,4 +262,26 @@ class UsersController < ApplicationController
     respond_to :html
   end
 
+  def manageaccount
+
+  @user = User.find(session[:user_id])
+
+  end
+
+  def update
+
+  @user = User.find(session[:user_id])
+  pass = params[:password]
+  conf_pass = params[:password_confirmation]
+
+  if pass == conf_pass then
+    @user.passwordSalt = BCrypt::Engine.generate_salt
+    @user.passwordHash = BCrypt::Engine.hash_secret(pass, passwordSalt)
+  end
+
+  redirect_to :root
+
+  end
+
+
 end

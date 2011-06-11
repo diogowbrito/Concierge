@@ -38,6 +38,8 @@ Concierge::Application.routes.draw do
   match "favourites" => "Users#favourites", :defaults => { :format => :xml}
   match "options" => "Users#options"
   match "editfavourites" => "Users#editfavourites", :defaults => { :format => :xml}
+  match "manageaccount" => "Users#manageaccount"
+  match "update" => "Users#update"
   match "sendresource" => "Users#sendresource", :defaults => { :format => :xml}
   match "rateservice" => "Users#rateservice", :defaults => { :format => :xml}
   match "addfavourite" => "Users#addfavourite", :defaults => { :format => :xml}

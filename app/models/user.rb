@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :favorites
   has_many :votes
 
-  attr_accessible :userName, :email, :password, :password_confirmation
+  attr_accessible :userName, :email, :password, :password_confirmationt
 
     attr_accessor :password
     before_save :encrypt_password
