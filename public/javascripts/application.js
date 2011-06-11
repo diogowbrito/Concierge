@@ -306,7 +306,6 @@ function parseList(xml) {
             var attr = $(this).attr('href');
             title = $(this).attr('title');
             var opt = $(this).attr('option');
-            console.log(opt);
             if (attr != undefined) {
                 if (title != undefined)
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() + " </a></li>");
@@ -351,18 +350,22 @@ function parseList(xml) {
 
 
 $(document).ready(function() {
-  $('.home_btn').addClass('ui-btn-active');
+     $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
+    var pathname = window.location.pathname;
+    if (pathname.indexOf('options') != -1) {
+        $('.link_to_options').addClass('ui-btn-active');
+    }
 });
 
 $('.link_back').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
     history.back();
     return true;
 });
 
 $('.link_to_homepage').live('click', function() {
-
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
     $.mobile.changePage('#web_homepage');
@@ -423,7 +426,6 @@ function parseMap(xml) {
 
 function parseRecord(xml) {
 
-    console.log("parse record");
     var logged;
     $(xml).find("record").each(function() {
         logged = $(this).attr('logged');
@@ -681,7 +683,6 @@ function replaceAll(string, token, newtoken) {
             searched = replaceAll(searched, " ", "+");
             var url = searchLink + searched;
             getParse(url);
-            console.log(url);
 
             return false;
         });
