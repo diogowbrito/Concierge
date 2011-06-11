@@ -88,9 +88,8 @@ class ServiceForwardController < ApplicationController
     next_url = root['next']
     next_url = next_url.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
     root['next'] = next_url
+
     nodes = @doc.xpath("//item")
-
-
 
     nodes.each do |node|
       href = node['href']

@@ -9,7 +9,8 @@ class SearchController < ApplicationController
     text = CGI.escape(params[:keyword].to_s)
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     @start = (params[:start] || '1').to_i
-    @end = (params[:end] || '7').to_i
+    @end = (params[:end] || '10').to_i
+
     @type = params[:type]
     @entity = params[:entity]
     counter = 1
@@ -64,6 +65,8 @@ class SearchController < ApplicationController
 
     @doc = Nokogiri::XML("<list title='Keyword: "+params[:keyword]+"' logged='"+@logged+"'></list>")
 
+    address = get_address
+
     list.each do |result|
 
       homenodes = result.xpath("//home")
@@ -93,6 +96,13 @@ class SearchController < ApplicationController
       end
 
     end
+
+    if counter>@end then
+      @next = address + "search?keyword=" + params[:keyword] + "&start=" + (@end+1).to_s + "&end=" + (@end+1+@end-@start).to_s
+    end
+
+    root = @doc.root()
+    root["next"] = @next
 
       respond_to :xml
 
@@ -147,6 +157,11 @@ class SearchController < ApplicationController
       @doc = Nokogiri::XML(open(url+'?keyword='+@keyword+"&start="+@start+"&end="+@end),nil, 'UTF-8')
 
       address = get_address
+
+      root = @doc.root()
+      next_url = root['next']
+      next_url = next_url.gsub(homeurl, address + "services/"+@servicename.gsub(" ", "_"))
+      root['next'] = next_url
 
       nodes = @doc.xpath("//item")
       if nodes.count != 1 then
