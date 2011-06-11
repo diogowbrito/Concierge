@@ -223,7 +223,7 @@ function parseHomepage(xml) {
 
     if ($(xml).find("search").text() != "") {
 
-        var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search").attr("data-theme", "d");
+        var search = $("<input>").attr("type", "search").attr("id", "homepage" + bla + "_service_search").attr("data-theme", "c");
         var divdatarole = $('<div>').attr("data-role", "fieldcontain").append(search);
 
         var serviceSearchForm = $("<form>").attr("id", "homepage" + bla + "_service_search_form").append(divdatarole);
