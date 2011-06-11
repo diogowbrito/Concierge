@@ -611,21 +611,21 @@ function replaceAll(string, token, newtoken) {
     return string;
 }
 
-function callServiceLive(pageIdentification, searchLink) {
+    function callServiceLive(pageIdentification, searchLink) {
 
-    var page = $("#" + pageIdentification);
+        var page = $("#" + pageIdentification);
 
-    var searchForm = page.find("#" + pageIdentification + "_service_search_form");
+        var searchForm = page.find("#" + pageIdentification + "_service_search_form");
 
-    searchForm.live('submit', function() {
-        var searched = page.find("#" + pageIdentification + "_service_search").val();
-        searched = replaceAll(searched, " ", "+");
-        var url = searchLink + searched;
-        getParse(url);
-        console.log(url);
+        searchForm.live('submit', function() {
+            var searched = page.find("#" + pageIdentification + "_service_search").val();
+            searched = replaceAll(searched, " ", "+");
+            var url = searchLink + searched;
+            getParse(url);
+            console.log(url);
 
-        return false;
-    });
-}
+            return false;
+        });
+    }
 
 
