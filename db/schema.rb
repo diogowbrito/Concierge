@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607172028) do
+ActiveRecord::Schema.define(:version => 20110610220543) do
 
   create_table "competences", :force => true do |t|
     t.integer  "service_id"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20110607172028) do
     t.string   "servicetype"
     t.integer  "ranking"
     t.string   "url"
-    t.string   "imgPath"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "icon_file_name"
@@ -78,6 +77,13 @@ ActiveRecord::Schema.define(:version => 20110607172028) do
     t.string   "passwordSalt"
     t.integer  "activateCode"
     t.string   "notAnonymus"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "service_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

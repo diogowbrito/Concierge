@@ -66,7 +66,11 @@ class ServiceForwardController < ApplicationController
     @servicename = params[:service].gsub("_", " ")
     @method = params[:method]
     @start = (params[:start] || "1")
+<<<<<<< HEAD
+    @end = (params[:end] || "7")
+=======
     @end = (params[:end] || "10")
+>>>>>>> f33fad33cbd32f35c38443514b765d48f64af655
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 

@@ -108,16 +108,19 @@ class UsersController < ApplicationController
 
   def rateservice
 
+    urlraw = params[:url]
+    urlarray = urlraw.split('/')
+    service = Service.where(:serviceName => urlarray[4])
+    s_id = service[0].id
+
     if session[:user_id] != nil
       user = User.find(session[:user_id])
-      if user.notAnonymus != nil
-        urlraw = params[:url]
-        urlarray = urlraw.split('/')
-        service = Service.where(:serviceName => urlarray[4])
+      if user.votes.where(:service_id => s_id)[0] == nil
         service[0].ranking = service[0].ranking+1
+        Vote.create :service_id => s_id, :user_id => session[:user_id]
         @result = "sucess"
       else
-        @result = "fail_logged"
+        @result = "already_vote"
       end
     else
       @msg = "fail_simple"

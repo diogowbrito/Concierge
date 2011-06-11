@@ -3,6 +3,7 @@ class Service < ActiveRecord::Base
   has_many :refEntities
   has_many :tags
   has_many :competences
+  has_many :votes
 
   has_attached_file :icon,
                     :url => "images/buttons/:basename.:extension",
