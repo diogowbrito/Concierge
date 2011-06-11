@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :histories
+  has_many :favorites
   has_many :votes
 
   attr_accessible :userName, :email, :password, :password_confirmation

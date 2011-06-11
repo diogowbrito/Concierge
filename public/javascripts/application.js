@@ -34,7 +34,7 @@ function getWarning(url, id) {
                 warning = $(data).find("status").text();
 
                 if (warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio.";
-                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta competência.";
+                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta funcionalidade.";
                 if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
                 var par = $("#" + id + "warning");
                 par.html(warning);
@@ -58,6 +58,27 @@ function getLike(url, id) {
                 if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
                 var par = $("#" + id + "warning");
                 par.html(warning);
+            },
+            "xml"
+            );
+
+}
+
+function getFavourite(url, id) {
+
+    var warning;
+    $.get(
+            url,
+            function(data) {
+                warning = $(data).find("status").text();
+
+                if (warning == "sucess") warning = "O recurso foi enviado com sucesso para a sua caixa de correio.";
+                if (warning == "already_favorite") warning = "Já adicionou este recurso como favorito.";
+                if (warning == "fail_logged") warning = "Necessita de estar logado para utilizar esta funcionalidade.";
+                if (warning == "fail_simple") warning = "Não conseguimos enviar o recurso.";
+                var par = $("#" + id + "warning");
+                par.html(warning);
+
             },
             "xml"
             );
@@ -399,9 +420,9 @@ function parseRecord(xml) {
     var page = createPage("record" + pageRandomId, logged);
     var pageWritable = $("[data-role=content]", page.get(0));
     var titleold;
-    var title = $(xml).find("record").attr('title');
+    var recordtitle = $(xml).find("record").attr('title');
     var recordurl = $(xml).find("record").attr('url');
-    pageWritable.append("<p>" + title + "</p>");
+    pageWritable.append("<p>" + recordtitle + "</p>");
 
     var list = pageWritable.append("<ul data-role='listview' data-inset='true' data-theme='d' data-dividertheme='d'></ul>").find('ul');
 
@@ -499,7 +520,10 @@ function parseRecord(xml) {
     var url = "http://" + document.domain + ":" + location.port + "/";
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a><a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>";
+    var favouriteurl = url + "addfavourite?url=" + recordurl +"&title=" + recordtitle;
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a>" +
+            "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>"
+            +"<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
     pageWritable.append(mail_button).append(paragraph);
 
@@ -590,6 +614,13 @@ $('.like').live('click', function(event) {
     event.stopPropagation();
     event.preventDefault();
     getLike($(this).attr('href'), $(this).attr('pageid'));
+    $.mobile.ajaxEnabled = false;
+});
+
+$('.favourite').live('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    getFavourite($(this).attr('href'), $(this).attr('pageid'));
     $.mobile.ajaxEnabled = false;
 });
 

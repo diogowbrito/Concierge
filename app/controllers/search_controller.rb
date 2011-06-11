@@ -138,7 +138,7 @@ class SearchController < ApplicationController
     text = CGI.escape(params[:keyword].to_s)
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     @start = (params[:start] || '1')
-    @end = (params[:end] || '7')
+    @end = (params[:end] || '10')
     @servicename = params[:service]
     service = Service.where(:serviceName => @servicename)
     competence = service[0].competences.where(:competenceType => "Search")
