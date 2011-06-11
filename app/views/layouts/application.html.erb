@@ -5,7 +5,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Concierge</title>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<link rel="apple-touch-icon" href="./public/images/buttons/concierge-icon.jpg" />
+
+  <link rel="apple-touch-icon" href="images/buttons/concierge-icon.jpg" />
 
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag "jquery-1.6", "login", "application", "jquery.mobile-1.0a4.1" %>
@@ -22,14 +23,12 @@
 
     <% address = get_address %>
 
-    <div data-role="controlgroup" class="ui-btn-right" data-type="horizontal" >
 
       <% if current_user  && current_user.notAnonymus %>
-        <a id="login" href='<%= address + "logout" %>' data-role="button" data-icon="gear">Logout</a>
+        <a id="login" href='<%= address + "logout" %>' class="ui-btn-right" data-role="button" data-icon="gear">Logout</a>
       <% else %>
-        <a href='<%= address + "login" %>' data-role="button"  data-icon="gear">Login</a>
+        <a href='<%= address + "login" %>' class="ui-btn-right"  data-role="button"  data-icon="gear">Login</a>
       <% end %>
-    </div>
 
   </div>
 

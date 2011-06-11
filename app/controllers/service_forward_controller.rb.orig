@@ -66,11 +66,7 @@ class ServiceForwardController < ApplicationController
     @servicename = params[:service].gsub("_", " ")
     @method = params[:method]
     @start = (params[:start] || "1")
-<<<<<<< HEAD
-    @end = (params[:end] || "7")
-=======
     @end = (params[:end] || "10")
->>>>>>> f33fad33cbd32f35c38443514b765d48f64af655
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
 
@@ -89,12 +85,21 @@ class ServiceForwardController < ApplicationController
 
     address = get_address
 
+
     next_url = root['next']
+<<<<<<< HEAD
     next_url = next_url.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
     root['next'] = next_url
+=======
+    if next_url != nil
+      next_url = next_url.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
+      root['next'] = next_url
+    end
     nodes = @doc.xpath("//item")
 
+>>>>>>> 1de3b98de194c8dd0f3e9e415f871e1f8fbbff1b
 
+    nodes = @doc.xpath("//item")
 
     nodes.each do |node|
       href = node['href']
