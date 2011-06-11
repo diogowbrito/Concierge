@@ -436,12 +436,18 @@ function parseRecord(xml) {
                             html += '<li data-theme="d">' + text + '</li>';
                         }
                         else if (element.nodeName == 'email') {
-                            attr = $(this).attr('href');
-                            html += '<li data-theme="d"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            text = $(this).text();
+                            title = $(this).attr('title');
+                            if (title != undefined){
+                                html += '<li>'+title+'</li>';
+                                html += '<li data-theme="d"><a href="mailto:' + text + '" >' + text + '</a></li>';
+                            }
+                            else
+                                html += '<li data-theme="d"><a href="mailto:' + text + '" >' + text + '</a></li>';
                         }
                         else if (element.nodeName == 'link') {
                             attr = $(this).attr('href');
-                            html += '<li data-theme="d"><a href="' + attr + '" >' + text + '</a></li>';
+                            html += '<li data-theme="d"><a class="parse" href="' + attr + '" >' + text + '</a></li>';
                         }
 
                     });
@@ -480,7 +486,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="parse" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
+                    list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
             case 'external_link':
@@ -489,8 +495,10 @@ function parseRecord(xml) {
                 title = $(this).attr('title');
                 if (title == undefined)
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
-                else
-                    list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '"><p>' + title + '</p>' + text + '</a></li>');
+                else{
+                    list.append('<li data-role="list-divider">' + title + '</li>');
+                    list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
+                }
                 break;
 
         }
@@ -541,7 +549,6 @@ function next() {
 
 function moreList(xml) {
     var next_url;
-//    $(".list_page li.ui-corner-bottom").removeClass("ui-corner-bottom");
     $(xml).find("list").each(function() {
         next_url = $(this).attr('next');
         $(this).find("item").each(function() {
@@ -564,7 +571,7 @@ function moreList(xml) {
     });
 
     $(".list_class").data("url", next_url);
-    $("ul", $(".ui-page-active")).listview("refresh");
+    $('ul:first', $('.ui-page-active')).listview('refresh');
 }
 
 $('#serviceLink').live('click', function() {
