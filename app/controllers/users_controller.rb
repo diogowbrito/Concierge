@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
       address = get_address
 
-      @start = (params[:start] || '0').to_i
+      @start = (params[:start] || '1').to_i
       @end = (params[:end] || '10').to_i
       @next = address + "history?start=" + (@end+1).to_s + "&end=" + (@end+1+@end-@start).to_s
       user = User.find(session[:user_id])
@@ -79,8 +79,10 @@ class UsersController < ApplicationController
 
   if session[:user_id] != nil then
 
-      @start = params[:start] || '0'
-      @end = params[:end] || '10'
+      address = get_address
+
+      @start = (params[:start] || '1').to_i
+      @end = (params[:end] || '10').to_i
       @next = address + "favourites?start=" + (@end+1).to_s + "&end=" + (@end+1+@end-@start).to_s
       user = User.find(session[:user_id])
 
@@ -89,13 +91,63 @@ class UsersController < ApplicationController
       else @logged = "false"
       end
 
-      favourites = user.favorites.find(:all, :offset =>@start.to_i, :limit => @end.to_i)
+      favourites = user.favorites.find(:all, :offset =>@start-1, :limit => @end)
       @doc = Nokogiri::XML("<list title='Favoritos'></list>")
       root = @doc.at_css "list"
-
+      puts "aroo"
+      puts favourites
       favourites.each do |fav|
 
         root.add_child("<item href='"+fav.url+"'>"+fav.title+"</item>")
+      end
+
+      if favourites.count != 10 then
+      @next = ""
+
+    end
+
+    else
+
+      @next = ""
+      @doc = Nokogiri::XML("<list title='Utilizador não registado'></list>")
+
+    end
+
+    root['logged'] = @logged
+    root['next'] = @next
+
+    respond_to :xml
+
+  end
+
+  def options
+
+    respond_to :html
+
+  end
+
+  def editfavourites
+
+    address = get_address
+
+      @start = (params[:start] || '1').to_i
+      @end = (params[:end] || '10').to_i
+      @next = address + "favourites?start=" + (@end+1).to_s + "&end=" + (@end+1+@end-@start).to_s
+      user = User.find(session[:user_id])
+
+      if user.notAnonymus != nil
+        @logged = "true"
+      else @logged = "false"
+      end
+
+      favourites = user.favorites.find(:all, :offset =>@start-1, :limit => @end)
+      @doc = Nokogiri::XML("<list title='Favoritos'></list>")
+      root = @doc.at_css "list"
+      puts "aroo"
+      puts favourites
+      favourites.each do |fav|
+        newurl = address + "destroyfavorite?url=" + fav.url
+        root.add_child("<item class="desfav" href='"+newurl+"'>"+fav.title+"</item>")
       end
 
       if favourites.count != 10 then
@@ -193,6 +245,21 @@ class UsersController < ApplicationController
     end
 
     respond_to :xml
+
+  end
+
+  def destroyfavourite
+
+    if session[:user_id] != nil
+      user = User.find(session[:user_id])
+      if user.notAnonymus != nil
+        url = params[:url]
+        fav = Favorite.where(:user_id => session[:user_id], :url => url)[0]
+        fav.destroy
+      end
+    end
+
+    redirect_to "/favourites"
 
   end
 
