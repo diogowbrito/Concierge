@@ -321,10 +321,12 @@ function parseList(xml) {
 
 $('.link_back').live('click', function() {
     history.back();
-
-
     $('.link_to_history').removeClass('ui-btn-active');
     return false;
+});
+
+$('.link_to_homepage').live('click', function() {
+   $.mobile.changePage('#web_homepage');
 });
 
 function parseMap(xml) {
@@ -597,11 +599,6 @@ function logOut() {
 $('#login').live('click', function() {
     logOut();
 });
-
-   $('.link_to_homepage').live('click', function() {
-      $.mobile.changePage('#web_homepage');
-    });
-
 
 function replaceAll(string, token, newtoken) {
     while (string.indexOf(token) != -1) {
