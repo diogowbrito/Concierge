@@ -113,14 +113,11 @@ function createPage(id, logged) {
     var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
 
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
-    var navbarul;
+    var optionstab = $("<li>").append("<a class='link_to_options' href='" + url + "options data-icon='gear'>Options</a>");
+    var navbarul = $("<ul>").append(hometab).append(historytab);
 
     if (logged == 'true') {
-       navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
-    }
-    else {
-       navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+       navbarul = navbarul.append(favouritestab).append(optionstab);
     }
 
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
@@ -328,6 +325,9 @@ function parseList(xml) {
 
     if (listTitle == "Histórico") {
         page.find('.link_to_history').addClass('ui-btn-active');
+        page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
+    }  else if (listTitle == "Favoritos") {
+        page.find('.link_to_favourites').addClass('ui-btn-active');
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
 
