@@ -120,7 +120,7 @@ function createPage(id, logged) {
         navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
-        navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
+        navbarul = $("<ul>").append(hometab).append(historytab);
     }
 
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
