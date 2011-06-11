@@ -102,8 +102,9 @@ class SearchController < ApplicationController
     end
 
     root = @doc.root()
-    root["next"] = @next
-
+    if root['next'] != nil
+      root["next"] = @next
+      end
       respond_to :xml
 
     else
@@ -168,7 +169,7 @@ class SearchController < ApplicationController
 
         nodes.each do |node|
           href = node['href']
-          link = href.gsub(homeurl, address+"/services")
+          link = href.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "_"))
           node['href'] = link
         end
 

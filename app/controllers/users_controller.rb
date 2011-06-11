@@ -36,9 +36,11 @@ class UsersController < ApplicationController
 
     if session[:user_id] != nil then
 
-      @start = params[:start] || '0'
-      @end = params[:end] || '7'
-      @next = @end.to_i+1
+      address = get_address
+
+      @start = (params[:start] || '0').to_i
+      @end = (params[:end] || '10').to_i
+      @next = address + "history?start=" + (@end+1).to_s + "&end=" + (@end+1+@end-@start).to_s
       user = User.find(session[:user_id])
 
       if user.notAnonymus != nil
@@ -49,14 +51,12 @@ class UsersController < ApplicationController
       history = user.histories.find(:all, :order =>"time DESC", :offset =>@start.to_i, :limit => @end.to_i)
       @doc = Nokogiri::XML("<list title='Histórico'></list>")
       root = @doc.at_css "list"
-      root['logged'] = @logged
-
 
       history.each do |hist|
         root.add_child("<item title='"+hist.time.strftime("%m/%d/%Y %H:%M")+"' href='"+hist.url+"'>"+hist.description+"</item>")
       end
 
-      if history.count != 7 then
+      if history.count != 10 then
       @next = ""
 
     end
@@ -64,9 +64,12 @@ class UsersController < ApplicationController
     else
 
       @next = ""
-      @doc = Nokogiri::XML("<list title='Utilizador não registado'></list>")
+      @doc = Nokogiri::XML("<list title='Utilizador não registado' ></list>")
 
     end
+
+    root['logged'] = @logged
+    root['next'] = @next
 
     respond_to :xml
 
@@ -77,8 +80,8 @@ class UsersController < ApplicationController
   if session[:user_id] != nil then
 
       @start = params[:start] || '0'
-      @end = params[:end] || '7'
-      @next = @end.to_i+1
+      @end = params[:end] || '10'
+      @next = address + "favourites?start=" + (@end+1).to_s + "&end=" + (@end+1+@end-@start).to_s
       user = User.find(session[:user_id])
 
       if user.notAnonymus != nil
@@ -89,14 +92,13 @@ class UsersController < ApplicationController
       favourites = user.favorites.find(:all, :offset =>@start.to_i, :limit => @end.to_i)
       @doc = Nokogiri::XML("<list title='Favoritos'></list>")
       root = @doc.at_css "list"
-      root['logged'] = @logged
 
       favourites.each do |fav|
 
         root.add_child("<item href='"+fav.url+"'>"+fav.title+"</item>")
       end
 
-      if favourites.count != 7 then
+      if favourites.count != 10 then
       @next = ""
 
     end
@@ -107,6 +109,9 @@ class UsersController < ApplicationController
       @doc = Nokogiri::XML("<list title='Utilizador não registado'></list>")
 
     end
+
+    root['logged'] = @logged
+    root['next'] = @next
 
     respond_to :xml
 
