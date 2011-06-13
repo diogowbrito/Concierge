@@ -551,7 +551,7 @@ function parseRecord(xml) {
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
     var favouriteurl = url + "addfavourite?url=" + recordurl + "&title=" + recordtitle;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a>" +
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mailicon3.png'/></a>" +
             "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>"
             + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/favourite.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
