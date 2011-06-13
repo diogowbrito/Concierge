@@ -48,7 +48,7 @@ class UsersController < ApplicationController
       else @logged = "false"
       end
 
-      history = user.histories.find(:all, :order =>"time DESC", :offset =>@start.to_i, :limit => @end.to_i)
+      history = user.histories.find(:all, :order =>"time DESC", :offset =>@start.to_i-1, :limit => @end.to_i)
       @doc = Nokogiri::XML("<list title='Histórico'></list>")
       root = @doc.at_css "list"
 
