@@ -11,7 +11,8 @@ class ServiceForwardController < ApplicationController
     user = User.find(session[:user_id])
     if user.notAnonymus != nil
       @logged = "true"
-    else @logged = "false"
+    else
+      @logged = "false"
     end
 
     @url = homeurl
@@ -47,16 +48,17 @@ class ServiceForwardController < ApplicationController
 
     nodes2.each do |node|
       href = node['href']
-      item = href.gsub(homeurl, address+"directrecord/"+@servicename.gsub(" ", "_"))
+      # acrescentei  na linha abaixo uma barra  por causa do serviço de transito, nao sei se sera o melhor sitio dps vejam isso
+      item = href.gsub(homeurl, address+"directrecord/"+@servicename.gsub(" ", "_")+"/")
       node['href'] = item
     end
 
     search = service[0].competences.where(:competenceType => "Search")
 
     if search[0] != nil then
-    search_link = search[0].competenceUrl.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "_"))
-    root = @doc.at_css "record"
-    root.add_child("<search>"+search_link+"?keyword=")
+      search_link = search[0].competenceUrl.gsub(homeurl, address+"services/"+@servicename.gsub(" ", "_"))
+      root = @doc.at_css "record"
+      root.add_child("<search>"+search_link+"?keyword=")
     end
     respond_to :xml
   end
@@ -73,7 +75,8 @@ class ServiceForwardController < ApplicationController
     user = User.find(session[:user_id])
     if user.notAnonymus != nil
       @logged = "true"
-    else @logged = "false"
+    else
+      @logged = "false"
     end
 
     @url = serviceurl + "/" + @method + "?start="+@start+"&end="+@end
@@ -95,8 +98,8 @@ class ServiceForwardController < ApplicationController
     nodes.each do |node|
       href = node['href']
       if href != nil
-       link = href.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
-       node['href'] = link
+        link = href.gsub(serviceurl, address + "services/"+@servicename.gsub(" ", "_"))
+        node['href'] = link
       end
     end
 
@@ -112,7 +115,12 @@ class ServiceForwardController < ApplicationController
     @method = params[:method]
 
     address = get_address
-    @url = address+"services/"+@servicename+"/"+@method+"/"+@id
+    if @method == nil
+      @url = address+"services/"+@servicename+"/"+@id
+    else
+      @url = address+"services/"+@servicename+"/"+@method+"/"+@id
+    end
+
 
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
@@ -120,7 +128,8 @@ class ServiceForwardController < ApplicationController
     user = User.find(session[:user_id])
     if user.notAnonymus != nil
       @logged = "true"
-    else @logged = "false"
+    else
+      @logged = "false"
     end
     querystring = ""
     params.each_pair do |key, value|
@@ -130,78 +139,90 @@ class ServiceForwardController < ApplicationController
     end
 
     if querystring == ""
-      link = serviceurl + "/" +@method+"/"+@id
+      if @method != nil
+        link = serviceurl + "/" +@method+"/"+@id
+      else
+        link = serviceurl +"/"+@id
+      end
     else
-      link = serviceurl + "/" +@method+"/"+@id+"?"+querystring
+      if @method != nil
+        link = serviceurl + "/" +@method+"/"+@id+"?"+querystring
+      else
+        link = serviceurl +"/"+@id +"?"+querystring
+      end
     end
 
     @doc = Nokogiri::XML(open(link), nil, 'UTF-8')
 
     if @doc.at_css("record") then
 
-    record = @doc.at_css("record")
-    title = record['title']
+      record = @doc.at_css("record")
+      title = record['title']
 
-    record['logged'] = @logged
-    record['url'] = @url
+      record['logged'] = @logged
+      record['url'] = @url
 
-    if session[:user_id] != nil then
-      History.create :user_id => session[:user_id], :time => Time.now, :description => title, :url => get_address + "services/"+@servicename.gsub(" ", "_")+"/"+@method+"/"+@id
-    end
-
-    entity = @doc.xpath("//entity");
-    entity.each do |node|
-
-      parent = node.parent()
-      kind = node.attr('kind')
-      service = node.attr('service')
-      serviceType = node.attr('serviceType')
-      title = node.attr('title')
-      value = node.text()
-
-      node.remove
-      plus_value = value.gsub(" ", "+")
-
-      link = get_address
-
-      if service != nil then
-        link += 'services/'+service+'search?keyword='+plus_value
-      elsif kind != nil then
-        plus_kind = kind.gsub(" ", "+")
-        link += 'search?keyword='+plus_value+'&amp;entity='+plus_kind
-      else
-        plus_serviceType = servie.gsub(" ", "+")
-        link += 'search?keyword='+plus_value+'&amp;type='+plus_serviceType
+      if session[:user_id] != nil then
+        if @method != nil
+          History.create :user_id => session[:user_id], :time => Time.now, :description => title, :url => get_address + "services/"+@servicename.gsub(" ", "_")+"/"+@method+"/"+@id
+        else
+           History.create :user_id => session[:user_id], :time => Time.now, :description => title, :url => get_address + "services/"+@servicename.gsub(" ", "_")+"/"+@id
+          end
       end
 
-      if title == nil
-        parent.add_child('<entity href="'+link+'">'+value+'</entity>')
-      else
-        parent.add_child('<entity title="'+title+'" href="'+link+'">'+value+'</entity>')
+      entity = @doc.xpath("//entity");
+      entity.each do |node|
+
+        parent = node.parent()
+        kind = node.attr('kind')
+        service = node.attr('service')
+        serviceType = node.attr('serviceType')
+        title = node.attr('title')
+        value = node.text()
+
+        node.remove
+        plus_value = value.gsub(" ", "+")
+
+        link = get_address
+
+        if service != nil then
+          link += 'services/'+service+'search?keyword='+plus_value
+        elsif kind != nil then
+          plus_kind = kind.gsub(" ", "+")
+          link += 'search?keyword='+plus_value+'&amp;entity='+plus_kind
+        else
+          plus_serviceType = servie.gsub(" ", "+")
+          link += 'search?keyword='+plus_value+'&amp;type='+plus_serviceType
+        end
+
+        if title == nil
+          parent.add_child('<entity href="'+link+'">'+value+'</entity>')
+        else
+          parent.add_child('<entity title="'+title+'" href="'+link+'">'+value+'</entity>')
+        end
+
       end
 
-    end
+      link_tag = @doc.xpath("//link")
 
-    link_tag = @doc.xpath("//link")
+      address = get_address
 
-    address = get_address
+      link_tag.each do |node|
 
-    link_tag.each do |node|
+        href = node['href']
+        if href == nil then
+          node.name = "external_link"
+          href = node['ehref']
+        end
+        link = href.gsub(serviceurl, address+"services/"+@servicename.gsub(" ", "_"))
+        node['href'] = link
 
-      href = node['href']
-      if href == nil then
-        node.name = "external_link"
-        href = node['ehref']
       end
-      link = href.gsub(serviceurl, address+"services/"+@servicename.gsub(" ", "_"))
-      node['href'] = link
 
+    elsif @doc.at_css("map")
     end
 
-  elsif @doc.at_css("map")
-  end
-
-  respond_to :xml
+    respond_to :xml
 
   end
 end

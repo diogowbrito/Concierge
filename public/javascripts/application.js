@@ -16,12 +16,12 @@ function getHomepage(url) {
 
 function getParse(url) {
 
-        return $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "xml",
-            success: parse
-        });
+    return $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "xml",
+        success: parse
+    });
 
 }
 
@@ -224,10 +224,10 @@ function parseHomepage(xml) {
                     break;
                 case 'list':
                     var titleList = $(this).attr('title');
-                    html = '<li title="' + titleList + '">';
+                    html = '<li data-role="list-divider">';
 
                     if (titleList != undefined)
-                        html += '<a href="">' + titleList + '</a>';
+                        html += titleList;
 
                     html += '</li>';
 
@@ -310,19 +310,19 @@ function parseList(xml) {
             title = $(this).attr('title');
             var opt = $(this).attr('option');
             if (attr != undefined) {
-                if (title != undefined){
-                    list.append('<li data-role="list-divider">'+$(this).attr("title")+'</li>');
+                if (title != undefined) {
+                    list.append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + " </a></li>");
                 }
                 else
-                    if (opt != undefined)
-                        list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
-                    else
+                if (opt != undefined)
+                    list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
+                else
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
             }
             else {
-                if (title != undefined){
-                    list.append('<li data-role="list-divider">'+$(this).attr("title")+'</li>');
+                if (title != undefined) {
+                    list.append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
                     list.append("<li class='parse'>" + $(this).text() + "</li>");
                 }
                 else
@@ -336,7 +336,7 @@ function parseList(xml) {
     if (listTitle == "Histórico") {
         page.find('.link_to_history').addClass('ui-btn-active');
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
-    }  else if (listTitle == "Favoritos") {
+    } else if (listTitle == "Favoritos") {
         page.find('.link_to_favourites').addClass('ui-btn-active');
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
@@ -357,7 +357,7 @@ function parseList(xml) {
 
 
 $(document).ready(function() {
-     $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
+    $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
     var pathname = window.location.pathname;
     if (pathname.indexOf('options') != -1) {
         $('.link_to_options').addClass('ui-btn-active');
@@ -451,15 +451,21 @@ function parseRecord(xml) {
     $(xml).find("record").children().each(function(index, element) {
         var text;
         var title;
+        var label;
         switch (element.nodeName) {
             case 'text':
                 if ($(this).children().size() == 0) {
                     text = $(this).text();
                     title = $(this).attr('title');
-                    if (title == undefined)
+                    label = $(this).attr('label');
+                    if (title == undefined && label != undefined) {
+                        title = label;
+                    }
+                    if (title == undefined) {
                         list.append('<li data-role="list-divider">' + text + '</li>');
+                    }
                     else {
-                        list.append('<li data-role="list-divider">' + title + '</li>')
+                        list.append('<li data-role="list-divider">' + title + '</li>');
                         list.append('<li data-theme="d">' + text + '</li>');
                     }
                 }
@@ -543,6 +549,12 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
+            case 'date':
+                text = $(this).text();
+                label = $(this).attr('label');
+                list.append('<li data-role="list-divider">' + label + '</li>');
+                list.append('<li data-theme="c">' + text + '</li>');
+                break;
 
         }
     });
@@ -603,16 +615,16 @@ function moreList(xml) {
             var attr = $(this).attr('href');
             var title = $(this).attr('title');
             if (attr != undefined) {
-                if (title != undefined){
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">'+$(this).attr("title")+'</li>');
+                if (title != undefined) {
+                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
                     $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + " </a></li>");
                 }
                 else
                     $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
             }
             else {
-                if (title != undefined){
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">'+$(this).attr("title")+'</li>');
+                if (title != undefined) {
+                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
                     $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li class='parse'>" + $(this).text() + "</li>");
                 }
                 else
@@ -685,20 +697,20 @@ function replaceAll(string, token, newtoken) {
     return string;
 }
 
-    function callServiceLive(pageIdentification, searchLink) {
+function callServiceLive(pageIdentification, searchLink) {
 
-        var page = $("#" + pageIdentification);
+    var page = $("#" + pageIdentification);
 
-        var searchForm = page.find("#" + pageIdentification + "_service_search_form");
+    var searchForm = page.find("#" + pageIdentification + "_service_search_form");
 
-        searchForm.live('submit', function() {
-            var searched = page.find("#" + pageIdentification + "_service_search").val();
-            searched = replaceAll(searched, " ", "+");
-            var url = searchLink + searched;
-            getParse(url);
+    searchForm.live('submit', function() {
+        var searched = page.find("#" + pageIdentification + "_service_search").val();
+        searched = replaceAll(searched, " ", "+");
+        var url = searchLink + searched;
+        getParse(url);
 
-            return false;
-        });
-    }
+        return false;
+    });
+}
 
 
