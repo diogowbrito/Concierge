@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def clean_old
+  every 1.day, :at => '4:30 am' do
+  runner "Model.do_something"
+  end
+  end
+
   def get_address
     port = request.port
     host = request.host
@@ -22,11 +28,11 @@ class ApplicationController < ActionController::Base
   def session_expiry
 
     if current_user != nil then
-
-    @time_left = (session[:expires_at] - Time.now).to_i
-      unless @time_left > 0
-        id = session[:user_id]
-        if User.find(id) != nil then
+      id = session[:user_id]
+      begin
+      User.find(id)
+        @time_left = (session[:expires_at] - Time.now).to_i
+        unless @time_left > 0
           old_user = User.find(id)
           if old_user.notAnonymus == nil then
             histories = old_user.histories
@@ -36,9 +42,9 @@ class ApplicationController < ActionController::Base
             end
           end
           reset_session
-        else
-        reset_session
         end
+      rescue ActiveRecord::RecordNotFound
+        reset_session
       end
     end
   end
