@@ -7,12 +7,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def clean_old
-  every 1.day, :at => '4:30 am' do
-  runner "Model.do_something"
-  end
-  end
-
   def get_address
     port = request.port
     host = request.host
@@ -21,7 +15,16 @@ class ApplicationController < ActionController::Base
 
   def current_user
 
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      if session[:user_id] == nil
+        reset_session
+      else
+        begin
+          User.find(session[:user_id])
+          @current_user ||= User.find(session[:user_id]) if session[:user_id]
+        rescue ActiveRecord::RecordNotFound
+          reset_session
+        end
+      end
 
   end
 
