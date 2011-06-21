@@ -1,7 +1,6 @@
 class HomePageController < ApplicationController
 
   def index
-
     if current_user == nil then
 
       name = "Anonymus"+rand(100000).to_s

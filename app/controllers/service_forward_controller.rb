@@ -109,7 +109,6 @@ class ServiceForwardController < ApplicationController
 
 
   def recordrequest
-
     @servicename = params[:service].gsub("_", " ")
     @id = params[:id]
     @method = params[:method]

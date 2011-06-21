@@ -98,8 +98,17 @@ class SearchController < ApplicationController
     end
 
     root = @doc.root()
+<<<<<<< HEAD
     root['next'] = @next
     respond_to :xml
+=======
+    if root['next'] != nil
+
+      root["next"] = @next
+      else root["next"] = @next
+    end
+      respond_to :xml
+>>>>>>> a69ff47e32bf74151fadd20a7b1dbc69eef5c9f3
 
     else
 

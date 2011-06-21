@@ -21,7 +21,6 @@ function getParse(url) {
         dataType: "xml",
         success: parse
     });
-
 }
 
 function getWarning(url, id) {
@@ -137,7 +136,6 @@ function createPage(id, logged) {
 
 
 function parse(xml) {
-
     if ($(xml).find("list").length != 0) {
         parseList(xml);
     }
@@ -325,7 +323,7 @@ function parseList(xml) {
                     list.append('<li data-theme="d">' + $(this).text() + '</li>');
                 }
                 else
-                    list.append("<li>" + $(this).text() + "</li>");
+                    list.append("<li data-theme='d'>" + $(this).text() + "</li>");
             }
 
         });
@@ -351,8 +349,7 @@ function parseList(xml) {
 
     $.mobile.changePage("#" + page.attr("id"));
 
-    $(".list_class").data("url", next_url);
-
+    $(".list_class").data("next_url", next_url);
 }
 
 
@@ -513,7 +510,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
 
@@ -524,7 +521,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a href="mailto:' + text + '" >' + text + '</a></li>');
                 }
                 break;
             case 'link':
@@ -535,7 +532,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
             case 'external_link':
@@ -546,14 +543,14 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
             case 'date':
                 text = $(this).text();
                 label = $(this).attr('label');
                 list.append('<li data-role="list-divider">' + label + '</li>');
-                list.append('<li data-theme="c">' + text + '</li>');
+                list.append('<li data-theme="d">' + text + '</li>');
                 break;
 
         }
@@ -597,10 +594,10 @@ function scroll() {
 }
 
 function next() {
-    if ($(".list_class").data('url') != "") {
+    if ($(".list_class").data('next_url') != "") {
         $.ajax({
             type: "GET",
-            url: $(".list_class").data("url"),
+            url: $(".list_class").data("next_url"),
             dataType: "xml",
             success: moreList
         });
@@ -634,7 +631,7 @@ function moreList(xml) {
         });
     });
 
-    $(".list_class").data("url", next_url);
+    $(".list_class").data("next_url", next_url);
     $('ul:first', $('.ui-page-active')).listview('refresh');
 }
 
@@ -678,6 +675,7 @@ $("#home_searchform").live('submit', function() {
     searched = replaceAll(searched, " ", "+");
     var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
     getParse(url);
+    $.mobile.ajaxEnabled = false;
     return false;
 });
 
@@ -708,7 +706,7 @@ function callServiceLive(pageIdentification, searchLink) {
         searched = replaceAll(searched, " ", "+");
         var url = searchLink + searched;
         getParse(url);
-
+        $.mobile.ajaxEnabled = false;
         return false;
     });
 }

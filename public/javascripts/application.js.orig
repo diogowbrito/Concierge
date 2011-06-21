@@ -15,14 +15,12 @@ function getHomepage(url) {
 }
 
 function getParse(url) {
-
     return $.ajax({
         type: "GET",
         url: url,
         dataType: "xml",
         success: parse
     });
-
 }
 
 function getWarning(url, id) {
@@ -113,18 +111,14 @@ function createPage(id, logged) {
     var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
 
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").append("<a class='link_to_options' href='" + url + "options' data-icon='gear'>Options</a>");
-    var navbarul = $("<ul>").append(hometab).append(historytab);
+    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
+    var navbarul;
 
     if (logged == 'true') {
-<<<<<<< HEAD
         navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
-        navbarul = $("<ul>").append(hometab).append(historytab).append(optionstab);
-=======
-       navbarul = navbarul.append(favouritestab).append(optionstab);
->>>>>>> 1acfe8878ea956982aa4aad9b4fd4abd890a69c9
+        navbarul = $("<ul>").append(hometab).append(historytab);
     }
 
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
@@ -142,7 +136,6 @@ function createPage(id, logged) {
 
 
 function parse(xml) {
-
     if ($(xml).find("list").length != 0) {
         parseList(xml);
     }
@@ -228,10 +221,10 @@ function parseHomepage(xml) {
                     break;
                 case 'list':
                     var titleList = $(this).attr('title');
-                    html = '<li title="' + titleList + '">';
+                    html = '<li data-role="list-divider">';
 
                     if (titleList != undefined)
-                        html += '<a href="">' + titleList + '</a>';
+                        html += titleList;
 
                     html += '</li>';
 
@@ -307,26 +300,31 @@ function parseList(xml) {
         next_url = $(this).attr('next');
         listTitle = $(this).attr('title');
         pageWritable.append("<p>" + listTitle + "</p>");
-        var list = pageWritable.append('<ul class="list_class" data-role="listview" data-inset="false" data-theme="c"></ul>').find('ul');
+        var list = pageWritable.append('<ul class="list_class" data-role="listview" data-inset="false" data-theme="c" data-dividertheme="d"></ul>').find('ul');
 
         $(this).find("item").each(function() {
+
             var attr = $(this).attr('href');
             title = $(this).attr('title');
             var opt = $(this).attr('option');
             if (attr != undefined) {
-                if (title != undefined)
-                    list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() + " </a></li>");
+                if (title != undefined) {
+                    list.append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
+                    list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + " </a></li>");
+                }
                 else
-                    if (opt != undefined)
-                        list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
-                    else
+                if (opt != undefined)
+                    list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
+                else
                     list.append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
             }
             else {
-                if (title != undefined)
-                    list.append("<li class='parse'><p>" + $(this).attr("title") + "</p>" + $(this).text() + "</li>");
+                if (title != undefined) {
+                    list.append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
+                    list.append('<li data-theme="d">' + $(this).text() + '</li>');
+                }
                 else
-                    list.append("<li class='parse'>" + $(this).text() + "</li>");
+                    list.append("<li>" + $(this).text() + "</li>");
             }
 
         });
@@ -336,7 +334,7 @@ function parseList(xml) {
     if (listTitle == "Histórico") {
         page.find('.link_to_history').addClass('ui-btn-active');
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
-    }  else if (listTitle == "Favoritos") {
+    } else if (listTitle == "Favoritos") {
         page.find('.link_to_favourites').addClass('ui-btn-active');
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
@@ -352,20 +350,21 @@ function parseList(xml) {
 
     $.mobile.changePage("#" + page.attr("id"));
 
+<<<<<<< HEAD
     $(".list_class").data("url", next_url);
+
+=======
+    $(".list_class").data("next_url", next_url);
+>>>>>>> a69ff47e32bf74151fadd20a7b1dbc69eef5c9f3
 }
 
 
 $(document).ready(function() {
-<<<<<<< HEAD
-    $('.home_btn').addClass('ui-btn-active');
-=======
-     $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
+    $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
     var pathname = window.location.pathname;
     if (pathname.indexOf('options') != -1) {
         $('.link_to_options').addClass('ui-btn-active');
     }
->>>>>>> 1acfe8878ea956982aa4aad9b4fd4abd890a69c9
 });
 
 $('.link_back').live('click', function() {
@@ -455,15 +454,21 @@ function parseRecord(xml) {
     $(xml).find("record").children().each(function(index, element) {
         var text;
         var title;
+        var label;
         switch (element.nodeName) {
             case 'text':
                 if ($(this).children().size() == 0) {
                     text = $(this).text();
                     title = $(this).attr('title');
-                    if (title == undefined)
+                    label = $(this).attr('label');
+                    if (title == undefined && label != undefined) {
+                        title = label;
+                    }
+                    if (title == undefined) {
                         list.append('<li data-role="list-divider">' + text + '</li>');
+                    }
                     else {
-                        list.append('<li data-role="list-divider">' + title + '</li>')
+                        list.append('<li data-role="list-divider">' + title + '</li>');
                         list.append('<li data-theme="d">' + text + '</li>');
                     }
                 }
@@ -547,6 +552,12 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
+            case 'date':
+                text = $(this).text();
+                label = $(this).attr('label');
+                list.append('<li data-role="list-divider">' + label + '</li>');
+                list.append('<li data-theme="c">' + text + '</li>');
+                break;
 
         }
     });
@@ -555,7 +566,7 @@ function parseRecord(xml) {
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
     var favouriteurl = url + "addfavourite?url=" + recordurl + "&title=" + recordtitle;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mail2.png'/></a>" +
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mailicon3.png'/></a>" +
             "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>"
             + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/favourite.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
@@ -589,10 +600,10 @@ function scroll() {
 }
 
 function next() {
-    if ($(".list_class").data('url') != "") {
+    if ($(".list_class").data('next_url') != "") {
         $.ajax({
             type: "GET",
-            url: $(".list_class").data("url"),
+            url: $(".list_class").data("next_url"),
             dataType: "xml",
             success: moreList
         });
@@ -607,14 +618,18 @@ function moreList(xml) {
             var attr = $(this).attr('href');
             var title = $(this).attr('title');
             if (attr != undefined) {
-                if (title != undefined)
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + "><p>" + $(this).attr("title") + " </p>" + $(this).text() + " </a></li>");
+                if (title != undefined) {
+                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
+                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + " </a></li>");
+                }
                 else
                     $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
             }
             else {
-                if (title != undefined)
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li class='parse'><p>" + $(this).attr("title") + "</p>" + $(this).text() + "</li>");
+                if (title != undefined) {
+                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
+                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li class='parse'>" + $(this).text() + "</li>");
+                }
                 else
                     $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li class='parse'>" + $(this).text() + "</li>");
             }
@@ -622,7 +637,7 @@ function moreList(xml) {
         });
     });
 
-    $(".list_class").data("url", next_url);
+    $(".list_class").data("next_url", next_url);
     $('ul:first', $('.ui-page-active')).listview('refresh');
 }
 
@@ -666,6 +681,7 @@ $("#home_searchform").live('submit', function() {
     searched = replaceAll(searched, " ", "+");
     var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
     getParse(url);
+    $.mobile.ajaxEnabled = false;
     return false;
 });
 
@@ -691,21 +707,12 @@ function callServiceLive(pageIdentification, searchLink) {
 
     var searchForm = page.find("#" + pageIdentification + "_service_search_form");
 
-<<<<<<< HEAD
     searchForm.live('submit', function() {
         var searched = page.find("#" + pageIdentification + "_service_search").val();
         searched = replaceAll(searched, " ", "+");
         var url = searchLink + searched;
         getParse(url);
-        console.log(url);
-=======
-        searchForm.live('submit', function() {
-            var searched = page.find("#" + pageIdentification + "_service_search").val();
-            searched = replaceAll(searched, " ", "+");
-            var url = searchLink + searched;
-            getParse(url);
->>>>>>> 1acfe8878ea956982aa4aad9b4fd4abd890a69c9
-
+        $.mobile.ajaxEnabled = false;
         return false;
     });
 }
