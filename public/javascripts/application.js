@@ -323,10 +323,10 @@ function parseList(xml) {
             else {
                 if (title != undefined) {
                     list.append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
-                    list.append("<li class='parse'>" + $(this).text() + "</li>");
+                    list.append("<li>" + $(this).text() + "</li>");
                 }
                 else
-                    list.append("<li class='parse'>" + $(this).text() + "</li>");
+                    list.append("<li>" + $(this).text() + "</li>");
             }
 
         });
