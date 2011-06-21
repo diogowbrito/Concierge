@@ -113,14 +113,13 @@ class ServiceForwardController < ApplicationController
     @servicename = params[:service].gsub("_", " ")
     @id = params[:id]
     @method = params[:method]
-
+    puts "oi?????"
     address = get_address
     if @method == nil
       @url = address+"services/"+@servicename+"/"+@id
     else
       @url = address+"services/"+@servicename+"/"+@method+"/"+@id
     end
-
 
     service = Service.where(:serviceName => @servicename)
     serviceurl = service[0].url
@@ -152,6 +151,7 @@ class ServiceForwardController < ApplicationController
       end
     end
 
+    puts link
     @doc = Nokogiri::XML(open(link), nil, 'UTF-8')
 
     if @doc.at_css("record") then

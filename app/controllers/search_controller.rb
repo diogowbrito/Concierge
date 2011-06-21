@@ -10,7 +10,7 @@ class SearchController < ApplicationController
     @keyword =  text.gsub("%", "\%").gsub("_", "\_").gsub(" ", "+")
     @start = (params[:start] || '1').to_i
     @end = (params[:end] || '10').to_i
-
+    @next = ""
     @type = params[:type]
     @entity = params[:entity]
     counter = 1
@@ -66,7 +66,6 @@ class SearchController < ApplicationController
     @doc = Nokogiri::XML("<list title='Keyword: "+params[:keyword]+"' logged='"+@logged+"'></list>")
 
     address = get_address
-
     list.each do |result|
 
       homenodes = result.xpath("//home")
@@ -74,8 +73,6 @@ class SearchController < ApplicationController
       namenodes = result.xpath("//name")
       name = namenodes[0].content
       nodes = result.xpath("//item")
-
-      address = get_address
 
       nodes.each do |node|
         if counter >= @start then
@@ -102,10 +99,8 @@ class SearchController < ApplicationController
     end
 
     root = @doc.root()
-    if root['next'] != nil
-      root["next"] = @next
-      end
-      respond_to :xml
+    root['next'] = @next
+    respond_to :xml
 
     else
 

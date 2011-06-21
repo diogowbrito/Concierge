@@ -26,15 +26,19 @@ class ApplicationController < ActionController::Base
     @time_left = (session[:expires_at] - Time.now).to_i
       unless @time_left > 0
         id = session[:user_id]
-        old_user = User.find(id)
-        if old_user.notAnonymus == nil then
-          histories = old_user.histories
-          old_user.destroy
-          histories.each do |h|
-            h.destroy
+        if User.find(id) != nil then
+          old_user = User.find(id)
+          if old_user.notAnonymus == nil then
+            histories = old_user.histories
+            old_user.destroy
+            histories.each do |h|
+              h.destroy
+            end
           end
-        end
+          reset_session
+        else
         reset_session
+        end
       end
     end
   end
