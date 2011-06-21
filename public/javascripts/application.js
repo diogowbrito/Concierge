@@ -323,10 +323,10 @@ function parseList(xml) {
             else {
                 if (title != undefined) {
                     list.append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
-                    list.append("<li>" + $(this).text() + "</li>");
+                    list.append("<li data-theme='d'>" + $(this).text() + "</li>");
                 }
                 else
-                    list.append("<li>" + $(this).text() + "</li>");
+                    list.append("<li data-theme='d'>" + $(this).text() + "</li>");
             }
 
         });
@@ -513,7 +513,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
 
@@ -524,7 +524,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a href="mailto:' + text + '" >' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a href="mailto:' + text + '" >' + text + '</a></li>');
                 }
                 break;
             case 'link':
@@ -535,7 +535,7 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="parse" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a class="parse" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
             case 'external_link':
@@ -546,14 +546,14 @@ function parseRecord(xml) {
                     list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 else {
                     list.append('<li data-role="list-divider">' + title + '</li>');
-                    list.append('<li data-theme="c"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
+                    list.append('<li data-theme="d"><a class="external_link" target="_blank" href="' + attr + '">' + text + '</a></li>');
                 }
                 break;
             case 'date':
                 text = $(this).text();
                 label = $(this).attr('label');
                 list.append('<li data-role="list-divider">' + label + '</li>');
-                list.append('<li data-theme="c">' + text + '</li>');
+                list.append('<li data-theme="d">' + text + '</li>');
                 break;
 
         }
