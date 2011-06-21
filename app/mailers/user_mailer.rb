@@ -10,8 +10,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => "#{user.userName} <#{user.email}>", :subject => "Registered")
   end
 
-  def sendres(user, url)
+  def sendres(user, url, host)
 
+  @host = host
   @doc = Nokogiri::XML(open(url), nil, 'UTF-8')
   @newdoc = Nokogiri::HTML("<div></div>")
   tempdoc = Nokogiri::HTML("<div></div>")
