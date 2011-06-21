@@ -15,14 +15,12 @@ function getHomepage(url) {
 }
 
 function getParse(url) {
-
     return $.ajax({
         type: "GET",
         url: url,
         dataType: "xml",
         success: parse
     });
-
 }
 
 function getWarning(url, id) {
@@ -138,7 +136,6 @@ function createPage(id, logged) {
 
 
 function parse(xml) {
-
     if ($(xml).find("list").length != 0) {
         parseList(xml);
     }
@@ -306,6 +303,7 @@ function parseList(xml) {
         var list = pageWritable.append('<ul class="list_class" data-role="listview" data-inset="false" data-theme="c" data-dividertheme="d"></ul>').find('ul');
 
         $(this).find("item").each(function() {
+
             var attr = $(this).attr('href');
             title = $(this).attr('title');
             var opt = $(this).attr('option');
@@ -352,7 +350,7 @@ function parseList(xml) {
 
     $.mobile.changePage("#" + page.attr("id"));
 
-    $(".list_class").data("url", next_url);
+    $(".list_class").data("next_url", next_url);
 }
 
 
@@ -597,10 +595,10 @@ function scroll() {
 }
 
 function next() {
-    if ($(".list_class").data('url') != "") {
+    if ($(".list_class").data('next_url') != "") {
         $.ajax({
             type: "GET",
-            url: $(".list_class").data("url"),
+            url: $(".list_class").data("next_url"),
             dataType: "xml",
             success: moreList
         });
@@ -634,7 +632,7 @@ function moreList(xml) {
         });
     });
 
-    $(".list_class").data("url", next_url);
+    $(".list_class").data("next_url", next_url);
     $('ul:first', $('.ui-page-active')).listview('refresh');
 }
 
@@ -678,6 +676,7 @@ $("#home_searchform").live('submit', function() {
     searched = replaceAll(searched, " ", "+");
     var url = "http://" + document.domain + ":" + location.port + "/" + "search?keyword=" + searched;
     getParse(url);
+    $.mobile.ajaxEnabled = false;
     return false;
 });
 
@@ -708,7 +707,7 @@ function callServiceLive(pageIdentification, searchLink) {
         searched = replaceAll(searched, " ", "+");
         var url = searchLink + searched;
         getParse(url);
-
+        $.mobile.ajaxEnabled = false;
         return false;
     });
 }

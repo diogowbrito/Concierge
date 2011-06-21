@@ -64,7 +64,6 @@ class SearchController < ApplicationController
     if itemcounter != 1 then
 
     @doc = Nokogiri::XML("<list title='Keyword: "+params[:keyword]+"' logged='"+@logged+"'></list>")
-
     address = get_address
 
     list.each do |result|
@@ -74,8 +73,6 @@ class SearchController < ApplicationController
       namenodes = result.xpath("//name")
       name = namenodes[0].content
       nodes = result.xpath("//item")
-
-      address = get_address
 
       nodes.each do |node|
         if counter >= @start then
@@ -103,8 +100,10 @@ class SearchController < ApplicationController
 
     root = @doc.root()
     if root['next'] != nil
+
       root["next"] = @next
-      end
+      else root["next"] = @next
+    end
       respond_to :xml
 
     else
