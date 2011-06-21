@@ -12,7 +12,8 @@ class UsersController < ApplicationController
       @user[:activateCode] = @rand
       @user[:notAnonymus] = "yes"
       @user.save
-      UserMailer.registration_confirmation(@user, @rand).deliver
+      @adress = get_address
+      UserMailer.registration_confirmation(@user, @rand, @adress).deliver
       redirect_to root_url
     else
       render "new"
@@ -178,7 +179,9 @@ class UsersController < ApplicationController
 
       @user = User.find(session[:user_id])
 
-      UserMailer.sendres(@user, @url).deliver
+      @adress = get_address
+
+      UserMailer.sendres(@user, @url, @adress).deliver
       @result = "sucess"
 
     else
