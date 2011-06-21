@@ -1,4 +1,6 @@
-<% address = get_address %>
+<% port = request.port
+   host = request.host
+   address = "http://"+host.to_s+":"+port.to_s+"/" %>
 <p>Hello <%= @user.userName %>,</p>
 
 <p>Thank you for registering!</p>
