@@ -376,6 +376,8 @@ $('.link_to_homepage').live('click', function() {
     return true;
 });
 
+var map = null;
+var ctaLayer = null;
 function parseMap(xml) {
 
     var logged;
@@ -389,7 +391,10 @@ function parseMap(xml) {
     var pageWritable = $("[data-role=content]", page.get(0));
     var title = $(xml).find("map").attr('title');
     var mapId = "map_canvas" + pageRandomId;
-    pageWritable.append("<div id=" + mapId + " style='height:380px;width:520px;'></div>");
+    var height = $(window).height();
+    var width = $(window).width();
+
+    pageWritable.append("<div id=" + mapId + " style='height:"+height+"px;width:"+width+"px;' class='map'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
@@ -419,14 +424,26 @@ function parseMap(xml) {
         mapTypeId: google.maps.MapTypeId.SATELLITE
     }
 
-    var map = new google.maps.Map(document.getElementById(mapId), myOptions);
-    var ctaLayer = new google.maps.KmlLayer(kmlUrl);
-    ctaLayer.setMap(map);
-
 
     $.mobile.changePage("#" + page.attr("id"));
+
+
+    map = new google.maps.Map(document.getElementById(mapId), myOptions);
+    ctaLayer = new google.maps.KmlLayer(kmlUrl);
+    ctaLayer.setMap(map);
+
     page.find('.ui-content').css({'padding':'0'});
 }
+
+$('div[data-role=page]').live('pagehide',function(event, ui){
+    var page = $(this).find('div.map');
+    if (page.length != 0) {
+        map = null;
+    }
+
+});
+
+
 
 function parseRecord(xml) {
 
