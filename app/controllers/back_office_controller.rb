@@ -2,7 +2,7 @@ class BackOfficeController < ApplicationController
 
   def newservice
 
-    respond_to :html
+    render :layout => false
 
   end
 
@@ -83,7 +83,7 @@ class BackOfficeController < ApplicationController
       Competence.create :competenceType => c[2], :competenceUrl => serviceurl+c[0], :description => c[1], :service_id => id
     end
 
-    respond_to :html
+    render :layout => false
 
   end
 
@@ -92,7 +92,7 @@ class BackOfficeController < ApplicationController
     @services = Service.all
     @competences = Competence.all
 
-    respond_to :html
+    render :layout => false
 
   end
 
@@ -123,9 +123,7 @@ class BackOfficeController < ApplicationController
       tag.destroy
     end
 
-    respond_to do |format|
-      format.html { redirect_to(:action => 'listservices') }
-    end
+    redirect_to(:action => 'listservices')
 
   end
 

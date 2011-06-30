@@ -1,46 +1,61 @@
-<h1>Listing services</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Concierge Admnistrator Painel</title>
 
-<table>
-  <tr>
-    <th>id</th>
-    <th>Servicename</th>
-    <th>Provider</th>
-    <th>Type</th>
-    <th>Ranking</th>
-    <th>Url</th>
-    <th></th>
-  </tr>
+</head>
+<body>
+    <div id="web_homepage" data-role="page" data-position="inline" data-theme="a">
+        <div id="content" data-role="content">
+            <h1>Listing services</h1>
 
-<% @services.each do |service| %>
-  <tr>
-    <td><%= service.id %></td>
-    <td><%= service.serviceName %></td>
-    <td><%= service.provider %></td>
-    <td><%= service.servicetype %></td>
-    <td><%= service.ranking %></td>
-    <td><%= service.url %></td>
-    <td><%= link_to 'Destroy', :action => 'destroyservice', :id => service.id %></td>
-  </tr>
-<% end %>
-</table>
+            <table>
+              <tr>
+                <th>id</th>
+                <th>Servicename</th>
+                <th>Provider</th>
+                <th>Type</th>
+                <th>Ranking</th>
+                <th>Url</th>
+                <th></th>
+              </tr>
 
-<h1>Listing competences</h1>
+            <% @services.each do |service| %>
+              <tr>
+                <td><%= service.id %></td>
+                <td><%= service.serviceName %></td>
+                <td><%= service.provider %></td>
+                <td><%= service.servicetype %></td>
+                <td><%= service.ranking %></td>
+                <td><%= service.url %></td>
+                <td><%= link_to 'Destroy', :action => 'destroyservice', :id => service.id %></td>
+              </tr>
+            <% end %>
+            </table>
 
-<table>
-  <tr>
-    <th>Service Id</th>
-    <th>Competence Type</th>
-    <th>Competence URL</th>
-    <th>Description</th>
-  </tr>
+            <h1>Listing competences</h1>
 
-<% @competences.each do |competence| %>
-  <tr>
-    <td><%= competence.service_id %></td>
-    <td><%= competence.competenceType %></td>
-    <td><%= competence.competenceUrl %></td>
-    <td><%= competence.description %></td>
-  </tr>
-<% end %>
-</table>
-<p><%= link_to 'New Service', :action => 'newservice'%></p>
+            <table>
+              <tr>
+                <th>Service Id</th>
+                <th>Competence Type</th>
+                <th>Competence URL</th>
+                <th>Description</th>
+              </tr>
+
+            <% @competences.each do |competence| %>
+              <tr>
+                <td><%= competence.service_id %></td>
+                <td><%= competence.competenceType %></td>
+                <td><%= competence.competenceUrl %></td>
+                <td><%= competence.description %></td>
+              </tr>
+            <% end %>
+            </table>
+            <p><%= link_to 'New Service', :action => 'newservice'%></p>
+        </div>
+    </div>
+</body>
+</html>
