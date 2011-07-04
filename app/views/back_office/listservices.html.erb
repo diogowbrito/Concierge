@@ -35,7 +35,7 @@
             <% end %>
             </table>
 
-            <h1>Listing competences</h1>
+            <h1>Listing Competences</h1>
 
             <table>
               <tr>
@@ -55,6 +55,68 @@
             <% end %>
             </table>
             <p><%= link_to 'New Service', :action => 'newservice'%></p>
+
+            <h1>Listing Users</h1>
+
+            <table>
+              <tr>
+                <th>User Id</th>
+                <th>UserName</th>
+                <th>Email</th>
+              </tr>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.userName %></td>
+                <td><%= user.email %></td>
+                <td><%= link_to 'Destroy', :action => 'destroyuser', :id => user.id %></td>
+              </tr>
+            <% end %>
+            </table>
+
+            <h1>Listing Favourites</h1>
+
+            <table>
+              <tr>
+                <th>User Id</th>
+                <th>Favourite Id</th>
+                <th>URL</th>
+                <th>Title</th>
+              </tr>
+            <% @favorites.each do |favorite|
+                favorite.each do |f|%>
+              <tr>
+                <td><%= f.user_id %></td>
+                <td><%= f.id %></td>
+                <td><%= f.url %></td>
+                <td><%= f.title %></td>
+                <td><%= link_to 'Destroy', :action => 'destroyfavourite', :id => f.id %></td>
+              </tr>
+            <% end end %>
+            </table>
+
+            <h1>Listing Histories</h1>
+
+            <table>
+              <tr>
+                <th>User Id</th>
+                <th>History Id</th>
+                <th>Date</th>
+                <th>URL</th>
+                <th>Title</th>
+              </tr>
+            <% @histories.each do |history|
+                history.each do |h|%>
+              <tr>
+                <td><%= h.user_id %></td>
+                <td><%= h.id %></td>
+                <td><%= h.time.strftime("%m/%d/%Y %H:%M") %></td>
+                <td><%= h.url %></td>
+                <td><%= f.description %></td>
+              </tr>
+            <% end end %>
+            </table>
+
         </div>
     </div>
 </body>
