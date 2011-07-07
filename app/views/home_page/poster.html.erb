@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Concierge</title>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+  <link rel="apple-touch-icon" href="images/buttons/concierge-icon.jpg" />
+
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag "jquery-1.6", "login", "application", "jquery.mobile-1.0a4.1" %>
+  <%= csrf_meta_tag %>
+
+
+</head>
+<body>
+
+<div id="web_homepage" data-role="page" data-position="inline" data-theme="a">
+
+  <div data-role="header" data-position="fixed">
+
+   <h1 id="logo" class="ui-title">ConciergeFCT</h1>
+   <a id="login" class="ui-btn-right" data-role="button" data-icon="gear">Logout</a>
+
+  </div>
+
+
+  <div id="content" data-role="content">
+    <ul class="list_class" data-role="listview" data-inset="false" data-theme="c" data-dividertheme="d">
+        <li data-role="list-divider">O que é?</li>
+        <li data-theme="d">O ConciergeFCT é uma plataforma de apoio a estudantes da FCT que agrega vários serviços,
+           desenhada para dispositivos móveis.</li>
+        <li data-role="list-divider">Objectivos principais:</li>
+        <li data-theme="d">Responder à maior parte dos pedidos e necessidades do aluno relativas à faculdade.</li>
+        <li data-theme="d">Interacção simples e intuitiva necessitando o utilizador de poucos passos para chegar à informação que pretende e sendo esta lhe apresentada de forma clara e sintética.</li>
+        <li data-theme="d">Qualidade do serviço melhorada com o registo do utilizador, ficando este com acesso a um maior número de funcionalidades.</li>
+        <li data-role="list-divider">Funcionalidades:</li>
+        <li data-theme="d">Acesso às páginas iniciais, listagens e recursos de cada serviço.</li>
+        <li data-theme="d">Integração entre serviços.</li>
+        <li data-theme="d">Procura global em todos os serviços.</li>
+        <li data-theme="d">Histórico dos recursos visitados.</li>
+        <li data-theme="d">Votar num recurso e 'ratings' de serviços.</li>
+        <li data-theme="d">Enviar um recurso para o email (apenas para os utilizadores registados).</li>
+        <li data-theme="d">Adição, acesso e remoção de recursos favoritos (apenas para os utilizadores registados).</li>
+        <li data-theme="d">BackOffice intuitivo e prático para o administrador da plataforma.</li>
+        <li data-role="list-divider">Serviços base:</li>
+        <li data-theme="d">PessoasFCT que oferece informação sobre os professores da faculdade.</li>
+        <li data-theme="d">CursosCadeiras que oferece informação sobre os cursos e as cadeiras da faculdade.</li>
+        <li data-theme="d">OrgUnits que oferece informação sobre os órgãos, departamentos e serviços da faculdade.</li>
+        <li data-theme="d">TransportesFCT que oferece informação sobre os transportes para sair da faculdade.</li>
+        <li data-theme="d">GeoFCT que oferece informação geográfica apresentada com o Google Earth sobre os vários edifícios e salas da faculdade.</li>
+        <li data-theme="d">MeteoFCT que oferece informação meteorológica sobre a área onde se situa a faculdade e sobre a praia da Costa da Caparica.</li>
+        <li data-theme="d">AjudaCaloiros que oferece informação que pode ajudar um caloiro nos primeiros passos na faculdade.</li>
+        <li data-role="list-divider">Grupo 6 - Diogo Brito, João Horta, Pedro Glória</li>
+        <li data-role="list-divider">FCTUNL</li>
+    </ul>
+  </div>
+
+
+  <div data-role="footer" data-id="navbar" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="" class="home_btn link_to_homepage" data-icon="home">Home</a></li>
+        <li ><a class="parse link_to_history" data-icon="grid">History</a></li>
+        <li ><a class="parse link_to_favourites" data-icon="star">Favourites</a></li>
+        <li ><a class=" link_to_options" data-icon="gear">Options</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+ </div>
+
+</body>
+
+<script type="text/javascript">
+
+
+
+</script>
+</html>

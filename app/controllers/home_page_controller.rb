@@ -18,4 +18,10 @@ class HomePageController < ApplicationController
       format.xml  { render :xml => @services }
     end
   end
+
+  def poster
+
+    render :layout => false
+
+  end
 end
