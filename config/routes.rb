@@ -9,7 +9,8 @@ Concierge::Application.routes.draw do
 
   #Concierge Defaults
 
-  root :to => "HomePage#index"
+  root :to => "HomePage#poster"
+  #root :to => "HomePage#index"
   match "index" => "HomePage#index"
   match "posterbackground" => "HomePage#poster"
   match "search" => "Search#search", :defaults => { :format => :xml}
