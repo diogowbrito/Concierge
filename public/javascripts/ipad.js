@@ -124,7 +124,7 @@ function createPage(id, logged) {
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
 
     <!-- Draw footer and append nav bar-->
-    var footer = $('<div>').attr("data-role", "footer").attr("data-position","fixed").attr("data-id", "navbar").append(navbar);
+    var footer = $('<div>').attr("data-role", "footer").attr("data-id", "navbar").append(navbar);
 
 
     <!-- Draw the final page-->
@@ -149,7 +149,6 @@ function parse(xml) {
     }
 }
 
-//    navigator.userAgent.match(/iPhone/i)
 
 function parseHomepage(xml) {
     var logged;
@@ -322,7 +321,7 @@ function parseList(xml) {
                 if (opt != undefined)
                     list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
                 else
-                    list.append('<li>' + "<a class='parse' href='" + $(this).attr('href') + "'>" + $(this).text() + "</a></li>");
+                    list.append('<li>' + "<a data-panel='main' class='parse' href='" + $(this).attr('href') + "'>" + $(this).text() + "</a></li>");
             }
             else {
                 if (title != undefined) {
@@ -660,11 +659,7 @@ function moreList(xml) {
 }
 
 $('#serviceLink').live('click', function(   ) {
-    event.stopPropagation();
-    event.preventDefault();
-    $.mobile.pageLoading();
     getHomepage($(this).attr('href'));
-    $.mobile.ajaxEnabled = false;
 });
 
 $('.parse').live('click', function(event) {

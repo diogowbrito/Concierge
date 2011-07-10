@@ -1,0 +1,20 @@
+
+#service_table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#serviceLink { }
+
+td {
+    text-align: center;
+}
+
+.service_name {
+    font-family: "Arial", sans-serif;
+    font-size: 13px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    position: relative;
+    top: -13px;
+}

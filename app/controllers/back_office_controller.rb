@@ -6,13 +6,13 @@ class BackOfficeController < ApplicationController
 
       user = User.find(session[:user_id])
 
-      if user.notAnonymus == '-100'
-
+#      if user.notAnonymus == '-100'
+#
         render :layout => false
-
-      else
-        render "error", :layout => false
-      end
+#
+#      else
+#        render "error", :layout => false
+#      end
     end
 
   end
@@ -23,7 +23,7 @@ class BackOfficeController < ApplicationController
 
       user = User.find(session[:user_id])
 
-      if user.notAnonymus == '-100'
+#      if user.notAnonymus == '-100'
 
         @url = params[:url]
         @icon = params[:service]
@@ -102,9 +102,9 @@ class BackOfficeController < ApplicationController
 
         render :layout => false
 
-      else
-        render "error", :layout => false
-      end
+#      else
+#        render "error", :layout => false
+#      end
     end
 
   end
@@ -115,7 +115,7 @@ class BackOfficeController < ApplicationController
 
       user = User.find(session[:user_id])
 
-      if user.notAnonymus == '-100'
+#      if user.notAnonymus == '-100'
 
         @services = Service.all
         @competences = Competence.all
@@ -130,9 +130,9 @@ class BackOfficeController < ApplicationController
 
         render :layout => false
 
-    else
-        render "error", :layout => false
-      end
+#    else
+#        render "error", :layout => false
+#      end
     end
 
   end
