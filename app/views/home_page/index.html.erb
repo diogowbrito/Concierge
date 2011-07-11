@@ -6,7 +6,7 @@
 <table id="service_table">
   <tbody>
   <% counter = 0 %>
-  <% if mobile_agent? then %>
+  <% if mobile? then %>
       <% @services.each do |service| %>
           <% if counter % 3 == 0 then %>
               <tr>
@@ -36,7 +36,8 @@
             <% if service.icon_file_name == nil %>
                 <img src="./images/buttons/letra c1.png" id="serviceLink" href=<%= address +"services/"+service.serviceName.gsub(" ", "_")+"/index" %>>
             <% else %>
-                <img data-panel="main" src=<%= "./images/buttons/"+service.icon_file_name %> id='serviceLink'
+                <img data-panel="main"
+                     src=<%= "./images/buttons/"+service.icon_file_name %> id='serviceLink'
                 href=<%= address +"services/"+service.serviceName.gsub(" ", "_")+"/index" %>>
             <% end %>
             <p class="service_name"><%= service.serviceName %></p>

@@ -83,11 +83,37 @@ function getFavourite(url, id) {
 
 }
 
+
 function createPage(id, logged) {
 
-    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme", "a");
+    var page = $('<div>').attr("data-role", "page").attr("data-position", "inline").attr("data-theme", "a").attr("id", id).attr("data-url", id);
+    page.addClass("ui-grid-a");
+    var gridA = $('<div>').addClass("ui-block-a");
+
+    var headerGridA = $('<div>').attr("data-role", "header").attr("data-backbtn", "false");
+    var headerBodyGridA = "<h1 id='logo' class='ui-title'>Menu</h1>";
+    var headerGridFinal = headerGridA.append(headerBodyGridA);
+
+    var contentGrid = $('<div>').attr("data-role", "content").attr("id", "contentMenu");
+
+    var footerGridA = $('<div>').attr("data-role", "footer").attr("data-position", "fixed").attr("data-id", "navbar");
+    var navbarGridA = $('<div>').attr("data-role", "navbar");
+
+    var ulGrid = $('<ul>').addClass("ui-grid-b");
+    var liGrid = '<li class="ui-block-a"><a data-icon="info" href="#">Pedro Glória</a></li>' +
+            '<li class="ui-block-b"><a data-icon="info" href="#">João Horta</a></li>' +
+            '<li class="ui-block-c"><a data-icon="info" href="#">Diogo Brito</a></li>';
+    var listGrid = ulGrid.append(liGrid);
+    var navBarGridFinal = navbarGridA.append(listGrid);
+    var footerFinal = footerGridA.append(navBarGridFinal);
+
+    var gridAFinal = gridA.append(headerGridFinal).append(contentGrid).append(footerFinal);
+
     var url = "http://" + document.domain + ":" + location.port + "/";
     var log;
+
+    var gridB = $('<div>').addClass("ui-block-b");
+
     <!-- Draw Header-->
     if (logged == 'true')
         log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
@@ -99,10 +125,10 @@ function createPage(id, logged) {
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
     var searchform = $('<form>').attr("id", "search_form").append(searchformbody);
-    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_search").attr("style", "text-align:center; visibility:hidden").append(searchform);
+    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_search").attr("style", "text-align:center; visibility:hidden; display: none;").append(searchform);
 
     <!-- Draw Content-->
-    var content = $('<div>').attr("data-role", "content");
+    var content = $('<div>').attr("data-role", "content").attr("id", "content");
 
     <!-- Draw Footer nav bar-->
 
@@ -124,16 +150,17 @@ function createPage(id, logged) {
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
 
     <!-- Draw footer and append nav bar-->
-    var footer = $('<div>').attr("data-role", "footer").attr("data-id", "navbar").append(navbar);
+    var footer = $('<div>').attr("data-role", "footer").attr("data-id", "navbar").attr("data-position", "fixed").append(navbar);
 
 
     <!-- Draw the final page-->
-    var finalpage = page.append(header).append(content).append(search).append(footer);
+    var finalGridB = gridB.append(header).append(content).append(search).append(footer);
 
+    var finalpagetemp = gridAFinal.add(finalGridB);
+    var finalpage = page.append(finalpagetemp);
 
-    return $(finalpage)
+    return $(finalpage);
 }
-
 
 function parse(xml) {
     if ($(xml).find("list").length != 0) {
@@ -149,7 +176,6 @@ function parse(xml) {
     }
 }
 
-
 function parseHomepage(xml) {
     var logged;
     $(xml).find("record").each(function() {
@@ -158,9 +184,9 @@ function parseHomepage(xml) {
 
     var bla = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("homepage" + bla, logged);
+//    var page = menu.add(pageMain);
 
-    var pageWritable = $("[data-role=content]", page.get(0));
-
+    var pageWritable = page.find('#content');
     var list;
     var titleold;
     var title;
@@ -220,7 +246,7 @@ function parseHomepage(xml) {
                     }
                     break;
                 case 'link':
-                    list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
+                    list.append('<li><a data-panel="main"  class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
                 case 'list':
                     var titleList = $(this).attr('title');
@@ -258,12 +284,9 @@ function parseHomepage(xml) {
 
         var homeUrl = document.location;
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
-
-        page.page();
+       page.page();
 
         $.mobile.pageContainer.append(page);
-
-
         <!-- Add the search listener -->
         callServiceLive("homepage" + bla, $(xml).find("search").text());
 
@@ -273,15 +296,13 @@ function parseHomepage(xml) {
 
         var homeUrl = document.location;
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+      page.page();
 
-        page.page();
-
-        $.mobile.pageContainer.append(page);
+      $.mobile.pageContainer.append(page);
 
     }
 
     $.mobile.changePage("#" + page.attr("id"));
-
 }
 
 function parseList(xml) {
@@ -294,9 +315,9 @@ function parseList(xml) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
 
     var page = createPage("list" + pageRandomId, logged);
-    page.attr("class", "list_page");
+    page.addClass("list_page");
 
-    var pageWritable = $("[data-role=content]", page.get(0));
+    var pageWritable = page.find('#content');
 
 
     var next_url;
@@ -344,15 +365,10 @@ function parseList(xml) {
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
 
-
+    <!-- Add the search listener -->
     page.page();
 
-
     $.mobile.pageContainer.append(page);
-
-    <!-- Add the search listener -->
-
-
     $.mobile.changePage("#" + page.attr("id"));
 
     $(".list_class").data("next_url", next_url);
@@ -416,6 +432,7 @@ function parseMap(xml) {
 
     page.page();
     $.mobile.pageContainer.append(page);
+//     $("#main").append(page);
 
     var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937);
     var myOptions = {
@@ -460,7 +477,9 @@ function parseRecord(xml) {
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("record" + pageRandomId, logged);
-    var pageWritable = $("[data-role=content]", page.get(0));
+
+//    var pageWritable = $("[data-role=content]", page.get(0));
+    var pageWritable = page.find('#content');
     var titleold;
     var recordtitle = $(xml).find("record").attr('title');
     var recordurl = $(xml).find("record").attr('url');
@@ -591,7 +610,7 @@ function parseRecord(xml) {
 
     page.page();
     $.mobile.pageContainer.append(page);
-
+//      $("#main").append(page);
     <!-- Add the search listener -->
 
     $.mobile.changePage("#" + page.attr("id"));

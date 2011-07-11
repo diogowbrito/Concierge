@@ -1348,7 +1348,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .ui-grid-solo .ui-block-a { width: 100%; float: none; }
 
 /* grid a: 50/50 */
-.ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 50%; }
+.ui-grid-a .ui-block-a { width: 25%; }
+.ui-grid-a .ui-block-b { width: 75%; }
+
 .ui-grid-a .ui-block-a { clear: left; }
 
 /* grid b: 33/33/33 */

@@ -18,3 +18,11 @@ td {
     position: relative;
     top: -13px;
 }
+
+#content {
+    height: 542px;
+}
+
+#contentMenu {
+    height: 542px;
+}

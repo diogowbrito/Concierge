@@ -21,7 +21,7 @@
       <%= javascript_include_tag "application" %>
   <% else %>
       <%= javascript_include_tag "ipad" %>
-      <%= javascript_include_tag "jquery.mobile.splitview" %>
+      <!--<%= javascript_include_tag "jquery.mobile.splitview" %>-->
       <%= javascript_include_tag "jquery.mobile-1.0a4.1" %>
   <% end %>
 
@@ -76,29 +76,34 @@
     </div>
 
 <% else %>
-    <div data-role="panel" data-id="menu">
-      <div data-role="page" data-position="inline" data-theme="a">
 
-        <div data-role="header" data-backbtn="false">
-          <h1 id="logo" class="ui-title">Menu</h1>
+    <div data-role="page" id="web_homepage" data-position="inline" data-theme="a" class="ui-grid-a">
+
+      <div class="ui-block-a">
+
+         <div data-role="header">
+            <h1 id="logo" class="ui-title">Menu</h1>
+         </div>
+
+        <div data-role="content" id="contentMenu">
+
         </div>
 
-        <div data-role="content">
-
-        </div>
-
-        <div data-role="footer">
+        <div data-role="footer" data-position="fixed" data-id="navbar">
+          <div data-role="navbar">
+              <ul class="ui-grid-b">
+                <li class="ui-block-a"><a data-icon="info" href="#">Pedro Glória</a></li>
+                <li class="ui-block-b"><a data-icon="info" href="#">João Horta</a></li>
+                <li class="ui-block-c"><a data-icon="info" href="#">Diogo Brito</a></li>
+              </ul>
+          </div>
 
         </div>
 
       </div>
-    </div>
 
-    <div data-role="panel" data-id="main">
-
-      <div id="web_homepage" data-backbtn="false" data-role="page" data-position="inline" data-theme="a">
-
-        <div data-role="header" data-position="fixed">
+      <div class="ui-block-b">
+        <div data-role="header">
 
           <h1 id="logo" class="ui-title">Concierge</h1>
 
@@ -111,11 +116,11 @@
         </div>
 
 
-        <div data-role="content">
+        <div data-role="content" id="content">
           <%= yield %>
         </div>
 
-        <div data-role="footer" data-id="navbar">
+        <div data-role="footer" data-position="fixed" data-id="navbar">
           <div data-role="navbar">
             <ul>
               <li><a href="" class="home_btn link_to_homepage" data-icon="home">Home</a></li>
@@ -127,20 +132,15 @@
                   </li>
                   <li><a class=" link_to_options" href='<%= address + "options" %>' data-icon="gear">Options</a></li>
               <% end %>
-
-
             </ul>
           </div>
-
         </div>
-       </div>
+
+      </div>
+
     </div>
+
 <% end %>
 
 </body>
-
-<script type="text/javascript">
-
-
-</script>
 </html>
