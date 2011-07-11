@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    puts params[:user]
     @user = User.new(params[:user])
+
     if @user.save
       @rand = rand(20000)
       @user[:activateCode] = @rand
