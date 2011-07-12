@@ -667,34 +667,6 @@ $('.register_user_btn').live('click', function(event) {
     return false;
 });
 
-$('.link_to_options').live('click', function() {
-    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    $('.link_to_history').removeClass('ui-btn-active');
-    $('.link_to_options').removeClass('ui-btn-active');
-
-    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("options" + pageRandomId, false);
-    var pageWritable = $("[data-role=content]", page.get(0));
-
-    $.get(optionsURL, function(data) {
-        pageWritable.append(data);
-    });
-
-    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
-
-    page.page();
-    $.mobile.pageContainer.append(page);
-
-    $('#options' + pageRandomId).find('.ui-btn-right').hide();
-
-
-    $.mobile.changePage("#" + page.attr("id"));
-
-    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
-
-    return true;
-});
-
 $('.login_btn').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
