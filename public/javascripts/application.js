@@ -3,6 +3,9 @@
 
 var loginURL = "http://" + document.domain + ":" + location.port + "/login";
 var registerURL =  "http://" + document.domain + ":" + location.port + "/register";
+var optionsURL =  "http://" + document.domain + ":" + location.port + "/options";
+
+
 
 function getHomepage(url) {
 
@@ -25,17 +28,6 @@ function getParse(url) {
         success: parse
     });
 }
-
-function getLoginPage() {
-    $.ajax({
-      type: "GET",
-      url: loginURL,
-      success: success,
-      dataType: dataType
-    });
-}
-
-
 
 function getWarning(url, id) {
 
@@ -105,7 +97,7 @@ function createPage(id, logged) {
     <!-- Draw Header-->
     if (logged == 'true')
         log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
-    else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
+    else log = "<a href='' class='ui-btn-right login_btn' data-icon='gear'>Login</a>";
     var headerbody = log +
             "<h1 id='logo' class='ui-title link_to_homepage'>Concierge</h1>";
 
@@ -125,7 +117,7 @@ function createPage(id, logged) {
     var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
 
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
+    var optionstab = $("<li>").append("<a class='link_to_options' href='' data-icon='gear'>Options</a>");
     var navbarul;
 
     if (logged == 'true') {
@@ -504,9 +496,9 @@ function parseRecord(xml) {
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
     var favouriteurl = url + "addfavourite?url=" + recordurl + "&title=" + recordtitle;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img id='serviceLink' src='/images/buttons/mailicon3.png'/></a>" +
-            "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img id='serviceLink' src='/images/buttons/like.png'/></a>"
-            + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img id='serviceLink' src='/images/buttons/favourite.png'/></a>";
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img class='imageLink' src='/images/buttons/mailicon3.png'/></a>" +
+            "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img class='imageLink' src='/images/buttons/like.png'/></a>"
+            + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img class='imageLink' src='/images/buttons/favourite.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
     pageWritable.append(mail_button).append(paragraph);
 
@@ -589,10 +581,8 @@ $(document).ready(function() {
 $('#login_form_btn').live('click', function() {
      url = '/sessions';
 
-
     var user = $(this).parent().parent().find('#username').val();
     var pwd = $(this).parent().parent().find('#password').val();
-
 
      var msgP = $(this).parent().parent().parent().find('#msg');
 
@@ -638,8 +628,6 @@ $('#register_form_btn').live('click', function() {
 });
 
 $('.create_user_btn').live('click', function(event) {
-    $.mobile.pageLoading();
-
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("register" + pageRandomId, false);
     var pageWritable = $("[data-role=content]", page.get(0));
@@ -659,8 +647,6 @@ $('.create_user_btn').live('click', function(event) {
 });
 
 $('.register_user_btn').live('click', function(event) {
-    $.mobile.pageLoading();
-
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("register" + pageRandomId, false);
     var pageWritable = $("[data-role=content]", page.get(0));
@@ -681,9 +667,35 @@ $('.register_user_btn').live('click', function(event) {
     return false;
 });
 
-$('.login_btn').live('click', function() {
-    $.mobile.pageLoading();
+$('.link_to_options').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
 
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("options" + pageRandomId, false);
+    var pageWritable = $("[data-role=content]", page.get(0));
+
+    $.get(optionsURL, function(data) {
+        pageWritable.append(data);
+    });
+
+    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#options' + pageRandomId).find('.ui-btn-right').hide();
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+
+    return true;
+});
+
+$('.login_btn').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
     $('.link_to_options').removeClass('ui-btn-active');
@@ -698,7 +710,7 @@ $('.login_btn').live('click', function() {
 
     page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
 
-     page.page();
+    page.page();
     $.mobile.pageContainer.append(page);
 
     $('#login' + pageRandomId).find('.ui-btn-right').hide();

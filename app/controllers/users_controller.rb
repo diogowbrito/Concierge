@@ -299,6 +299,7 @@ class UsersController < ApplicationController
 
   def options
     respond_to :html
+  #  render :layout => false
   end
 
   def manageaccount
