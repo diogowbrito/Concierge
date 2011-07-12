@@ -26,3 +26,11 @@ td {
 #contentMenu {
     height: 542px;
 }
+
+#paginaA {
+    width: 25%;
+}
+
+#paginaB {
+    width: 75%;
+}

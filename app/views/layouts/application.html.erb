@@ -11,9 +11,6 @@
   <%= stylesheet_link_tag "iphone", :media => "only screen and (max-width: 480px)" %>
   <%= stylesheet_link_tag "ipad", :media => "only screen and (min-width: 481px)" %>
   <%= stylesheet_link_tag "jquery.mobile-1.0a4.1" %>
-  <%= stylesheet_link_tag "jquery.mobile.splitview", :media => "only screen and (min-width: 481px)" %>
-  <!--<%= stylesheet_link_tag "jquery.mobile.scrollview", :media => "only screen and (min-width: 481px)" %>-->
-  <!--<%= stylesheet_link_tag :all %>-->
 
   <%= javascript_include_tag "jquery-1.6" %>
   <% if mobile? then %>
@@ -21,7 +18,6 @@
       <%= javascript_include_tag "application" %>
   <% else %>
       <%= javascript_include_tag "ipad" %>
-      <!--<%= javascript_include_tag "jquery.mobile.splitview" %>-->
       <%= javascript_include_tag "jquery.mobile-1.0a4.1" %>
   <% end %>
 
@@ -79,30 +75,19 @@
 
     <div data-role="page" id="web_homepage" data-position="inline" data-theme="a" class="ui-grid-a">
 
-      <div class="ui-block-a">
+      <div class="ui-block-a" id="paginaA">
 
          <div data-role="header">
             <h1 id="logo" class="ui-title">Menu</h1>
          </div>
 
         <div data-role="content" id="contentMenu">
-
-        </div>
-
-        <div data-role="footer" data-position="fixed" data-id="navbar">
-          <div data-role="navbar">
-              <ul class="ui-grid-b">
-                <li class="ui-block-a"><a data-icon="info" href="#">Pedro Glória</a></li>
-                <li class="ui-block-b"><a data-icon="info" href="#">João Horta</a></li>
-                <li class="ui-block-c"><a data-icon="info" href="#">Diogo Brito</a></li>
-              </ul>
-          </div>
-
+                  <%= yield :serviceList %>
         </div>
 
       </div>
 
-      <div class="ui-block-b">
+      <div class="ui-block-b" id="paginaB">
         <div data-role="header">
 
           <h1 id="logo" class="ui-title">Concierge</h1>
@@ -120,7 +105,9 @@
           <%= yield %>
         </div>
 
-        <div data-role="footer" data-position="fixed" data-id="navbar">
+      </div>
+
+      <div data-role="footer" data-position="fixed" data-id="navbar">
           <div data-role="navbar">
             <ul>
               <li><a href="" class="home_btn link_to_homepage" data-icon="home">Home</a></li>
@@ -135,8 +122,6 @@
             </ul>
           </div>
         </div>
-
-      </div>
 
     </div>
 

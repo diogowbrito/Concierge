@@ -24,4 +24,8 @@ class HomePageController < ApplicationController
     render :layout => false
 
   end
+
+  def serviceLinks
+    @services = Service.all
+  end
 end

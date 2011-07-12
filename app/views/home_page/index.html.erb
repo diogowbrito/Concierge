@@ -51,3 +51,13 @@
   </tbody>
 </table>
 
+
+
+<% content_for :serviceList do %>
+    <% address = get_address %>
+    <ul data-role='listview' data-inset='true' data-theme='c'>
+      <% @services.each do |service| %>
+          <li><a id="serviceLink" href=<%= address +"services/"+service.serviceName.gsub(" ", "_")+"/index" %>><%= service.serviceName %></a></li>
+      <% end %>
+    </ul>
+<% end %>
