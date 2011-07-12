@@ -4,11 +4,7 @@
     table-layout: fixed;
 }
 
-#serviceLink:active {
-     opacity:0.1;
-    /*-webkit-box-shadow: 1px 1px 3px 3px #000000;*/
-
-}
+#serviceLink { }
 
 td {
     text-align: center;
@@ -21,4 +17,20 @@ td {
     text-shadow: 1px 1px 1px black;
     position: relative;
     top: -13px;
+}
+
+#content {
+    height: 542px;
+}
+
+#contentMenu {
+    height: 542px;
+}
+
+#paginaA {
+    width: 25%;
+}
+
+#paginaB {
+    width: 75%;
 }

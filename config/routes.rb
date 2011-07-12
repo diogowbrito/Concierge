@@ -6,14 +6,16 @@ Concierge::Application.routes.draw do
 
   resources :users
   resources :sessions
-#  resources :services
 
   #Concierge Defaults
+
+  #root :to => "HomePage#poster"
   root :to => "HomePage#index"
   match "index" => "HomePage#index"
+  match "posterbackground" => "HomePage#poster"
   match "search" => "Search#search", :defaults => { :format => :xml}
   match "searchrecord/:service/:method/:id" =>"ServiceForward#recordrequest", :as => "searchrecord", :defaults => { :format => :xml}
-
+  match "servicelinks" => "HomePage#serviceLinks", :defaults => { :format => :xml}
   #Service forward
   match "services/:service/search" => "Search#servicesearch", :defaults => { :format => :xml}
   match "services/:service/index" => "ServiceForward#homepagerequest", :defaults => { :format => :xml}
@@ -22,11 +24,15 @@ Concierge::Application.routes.draw do
   match "directrecord/:service/:id" => "ServiceForward#recordrequest", :defaults => { :format => :xml}
 
   #Concierge admin
+  match "admin" => "BackOffice#new"
+  match "admin/create" => "BackOffice#create"
   match "admin/newservice" => "BackOffice#newservice"
   match "admin/createservice" => "BackOffice#createservice"
   match "admin/uploadfile" => "BackOffice#uploadFile"
   match "admin/listservices" => "BackOffice#listservices"
   match "admin/destroyservice" => "BackOffice#destroyservice"
+  match "admin/destroyuser" => "BackOffice#destroyuser"
+  match "admin/destroyfavourite" => "BackOffice#destroyfavourite"
 
   #user actions
 

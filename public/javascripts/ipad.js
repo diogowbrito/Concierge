@@ -1,9 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-var loginURL = "http://" + document.domain + ":" + location.port + "/login";
-var registerURL =  "http://" + document.domain + ":" + location.port + "/register";
-
 function getHomepage(url) {
 
     $(document).ready(function() {
@@ -25,17 +22,6 @@ function getParse(url) {
         success: parse
     });
 }
-
-function getLoginPage() {
-    $.ajax({
-      type: "GET",
-      url: loginURL,
-      success: success,
-      dataType: dataType
-    });
-}
-
-
 
 function getWarning(url, id) {
 
@@ -99,9 +85,26 @@ function getFavourite(url, id) {
 
 function createPage(id, logged) {
 
-    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme", "a");
     var url = "http://" + document.domain + ":" + location.port + "/";
+
+
+    var page = $('<div>').attr("data-role", "page").attr("data-position", "inline").attr("data-theme", "a").attr("id", id).attr("data-url", id);
+    page.addClass("ui-grid-a");
+    var gridA = $('<div>').addClass("ui-block-a").attr("id", "paginaA");
+
+    var headerGridA = $('<div>').attr("data-role", "header").attr("data-backbtn", "false");
+    var headerBodyGridA = "<h1 id='logo' class='ui-title'>Menu</h1>";
+    var headerGridFinal = headerGridA.append(headerBodyGridA);
+
+//    var contentGrid = $('<div>').attr("data-role", "content").attr("id", "contentMenu");
+    var clone = $(".ui-page-active #contentMenu").clone();
+    var gridAFinal = gridA.append(headerGridFinal).append(clone);
+
+
     var log;
+
+    var gridB = $('<div>').addClass("ui-block-b").attr("id", "paginaB");
+
     <!-- Draw Header-->
     if (logged == 'true')
         log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
@@ -113,10 +116,10 @@ function createPage(id, logged) {
     <!-- Draw Search-->
     var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
     var searchform = $('<form>').attr("id", "search_form").append(searchformbody);
-    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_search").attr("style", "text-align:center; visibility:hidden").append(searchform);
+    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_search").attr("style", "text-align:center; visibility:hidden; display: none;").append(searchform);
 
     <!-- Draw Content-->
-    var content = $('<div>').attr("data-role", "content");
+    var content = $('<div>').attr("data-role", "content").attr("id", "content");
 
     <!-- Draw Footer nav bar-->
 
@@ -138,14 +141,16 @@ function createPage(id, logged) {
     var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
 
     <!-- Draw footer and append nav bar-->
-    var footer = $('<div>').attr("data-role", "footer").attr("data-position","fixed").attr("data-id", "navbar").append(navbar);
+    var footer = $('<div>').attr("data-role", "footer").attr("data-id", "navbar").attr("data-position", "fixed").append(navbar);
 
 
     <!-- Draw the final page-->
-    var finalpage = page.append(header).append(content).append(search).append(footer);
+    var finalGridB = gridB.append(header).append(content).append(search);
 
+    var finalpagetemp = gridAFinal.add(finalGridB).add(footer);
+    var finalpage = page.append(finalpagetemp);
 
-    return $(finalpage)
+    return $(finalpage);
 }
 
 function parse(xml) {
@@ -162,8 +167,6 @@ function parse(xml) {
     }
 }
 
-//    navigator.userAgent.match(/iPhone/i)
-
 function parseHomepage(xml) {
     var logged;
     $(xml).find("record").each(function() {
@@ -172,9 +175,9 @@ function parseHomepage(xml) {
 
     var bla = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("homepage" + bla, logged);
+//    var page = menu.add(pageMain);
 
-    var pageWritable = $("[data-role=content]", page.get(0));
-
+    var pageWritable = page.find('#content');
     var list;
     var titleold;
     var title;
@@ -234,7 +237,7 @@ function parseHomepage(xml) {
                     }
                     break;
                 case 'link':
-                    list.append('<li><a class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
+                    list.append('<li><a data-panel="main"  class="parse" href="' + $(this).attr('href') + '">' + $(this).text() + '</a></li>');
                     break;
                 case 'list':
                     var titleList = $(this).attr('title');
@@ -272,12 +275,9 @@ function parseHomepage(xml) {
 
         var homeUrl = document.location;
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
-
         page.page();
 
         $.mobile.pageContainer.append(page);
-
-
         <!-- Add the search listener -->
         callServiceLive("homepage" + bla, $(xml).find("search").text());
 
@@ -287,7 +287,6 @@ function parseHomepage(xml) {
 
         var homeUrl = document.location;
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
-
         page.page();
 
         $.mobile.pageContainer.append(page);
@@ -295,6 +294,8 @@ function parseHomepage(xml) {
     }
 
     $.mobile.changePage("#" + page.attr("id"));
+    $('#contentMenu .ui-li-static').removeClass("ui-li-static");
+    $('#contentMenu .ui-body-c').removeClass("ui-body-c");
 
 }
 
@@ -308,9 +309,9 @@ function parseList(xml) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
 
     var page = createPage("list" + pageRandomId, logged);
-    page.attr("class", "list_page");
+    page.addClass("list_page");
 
-    var pageWritable = $("[data-role=content]", page.get(0));
+    var pageWritable = page.find('#content');
 
 
     var next_url;
@@ -335,7 +336,7 @@ function parseList(xml) {
                 if (opt != undefined)
                     list.append("<li data-icon='delete'>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
                 else
-                    list.append('<li>' + "<a class='parse' href='" + $(this).attr('href') + "'>" + $(this).text() + "</a></li>");
+                    list.append('<li>' + "<a data-panel='main' class='parse' href='" + $(this).attr('href') + "'>" + $(this).text() + "</a></li>");
             }
             else {
                 if (title != undefined) {
@@ -358,19 +359,109 @@ function parseList(xml) {
         page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_back' data-icon='arrow-l'>Back</a>");
     }
 
-
+    <!-- Add the search listener -->
     page.page();
 
-
     $.mobile.pageContainer.append(page);
+    $.mobile.changePage("#" + page.attr("id"));
 
-    <!-- Add the search listener -->
+    $(".list_class").data("next_url", next_url);
+    $('#contentMenu .ui-li-static').removeClass("ui-li-static");
+    $('#contentMenu .ui-body-c').removeClass("ui-body-c");
+}
+
+
+$(document).ready(function() {
+    $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
+    var pathname = window.location.pathname;
+    if (pathname.indexOf('options') != -1) {
+        $('.link_to_options').addClass('ui-btn-active');
+    }
+});
+
+$('.link_back').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
+    history.back();
+    return true;
+});
+
+$('.link_to_homepage').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $.mobile.changePage('#web_homepage');
+    return true;
+});
+
+var map = null;
+var ctaLayer = null;
+function parseMap(xml) {
+
+    var logged;
+    $(xml).find("map").each(function() {
+        logged = $(this).attr('logged');
+    });
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("map" + pageRandomId, logged);
+
+    var pageWritable = $("[data-role=content]", page.get(0));
+    var title = $(xml).find("map").attr('title');
+    var mapId = "map_canvas" + pageRandomId;
+    var height = $(window).height();
+    var width = $(window).width();
+
+    pageWritable.append("<div id=" + mapId + " style='height:" + height + "px;width:" + width + "px;' class='map'></div>");
+
+
+    $(xml).find("map").children().each(function(index, element) {
+        switch (element.nodeName) {
+            case 'link':
+                kmlUrl = $(this).attr("href");
+                break;
+        }
+    });
+
+    //  page.find(':jqmData(role="content")').css({'padding' : ''});
+
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+//     $("#main").append(page);
+
+    var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937);
+    var myOptions = {
+        zoom: 15,
+        center: center,
+        panControl : false,
+        zoomControl : false,
+        mapTypeControl : false,
+        scaleControl : false,
+        streetViewControl : false,
+        overviewMapControl : false,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+    }
 
 
     $.mobile.changePage("#" + page.attr("id"));
 
-    $(".list_class").data("next_url", next_url);
+
+    map = new google.maps.Map(document.getElementById(mapId), myOptions);
+    ctaLayer = new google.maps.KmlLayer(kmlUrl);
+    ctaLayer.setMap(map);
+
+    page.find('.ui-content').css({'padding':'0'});
 }
+
+$('div[data-role=page]').live('pagehide', function(event, ui) {
+    var page = $(this).find('div.map');
+    if (page.length != 0) {
+        map = null;
+    }
+
+});
+
 
 function parseRecord(xml) {
 
@@ -381,7 +472,9 @@ function parseRecord(xml) {
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("record" + pageRandomId, logged);
-    var pageWritable = $("[data-role=content]", page.get(0));
+
+//    var pageWritable = $("[data-role=content]", page.get(0));
+    var pageWritable = page.find('#content');
     var titleold;
     var recordtitle = $(xml).find("record").attr('title');
     var recordurl = $(xml).find("record").attr('url');
@@ -504,240 +597,21 @@ function parseRecord(xml) {
     var sendurl = url + "sendresource?url=" + recordurl;
     var voteurl = url + "rateservice?url=" + recordurl;
     var favouriteurl = url + "addfavourite?url=" + recordurl + "&title=" + recordtitle;
-    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img id='serviceLink' src='/images/buttons/mailicon3.png'/></a>" +
-            "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img id='serviceLink' src='/images/buttons/like.png'/></a>"
-            + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img id='serviceLink' src='/images/buttons/favourite.png'/></a>";
+    var mail_button = "<a class='warning' href='" + sendurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/mailicon3.png'/></a>" +
+            "<a class='like' href='" + voteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/like.png'/></a>"
+            + "<a class='favourite' href='" + favouriteurl + "' pageid='" + page.attr("id") + "'><img src='/images/buttons/favourite.png'/></a>";
     var paragraph = "<p id='" + page.attr("id") + "warning'></p>";
     pageWritable.append(mail_button).append(paragraph);
 
     page.page();
     $.mobile.pageContainer.append(page);
-
+//      $("#main").append(page);
     <!-- Add the search listener -->
 
     $.mobile.changePage("#" + page.attr("id"));
+    $('#contentMenu .ui-li-static').removeClass("ui-li-static");
+    $('#contentMenu .ui-body-c').removeClass("ui-body-c");
 }
-
-var map = null;
-var ctaLayer = null;
-function parseMap(xml) {
-
-    var logged;
-    $(xml).find("map").each(function() {
-        logged = $(this).attr('logged');
-    });
-
-    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("map" + pageRandomId, logged);
-
-    var pageWritable = $("[data-role=content]", page.get(0));
-    var title = $(xml).find("map").attr('title');
-    var mapId = "map_canvas" + pageRandomId;
-    var height = $(window).height();
-    var width = $(window).width();
-
-    pageWritable.append("<div id=" + mapId + " style='height:"+height+"px;width:"+width+"px;' class='map'></div>");
-
-
-    $(xml).find("map").children().each(function(index, element) {
-        switch (element.nodeName) {
-            case 'link':
-                kmlUrl = $(this).attr("href");
-                break;
-        }
-    });
-
-    //  page.find(':jqmData(role="content")').css({'padding' : ''});
-
-
-    page.page();
-    $.mobile.pageContainer.append(page);
-
-    var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937);
-    var myOptions = {
-        zoom: 15,
-        center: center,
-        panControl : false,
-        zoomControl : false,
-        mapTypeControl : false,
-        scaleControl : false,
-        streetViewControl : false,
-        overviewMapControl : false,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-    }
-
-
-    $.mobile.changePage("#" + page.attr("id"));
-
-
-    map = new google.maps.Map(document.getElementById(mapId), myOptions);
-    ctaLayer = new google.maps.KmlLayer(kmlUrl);
-    ctaLayer.setMap(map);
-
-    page.find('.ui-content').css({'padding':'0'});
-}
-
-$(document).ready(function() {
-    $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
-    var pathname = window.location.pathname;
-    if (pathname.indexOf('options') != -1) {
-        $('.link_to_options').addClass('ui-btn-active');
-    }
-});
-
-
-$('#login_form_btn').live('click', function() {
-     url = '/sessions';
-
-
-    var user = $(this).parent().parent().find('#username').val();
-    var pwd = $(this).parent().parent().find('#password').val();
-
-
-     var msgP = $(this).parent().parent().parent().find('#msg');
-
-     $.post( url, { username: user, password: pwd },
-     function( data ) {
-                if (data == 'OK') {
-                    window.location = "http://" + document.domain + ":" + location.port;
-                } else if (data=='WRONG') {
-                   msgP.empty().append("Username/Password combination error.");
-                }
-                else if (data=='ACTIVATION') {
-                   msgP.empty().append("Please activate your account.");
-                }
-         }
-       );
-
-});
-
-$('#register_form_btn').live('click', function() {
-
-     url = '/users';
-
-    var user = $(this).parent().parent().find('#user_userName').val();
-    var pwd = $(this).parent().parent().find('#user_password').val();
-    var pwd_conf = $(this).parent().parent().find('#user_password_confirmation').val();
-    var mail = $(this).parent().parent().find('#user_email').val();
-
-
-     var msgP = $(this).parent().parent().parent().find('#msg');
-
-     $.post( url, { user_userName: user, user_password: pwd, user_password_confirmation: pwd_conf, user_email:mail },
-     function( data ) {
-                if (data == 'OK') {
-                    msgP.empty().append("Please check your email, activate your account and login.");
-                } else if (data=='WRONG') {
-                   msgP.empty().append("Please check if you inserted all the data correctly.");
-                } else if(data=='EXISTS') {
-                    msgP.empty().append("Username already exists.");
-                }
-         }
-       );
-
-});
-
-$('.create_user_btn').live('click', function(event) {
-    $.mobile.pageLoading();
-
-    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("register" + pageRandomId, false);
-    var pageWritable = $("[data-role=content]", page.get(0));
-
-    $.get(registerURL, function(data) {
-        pageWritable.append(data);
-    });
-
-     page.page();
-
-    $.mobile.pageContainer.append(page);
-    $('#register' + pageRandomId).find('.ui-btn-right').hide();
-    $.mobile.changePage("#" + page.attr("id"));
-    $.mobile.ajaxEnabled = false;
-
-    return false;
-});
-
-$('.register_user_btn').live('click', function(event) {
-    $.mobile.pageLoading();
-
-    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("register" + pageRandomId, false);
-    var pageWritable = $("[data-role=content]", page.get(0));
-
-    $.get(registerURL, function(data) {
-        pageWritable.append(data);
-    });
-
-     page.page();
-    $.mobile.pageContainer.append(page);
-
-    $('#register' + pageRandomId).find('.ui-btn-right').hide();
-
-    $.mobile.changePage("#" + page.attr("id"));
-
-    $.mobile.ajaxEnabled = false;
-
-    return false;
-});
-
-$('.login_btn').live('click', function() {
-    $.mobile.pageLoading();
-
-    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    $('.link_to_history').removeClass('ui-btn-active');
-    $('.link_to_options').removeClass('ui-btn-active');
-
-    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("login" + pageRandomId, false);
-    var pageWritable = $("[data-role=content]", page.get(0));
-
-    $.get(loginURL, function(data) {
-        pageWritable.append(data);
-    });
-
-    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
-
-     page.page();
-    $.mobile.pageContainer.append(page);
-
-    $('#login' + pageRandomId).find('.ui-btn-right').hide();
-
-
-    $.mobile.changePage("#" + page.attr("id"));
-
-    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
-
-    return true;
-});
-
-$('.link_back').live('click', function() {
-    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    $('.link_to_history').removeClass('ui-btn-active');
-    $('.link_to_options').removeClass('ui-btn-active');
-    history.back();
-    return true;
-});
-
-$('.ui-btn-left').live('click', function() {
-  $('.register_user_btn').removeClass('ui-btn-active');
-});
-
-$('.link_to_homepage').live('click', function() {
-    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
-    $('.link_to_history').removeClass('ui-btn-active');
-    $.mobile.changePage('#web_homepage');
-    return true;
-});
-
-$('div[data-role=page]').live('pagehide',function(event, ui){
-    var page = $(this).find('div.map');
-    if (page.length != 0) {
-        map = null;
-    }
-
-});
 
 $(".list_page").live('pageshow', function() {
     scroll();
@@ -800,7 +674,7 @@ function moreList(xml) {
     $('ul:first', $('.ui-page-active')).listview('refresh');
 }
 
-$('#serviceLink').live('click', function(   ) {
+$('#serviceLink').live('click', function() {
     event.stopPropagation();
     event.preventDefault();
     $.mobile.pageLoading();
