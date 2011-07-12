@@ -1,6 +1,9 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+var loginURL = "http://" + document.domain + ":" + location.port + "/login";
+var registerURL =  "http://" + document.domain + ":" + location.port + "/register";
+
 function getHomepage(url) {
 
     $(document).ready(function() {
@@ -22,6 +25,17 @@ function getParse(url) {
         success: parse
     });
 }
+
+function getLoginPage() {
+    $.ajax({
+      type: "GET",
+      url: loginURL,
+      success: success,
+      dataType: dataType
+    });
+}
+
+
 
 function getWarning(url, id) {
 
@@ -133,7 +147,6 @@ function createPage(id, logged) {
 
     return $(finalpage)
 }
-
 
 function parse(xml) {
     if ($(xml).find("list").length != 0) {
@@ -352,99 +365,6 @@ function parseList(xml) {
     $(".list_class").data("next_url", next_url);
 }
 
-
-$(document).ready(function() {
-    $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
-    var pathname = window.location.pathname;
-    if (pathname.indexOf('options') != -1) {
-        $('.link_to_options').addClass('ui-btn-active');
-    }
-});
-
-$('.link_back').live('click', function() {
-    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    $('.link_to_history').removeClass('ui-btn-active');
-    $('.link_to_options').removeClass('ui-btn-active');
-    history.back();
-    return true;
-});
-
-$('.link_to_homepage').live('click', function() {
-    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
-    $('.link_to_history').removeClass('ui-btn-active');
-    $.mobile.changePage('#web_homepage');
-    return true;
-});
-
-var map = null;
-var ctaLayer = null;
-function parseMap(xml) {
-
-    var logged;
-    $(xml).find("map").each(function() {
-        logged = $(this).attr('logged');
-    });
-
-    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("map" + pageRandomId, logged);
-
-    var pageWritable = $("[data-role=content]", page.get(0));
-    var title = $(xml).find("map").attr('title');
-    var mapId = "map_canvas" + pageRandomId;
-    var height = $(window).height();
-    var width = $(window).width();
-
-    pageWritable.append("<div id=" + mapId + " style='height:"+height+"px;width:"+width+"px;' class='map'></div>");
-
-
-    $(xml).find("map").children().each(function(index, element) {
-        switch (element.nodeName) {
-            case 'link':
-                kmlUrl = $(this).attr("href");
-                break;
-        }
-    });
-
-    //  page.find(':jqmData(role="content")').css({'padding' : ''});
-
-
-    page.page();
-    $.mobile.pageContainer.append(page);
-
-    var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937);
-    var myOptions = {
-        zoom: 15,
-        center: center,
-        panControl : false,
-        zoomControl : false,
-        mapTypeControl : false,
-        scaleControl : false,
-        streetViewControl : false,
-        overviewMapControl : false,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-    }
-
-
-    $.mobile.changePage("#" + page.attr("id"));
-
-
-    map = new google.maps.Map(document.getElementById(mapId), myOptions);
-    ctaLayer = new google.maps.KmlLayer(kmlUrl);
-    ctaLayer.setMap(map);
-
-    page.find('.ui-content').css({'padding':'0'});
-}
-
-$('div[data-role=page]').live('pagehide',function(event, ui){
-    var page = $(this).find('div.map');
-    if (page.length != 0) {
-        map = null;
-    }
-
-});
-
-
-
 function parseRecord(xml) {
 
     var logged;
@@ -590,6 +510,227 @@ function parseRecord(xml) {
 
     $.mobile.changePage("#" + page.attr("id"));
 }
+
+var map = null;
+var ctaLayer = null;
+function parseMap(xml) {
+
+    var logged;
+    $(xml).find("map").each(function() {
+        logged = $(this).attr('logged');
+    });
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("map" + pageRandomId, logged);
+
+    var pageWritable = $("[data-role=content]", page.get(0));
+    var title = $(xml).find("map").attr('title');
+    var mapId = "map_canvas" + pageRandomId;
+    var height = $(window).height();
+    var width = $(window).width();
+
+    pageWritable.append("<div id=" + mapId + " style='height:"+height+"px;width:"+width+"px;' class='map'></div>");
+
+
+    $(xml).find("map").children().each(function(index, element) {
+        switch (element.nodeName) {
+            case 'link':
+                kmlUrl = $(this).attr("href");
+                break;
+        }
+    });
+
+    //  page.find(':jqmData(role="content")').css({'padding' : ''});
+
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+
+    var center = new google.maps.LatLng(38.660998431780286, -9.204448037385937);
+    var myOptions = {
+        zoom: 15,
+        center: center,
+        panControl : false,
+        zoomControl : false,
+        mapTypeControl : false,
+        scaleControl : false,
+        streetViewControl : false,
+        overviewMapControl : false,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+    }
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+
+    map = new google.maps.Map(document.getElementById(mapId), myOptions);
+    ctaLayer = new google.maps.KmlLayer(kmlUrl);
+    ctaLayer.setMap(map);
+
+    page.find('.ui-content').css({'padding':'0'});
+}
+
+$(document).ready(function() {
+    $("#web_homepage").find("#home_searchform").parent().parent().parent().find('.home_btn').addClass('ui-btn-active');
+    var pathname = window.location.pathname;
+    if (pathname.indexOf('options') != -1) {
+        $('.link_to_options').addClass('ui-btn-active');
+    }
+});
+
+
+$('#login_form_btn').live('click', function() {
+     url = '/sessions';
+
+
+    var user = $(this).parent().parent().find('#username').val();
+    var pwd = $(this).parent().parent().find('#password').val();
+
+
+     var msgP = $(this).parent().parent().parent().find('#msg');
+
+     $.post( url, { username: user, password: pwd },
+     function( data ) {
+                if (data == 'OK') {
+                    window.location = "http://" + document.domain + ":" + location.port;
+                } else if (data=='WRONG') {
+                   msgP.empty().append("Username/Password combination error.");
+                }
+                else if (data=='ACTIVATION') {
+                   msgP.empty().append("Please activate your account.");
+                }
+         }
+       );
+
+});
+
+$('#register_form_btn').live('click', function() {
+
+     url = '/users';
+
+    var user = $(this).parent().parent().find('#user_userName').val();
+    var pwd = $(this).parent().parent().find('#user_password').val();
+    var pwd_conf = $(this).parent().parent().find('#user_password_confirmation').val();
+    var mail = $(this).parent().parent().find('#user_email').val();
+
+
+     var msgP = $(this).parent().parent().parent().find('#msg');
+
+     $.post( url, { user_userName: user, user_password: pwd, user_password_confirmation: pwd_conf, user_email:mail },
+     function( data ) {
+                if (data == 'OK') {
+                    msgP.empty().append("Please check your email, activate your account and login.");
+                } else if (data=='WRONG') {
+                   msgP.empty().append("Please check if you inserted all the data correctly.");
+                } else if(data=='EXISTS') {
+                    msgP.empty().append("Username already exists.");
+                }
+         }
+       );
+
+});
+
+$('.create_user_btn').live('click', function(event) {
+    $.mobile.pageLoading();
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("register" + pageRandomId, false);
+    var pageWritable = $("[data-role=content]", page.get(0));
+
+    $.get(registerURL, function(data) {
+        pageWritable.append(data);
+    });
+
+     page.page();
+
+    $.mobile.pageContainer.append(page);
+    $('#register' + pageRandomId).find('.ui-btn-right').hide();
+    $.mobile.changePage("#" + page.attr("id"));
+    $.mobile.ajaxEnabled = false;
+
+    return false;
+});
+
+$('.register_user_btn').live('click', function(event) {
+    $.mobile.pageLoading();
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("register" + pageRandomId, false);
+    var pageWritable = $("[data-role=content]", page.get(0));
+
+    $.get(registerURL, function(data) {
+        pageWritable.append(data);
+    });
+
+     page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#register' + pageRandomId).find('.ui-btn-right').hide();
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $.mobile.ajaxEnabled = false;
+
+    return false;
+});
+
+$('.login_btn').live('click', function() {
+    $.mobile.pageLoading();
+
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("login" + pageRandomId, false);
+    var pageWritable = $("[data-role=content]", page.get(0));
+
+    $.get(loginURL, function(data) {
+        pageWritable.append(data);
+    });
+
+    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+
+     page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#login' + pageRandomId).find('.ui-btn-right').hide();
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+
+    return true;
+});
+
+$('.link_back').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
+    history.back();
+    return true;
+});
+
+$('.ui-btn-left').live('click', function() {
+  $('.register_user_btn').removeClass('ui-btn-active');
+});
+
+$('.link_to_homepage').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $.mobile.changePage('#web_homepage');
+    return true;
+});
+
+$('div[data-role=page]').live('pagehide',function(event, ui){
+    var page = $(this).find('div.map');
+    if (page.length != 0) {
+        map = null;
+    }
+
+});
 
 $(".list_page").live('pageshow', function() {
     scroll();

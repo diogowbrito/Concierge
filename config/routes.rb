@@ -32,7 +32,7 @@ Concierge::Application.routes.draw do
 
   match "login" => "sessions#new"
   match "logout" => "sessions#destroy"
-  match "signin" => "users#new"
+  match "register" => "users#new"
   match "activation" => "users#activate"
   match "history" => "Users#history", :defaults => { :format => :xml}
   match "favourites" => "Users#favourites", :defaults => { :format => :xml}

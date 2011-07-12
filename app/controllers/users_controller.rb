@@ -2,21 +2,54 @@
 class UsersController < ApplicationController
 
   def new
+
     @user = User.new
+    render :layout => false
   end
 
   def create
-    @user = User.new(params[:user])
+  #  @user = User.new(params[:user])
+
+  #      if User.find(params[:user_userName]) != nil
+   #   render :text => "EXISTS", :layout => false
+    #    end
+
+        stuff = {
+            :userName => 'string',
+            :password => 'string',
+            :password_confirmation => 'string',
+            :email => 'string'
+        }
+
+    stuff[:userName] = params[:user_userName]
+    stuff[:password] = params[:user_password]
+    stuff[:password_confirmation] = params[:user_password_confirmation]
+    stuff[:email] = params[:user_email]
+    puts stuff
+ #   stuff = [ params[:user_userName], params[:user_password],params[:user_password_confirmation],params[:user_email]  ]
+
+    @user = User.new(stuff)
+    puts stuff
+    puts 'uz'
+    puts params
+    puts params[:user]
+    puts 'shown'
+
+
     if @user.save
+      puts 'saved'
       @rand = rand(20000)
       @user[:activateCode] = @rand
       @user[:notAnonymus] = "yes"
       @user.save
       @adress = get_address
+
       UserMailer.registration_confirmation(@user, @rand, @adress).deliver
-      redirect_to root_url
+
+      render :text => "OK", :layout=>false
+
     else
-      render "new"
+       render :text => "WRONG", :layout=>false
     end
   end
 
@@ -29,6 +62,10 @@ class UsersController < ApplicationController
     if code == @user.activateCode.to_s then
       @user[:activateCode] = -1
       @user.save
+      render :text => "Your account has been activated.", :layout=>false
+
+    else
+     render :text => "WRONG", :layout=>false
     end
 
   end
@@ -259,7 +296,6 @@ class UsersController < ApplicationController
     redirect_to "/editfavourites"
 
   end
-
 
   def options
     respond_to :html

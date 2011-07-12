@@ -1,18 +1,31 @@
 <h1>Log in</h1>
-<% address = get_address %>
-<%= form_tag sessions_path do %>
+
+
+<div style="margin: 0pt; padding: 0pt; display: inline;">
   <p>
-    <%= label_tag :username %><br />
-    <%= text_field_tag :username, params[:username] %>
+    <label class="ui-input-text" for="username">Username</label><br>
+    <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-a" id="username" name="username" type="text">
   </p>
   <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
+    <label class="ui-input-text" for="password">Password</label><br>
+    <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-a" id="password" name="password" type="password">
   </p>
-  <p class="button"><%= submit_tag "Log in" %></p>
-  <p class="button"><a data-role="button" href='<%= address + "signin" %>'>Sign In</a></p>
+  <p class="button">
+  <div aria-disabled="false" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c" data-theme="c">
+    <span class="ui-btn-inner ui-btn-corner-all">
+      <span class="ui-btn-text">Log in</span>
+    </span>
+    <input id="login_form_btn" aria-disabled="false" class="ui-btn-hidden" name="commit" value="Log in" type="submit">
+    </div>
+  </p>
+  <p class="button">
+    <a class="register_user_btn ui-btn ui-btn-corner-all ui-shadow ui-btn-up-a" data-theme="a" data-role="button" >
+      <span class="ui-btn-inner ui-btn-corner-all register_user_btn"><span class="ui-btn-text">Register</span>
+      </span></a>
+  </p>
 
-  <% if @msg != "" %>
-    <p><%= @msg %></p>
+   <p id='msg'>
 
-<% end end %>
+   </p>
+
+</div>

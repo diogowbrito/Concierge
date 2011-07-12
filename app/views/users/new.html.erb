@@ -1,34 +1,33 @@
-<h1>Sign Up</h1>
+<h1>Register</h1>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div style="margin: 0pt; padding: 0pt; display: inline;">
+  <p>
+    <label class="ui-input-text" for="user_userName">Username</label><br>
+    <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-a" id="user_userName" name="user_userName" type="text">
+  </p>
+  <p>
+    <label class="ui-input-text" for="user_password">Password</label><br>
+    <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-a" id="user_password" name="user_password" type="password">
+  </p>
+    <p>
+    <label class="ui-input-text" for="user_password_confirmation">Password Confirmation</label><br>
+    <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-a" id="user_password_confirmation" name="user_password_confirmation" type="password">
+  </p>
+  <p>
+    <label class="ui-input-text" for="user_email">Email</label><br>
+    <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-a" id="user_email" name="user[email]" type="text">
+  </p>
+
+  <div aria-disabled="false" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c" data-theme="c">
+    <span class="ui-btn-inner ui-btn-corner-all">
+      <span class="ui-btn-text">Create User</span>
+    </span>
+    <input id="register_form_btn" aria-disabled="false" class="ui-btn-hidden" name="commit" value="Create User" type="submit">
     </div>
-  <% end %>
-  <p>
-    <%= f.label :userName %><br />
-    <%= f.text_field :userName %>
   </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p class="button"><%= f.submit %></p>
-<% end %>
 
+     <p id='msg'>
 
+   </p>
 
+</div>
