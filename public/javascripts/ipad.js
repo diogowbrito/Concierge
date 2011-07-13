@@ -402,6 +402,9 @@ function parseList(xml) {
             }
 
         });
+        if ($(".list_class").data('next_url') != "") {
+            list.append('<li id="toRemove"><a id="moreList" href="#">more list</a></li>');
+        }
     });
 
 
@@ -670,6 +673,7 @@ function parseRecord(xml) {
 }
 
 $(".list_page").live('pageshow', function() {
+
     scroll();
 });
 
@@ -677,16 +681,9 @@ $(".list_page").live('pagebeforehide', function() {
     $(document).unbind('scrollstop');
 });
 
-function scroll() {
-    $(document).unbind('scrollstop');
-    $(document).bind('scrollstop', function() {
-        var x = $('body').height() + $(document).scrollTop();
-        var y = $(document).height();
-        if (x >= y) {
-            next();
-        }
-    });
-}
+$("#moreList").live('click', function(){
+   next();
+});
 
 function next() {
     if ($(".list_class").data('next_url') != "") {
@@ -708,26 +705,28 @@ function moreList(xml) {
             var title = $(this).attr('title');
             if (attr != undefined) {
                 if (title != undefined) {
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + " </a></li>");
+                    $("ul.list_class", $(".ui-page-active #content")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
+                    $("ul.list_class", $(".ui-page-active #content")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + " </a></li>");
                 }
                 else
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
+                    $("ul.list_class", $(".ui-page-active #content")).append("<li>" + "<a class='parse' href=" + $(this).attr('href') + ">" + $(this).text() + "</a></li>");
             }
             else {
                 if (title != undefined) {
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li class='parse'>" + $(this).text() + "</li>");
+                    $("ul.list_class", $(".ui-page-active #content")).append('<li data-role="list-divider">' + $(this).attr("title") + '</li>');
+                    $("ul.list_class", $(".ui-page-active #content")).append("<li class='parse'>" + $(this).text() + "</li>");
                 }
                 else
-                    $("ul.list_class", $(".ui-page-active :jqmData(role='content')")).append("<li class='parse'>" + $(this).text() + "</li>");
+                    $("ul.list_class", $(".ui-page-active #content")).append("<li class='parse'>" + $(this).text() + "</li>");
             }
 
         });
+        $("#toRemove").remove();
+        $("ul.list_class", $(".ui-page-active #content")).append('<li id="toRemove"><a id="moreList" href="#">more list</a></li>');
     });
 
     $(".list_class").data("next_url", next_url);
-    $('ul:first', $('.ui-page-active')).listview('refresh');
+    $('ul:first', $('.ui-page-active #content')).listview('refresh');
 }
 
 
