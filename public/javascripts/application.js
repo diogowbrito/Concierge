@@ -521,6 +521,7 @@ function parseMap(xml) {
 
     console.log('loged?');
     console.log(logged);
+    console.log(xml);
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("map" + pageRandomId, logged);
 
