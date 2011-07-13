@@ -24,27 +24,27 @@ class UserMailer < ActionMailer::Base
   children.each do |child|
 
       if child['title'] != nil
-      if child.children().count == 1
+        if child.children().count == 1
 
-        htmlroot.add_child("<p>"+child['title']+": "+child.text()+"</p>")
+          htmlroot.add_child("<p>"+child['title']+": "+child.text()+"</p>")
 
-      else
+        else
 
-        child2 = child.children()
-        htmlroot.add_child("<p>"+child['title']+"</p>")
-        htmlroot.add_child("<ul></ul>")
+          child2 = child.children()
+          htmlroot.add_child("<p>"+child['title']+"</p>")
+          htmlroot.add_child("<ul></ul>")
 
-        child2.each do |c|
+          child2.each do |c|
 
-            node = @newdoc.xpath("//ul").last()
-            text = c.text.delete " "
-            if text.size != 1
-              node.add_child("<li>"+c.text()+"</li>")
-            end
+              node = @newdoc.xpath("//ul").last()
+              text = c.text.delete " "
+              if text.size != 1
+                node.add_child("<li>"+c.text()+"</li>")
+              end
+
+          end
 
         end
-
-      end
       end
 
   end
