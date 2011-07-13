@@ -120,7 +120,7 @@ function createPage(id, logged) {
     var optionstab = $("<li>").append("<a class='link_to_options' href='' data-icon='gear'>Options</a>");
     var navbarul;
 
-    if (logged.toString() == 'true' ) {
+    if (logged == 'true' ) {
         navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
@@ -673,7 +673,7 @@ $('.link_to_options').live('click', function() {
     $('.link_to_favourites').removeClass('ui-btn-active');
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("options" + pageRandomId, true);
+    var page = createPage("options" + pageRandomId, 'true');
     var pageWritable = $("[data-role=content]", page.get(0));
 
     page.find('.link_to_options').addClass('ui-btn-active');
@@ -697,14 +697,13 @@ $('.link_to_options').live('click', function() {
     return true;
 });
 
-
 $('.login_btn').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
     $('.link_to_options').removeClass('ui-btn-active');
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPage("login" + pageRandomId, false);
+    var page = createPage("login" + pageRandomId, 'false');
     var pageWritable = $("[data-role=content]", page.get(0));
 
     $.get(loginURL, function(data) {

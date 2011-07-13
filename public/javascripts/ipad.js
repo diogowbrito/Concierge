@@ -160,7 +160,7 @@ function createPage(id, logged) {
     var gridB = $('<div>').addClass("ui-block-b").attr("id", "paginaB");
 
     <!-- Draw Header-->
-    if (logged.toString() == 'true')
+    if (logged == 'true')
         log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
@@ -781,7 +781,7 @@ $('#register_form_btn').live('click', function() {
 
 $('.create_user_btn').live('click', function(event) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPageWithoutList("register" + pageRandomId, false);
+    var page = createPageWithoutList("register" + pageRandomId, 'false');
    var pageWritable = page.find('#content');
 
     $.get(registerURL, function(data) {
@@ -800,7 +800,7 @@ $('.create_user_btn').live('click', function(event) {
 
 $('.register_user_btn').live('click', function(event) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPageWithoutList("register" + pageRandomId, false);
+    var page = createPageWithoutList("register" + pageRandomId, 'false');
     var pageWritable = page.find('#content');
 
     $.get(registerURL, function(data) {
@@ -825,7 +825,7 @@ $('.link_to_options').live('click', function() {
     $('.link_to_favourites').removeClass('ui-btn-active');
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPageWithoutList("options" + pageRandomId, true);
+    var page = createPageWithoutList("options" + pageRandomId, 'true');
     var pageWritable =  page.find('#content');
 
     page.find('.link_to_options').addClass('ui-btn-active');
@@ -855,7 +855,7 @@ $('.login_btn').live('click', function() {
     $('.link_to_options').removeClass('ui-btn-active');
 
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
-    var page = createPageWithoutList("login" + pageRandomId, false);
+    var page = createPageWithoutList("login" + pageRandomId, 'false');
     var pageWritable = page.find("#content");
 
     $.get(loginURL, function(data) {
