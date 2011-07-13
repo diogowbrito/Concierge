@@ -120,10 +120,7 @@ function createPage(id, logged) {
     var optionstab = $("<li>").append("<a class='link_to_options' href='' data-icon='gear'>Options</a>");
     var navbarul;
 
-    console.log('goddamn');
-    console.log(logged);
     if (logged.toString() == 'true' ) {
-        console.log('wtf');
         navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
