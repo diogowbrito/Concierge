@@ -519,6 +519,8 @@ function parseMap(xml) {
         logged = $(this).attr('logged');
     });
 
+    console.log('loged?');
+    console.log(logged);
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("map" + pageRandomId, logged);
 
