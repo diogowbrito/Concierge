@@ -402,9 +402,8 @@ function parseList(xml) {
             }
 
         });
-        if ($(".list_class").data('next_url') != "") {
-            list.append('<li id="toRemove"><a id="moreList" href="#">more list</a></li>');
-        }
+            list.append('<li class="toRemove"><a id="moreList" href="#">more list</a></li>');
+
     });
 
 
@@ -421,7 +420,6 @@ function parseList(xml) {
 
     $.mobile.pageContainer.append(page);
     $.mobile.changePage("#" + page.attr("id"));
-
     $(".list_class").data("next_url", next_url);
     $('#contentMenu .ui-li-static').removeClass("ui-li-static");
     $('#contentMenu .ui-body-c').removeClass("ui-body-c");
@@ -721,12 +719,13 @@ function moreList(xml) {
             }
 
         });
-        $("#toRemove").remove();
-        $("ul.list_class", $(".ui-page-active #content")).append('<li id="toRemove"><a id="moreList" href="#">more list</a></li>');
+        $(".toRemove").remove();
+        $("ul.list_class", $(".ui-page-active #content")).append('<li class="toRemove"><a id="moreList" href="#">more list</a></li>');
     });
 
     $(".list_class").data("next_url", next_url);
     $('ul:first', $('.ui-page-active #content')).listview('refresh');
+
 }
 
 
