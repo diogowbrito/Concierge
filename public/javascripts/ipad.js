@@ -460,7 +460,7 @@ function parseMap(xml) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("map" + pageRandomId, logged);
 
-    var pageWritable = $("[data-role=content]", page.get(0));
+    var pageWritable = $("#content");
     var title = $(xml).find("map").attr('title');
     var mapId = "map_canvas" + pageRandomId;
     var height = $(window).height();
@@ -506,6 +506,8 @@ function parseMap(xml) {
     ctaLayer.setMap(map);
 
     page.find('.ui-content').css({'padding':'0'});
+    $('#contentMenu .ui-li-static').removeClass("ui-li-static");
+    $('#contentMenu .ui-body-c').removeClass("ui-body-c");
 }
 
 $('div[data-role=page]').live('pagehide', function(event, ui) {
