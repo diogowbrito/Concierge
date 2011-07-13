@@ -258,12 +258,12 @@ class BackOfficeController < ApplicationController
       if user.notAnonymus == '-100' then
         session[:user_id] = user.id
         session[:expires_at] = 180.minutes.from_now
-        old_user = User.find(old_id)
-        histories = old_user.histories
-        old_user.destroy
-        histories.each do |h|
-          h.destroy
-        end
+        #old_user = User.find(old_id)
+        #histories = old_user.histories
+        #old_user.destroy
+        #histories.each do |h|
+          #h.destroy
+        #end
         redirect_to "/admin/listservices"
       else
         @msg = "You are not the admnistrator, sorry"
