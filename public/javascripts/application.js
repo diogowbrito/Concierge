@@ -863,7 +863,6 @@ $("#home_searchform").live('submit', function() {
     return false;
 });
 
-
 function logOut() {
     $.mobile.hashListeningEnabled(false);
 }
