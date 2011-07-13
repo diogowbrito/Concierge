@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def mobile_agent?
-    request.user_agent =~ /Mobile|webOS/
+   request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"][/(iPhone)/]
   end
 
   def mobile?

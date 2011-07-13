@@ -1,6 +1,10 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+var loginURL = "http://" + document.domain + ":" + location.port + "/login";
+var registerURL =  "http://" + document.domain + ":" + location.port + "/register";
+
+
 function getHomepage(url) {
 
     $(document).ready(function() {
@@ -83,6 +87,56 @@ function getFavourite(url, id) {
 
 }
 
+function createPageWithoutList(id, logged){
+    var page = $('<div>').attr("data-role", "page").attr("id", id).attr("data-url", id).attr("data-position", "inline").attr("data-theme", "a");
+    var url = "http://" + document.domain + ":" + location.port + "/";
+    var log;
+    <!-- Draw Header-->
+    if (logged == 'true')
+        log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
+    else log = "<a href='" + url + "login' class='ui-btn-right login_btn' data-icon='gear'>Login</a>";
+    var headerbody = log +
+            "<h1 id='logo' class='ui-title link_to_homepage'>Concierge</h1>";
+
+    var header = $('<div>').attr("data-role", "header").attr("data-position", "fixed").append(headerbody);
+    <!-- Draw Search-->
+    var searchformbody = $('<input>').attr("type", "search").attr("id", "search").attr("value", "").attr("width", "100%");
+    var searchform = $('<form>').attr("id", "search_form").append(searchformbody);
+    var search = $('<div>').attr("data-role", "footer").attr("data-role", "fieldcontain").attr("width", "100%").attr("class", "hidden_search").attr("style", "text-align:center; visibility:hidden").append(searchform);
+
+    <!-- Draw Content-->
+    var content = $('<div>').attr("data-role", "content").attr("id", "content");
+
+    <!-- Draw Footer nav bar-->
+
+    var hometab = $("<li>").append("<a class='link_to_homepage' data-icon='home' href=''>Home</a>");
+    var historytab = $("<li>").append("<a class='parse link_to_history' href='" + url + "history' data-icon='grid'>History</a>");
+    var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
+
+    //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
+    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
+    var navbarul;
+
+    if (logged == 'true') {
+        navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
+    }
+    else {
+        navbarul = $("<ul>").append(hometab).append(historytab);
+    }
+
+    var navbar = $("<div>").attr("data-role", "navbar").append(navbarul);
+
+    <!-- Draw footer and append nav bar-->
+    var footer = $('<div>').attr("data-role", "footer").attr("data-position","fixed").attr("data-id", "navbar").append(navbar);
+
+
+    <!-- Draw the final page-->
+    var finalpage = page.append(header).append(content).append(search).append(footer);
+
+
+    return $(finalpage)
+}
+
 function createPage(id, logged) {
 
     var url = "http://" + document.domain + ":" + location.port + "/";
@@ -128,7 +182,7 @@ function createPage(id, logged) {
     var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
 
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
+    var optionstab = $("<li>").append("<a class='link_to_options' href='' data-icon='gear'>Options</a>");
     var navbarul;
 
     if (logged == 'true') {
@@ -406,7 +460,7 @@ function parseMap(xml) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPage("map" + pageRandomId, logged);
 
-    var pageWritable = $("[data-role=content]", page.get(0));
+    var pageWritable = $("#content");
     var title = $(xml).find("map").attr('title');
     var mapId = "map_canvas" + pageRandomId;
     var height = $(window).height();
@@ -452,6 +506,8 @@ function parseMap(xml) {
     ctaLayer.setMap(map);
 
     page.find('.ui-content').css({'padding':'0'});
+    $('#contentMenu .ui-li-static').removeClass("ui-li-static");
+    $('#contentMenu .ui-body-c').removeClass("ui-body-c");
 }
 
 $('div[data-role=page]').live('pagehide', function(event, ui) {
@@ -673,6 +729,155 @@ function moreList(xml) {
     $(".list_class").data("next_url", next_url);
     $('ul:first', $('.ui-page-active')).listview('refresh');
 }
+
+
+
+$('#login_form_btn').live('click', function() {
+     url = '/sessions';
+
+    var user = $(this).parent().parent().find('#username').val();
+    var pwd = $(this).parent().parent().find('#password').val();
+
+     var msgP = $(this).parent().parent().parent().find('#msg');
+
+     $.post( url, { username: user, password: pwd },
+     function( data ) {
+                if (data == 'OK') {
+                    window.location = "http://" + document.domain + ":" + location.port;
+                } else if (data=='WRONG') {
+                   msgP.empty().append("Username/Password combination error.");
+                }
+                else if (data=='ACTIVATION') {
+                   msgP.empty().append("Please activate your account.");
+                }
+         }
+       );
+
+});
+
+$('#register_form_btn').live('click', function() {
+
+     url = '/users';
+
+    var user = $(this).parent().parent().find('#user_userName').val();
+    var pwd = $(this).parent().parent().find('#user_password').val();
+    var pwd_conf = $(this).parent().parent().find('#user_password_confirmation').val();
+    var mail = $(this).parent().parent().find('#user_email').val();
+
+
+     var msgP = $(this).parent().parent().parent().find('#msg');
+
+     $.post( url, { user_userName: user, user_password: pwd, user_password_confirmation: pwd_conf, user_email:mail },
+     function( data ) {
+                if (data == 'OK') {
+                    msgP.empty().append("Please check your email, activate your account and login.");
+                } else if (data=='WRONG') {
+                   msgP.empty().append("Please check if you inserted all the data correctly.");
+                } else if(data=='EXISTS') {
+                    msgP.empty().append("Username already exists.");
+                }
+         }
+       );
+
+});
+
+$('.create_user_btn').live('click', function(event) {
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPageWithoutList("register" + pageRandomId, 'false');
+   var pageWritable = page.find('#content');
+
+    $.get(registerURL, function(data) {
+        pageWritable.append(data);
+    });
+
+     page.page();
+
+    $.mobile.pageContainer.append(page);
+    $('#register' + pageRandomId).find('.ui-btn-right').hide();
+    $.mobile.changePage("#" + page.attr("id"));
+    $.mobile.ajaxEnabled = false;
+
+    return false;
+});
+
+$('.register_user_btn').live('click', function(event) {
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPageWithoutList("register" + pageRandomId, 'false');
+    var pageWritable = page.find('#content');
+
+    $.get(registerURL, function(data) {
+        pageWritable.append(data);
+    });
+
+     page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#register' + pageRandomId).find('.ui-btn-right').hide();
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $.mobile.ajaxEnabled = false;
+
+    return false;
+});
+
+$('.link_to_options').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_favourites').removeClass('ui-btn-active');
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPageWithoutList("options" + pageRandomId, 'true');
+    var pageWritable =  page.find('#content');
+
+    page.find('.link_to_options').addClass('ui-btn-active');
+
+    $.get(optionsURL, function(data) {
+        pageWritable.append(data);
+    });
+
+    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#options' + pageRandomId).find('.ui-btn-right').hide();
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+
+    return true;
+});
+
+$('.login_btn').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPageWithoutList("login" + pageRandomId, 'false');
+    var pageWritable = page.find("#content");
+
+    $.get(loginURL, function(data) {
+        pageWritable.append(data);
+    });
+
+    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#login' + pageRandomId).find('.ui-btn-right').hide();
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+
+    return true;
+});
 
 $('#serviceLink').live('click', function() {
     event.stopPropagation();

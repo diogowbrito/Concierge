@@ -157,6 +157,7 @@ class SearchController < ApplicationController
       next_url = root['next']
       next_url = next_url.gsub(homeurl, address + "services/"+@servicename.gsub(" ", "_"))
       root['next'] = next_url
+      root['logged'] = @logged
 
       nodes = @doc.xpath("//item")
       if nodes.count != 1 then

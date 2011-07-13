@@ -175,7 +175,7 @@ class UsersController < ApplicationController
       end
 
       favourites = user.favorites.find(:all, :offset =>@start-1, :limit => @end)
-      @doc = Nokogiri::XML("<list title='Favoritos'></list>")
+      @doc = Nokogiri::XML("<list title='Editar Favoritos'></list>")
       root = @doc.at_css "list"
       favourites.each do |fav|
         newurl = address + "destroyfavorite?url=" + fav.url
@@ -298,7 +298,8 @@ class UsersController < ApplicationController
   end
 
   def options
-    respond_to :html
+  #  respond_to :html
+    render :layout => false
   end
 
   def manageaccount
