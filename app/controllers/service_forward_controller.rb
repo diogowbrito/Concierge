@@ -218,7 +218,9 @@ class ServiceForwardController < ApplicationController
 
       end
 
-    elsif @doc.at_css("map")
+    elsif @doc.at_css("map") then
+      map = @doc.at_css("map")
+      map['logged'] = @logged
     end
 
     respond_to :xml
