@@ -466,7 +466,7 @@ function parseMap(xml) {
     var height = $(window).height();
     var width = $(window).width();
 
-    pageWritable += ("<div id=" + mapId + " style='height:" + height + "px;width:" + width + "px;' class='map'></div>");
+    pageWritable.add("<div id=" + mapId + " style='height:" + height + "px;width:" + width + "px;' class='map'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
