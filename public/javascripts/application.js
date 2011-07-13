@@ -124,7 +124,6 @@ function createPage(id, logged) {
         navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
-        console.log('fdx');
         navbarul = $("<ul>").append(hometab).append(historytab);
     }
 
