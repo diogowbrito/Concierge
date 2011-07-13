@@ -16,35 +16,20 @@ class SessionsController < ApplicationController
       if user.activateCode == -1 && user.id != session[:user_id] then
         session[:user_id] = user.id
         session[:expires_at] = 30.minutes.from_now
-      #  old_user = User.find(old_id)
-     #   histories = old_user.histories
-     #   old_user.destroy
-      #  histories.each do |h|
-       #   h.destroy
-        #end
-     #   @msg = "OK"
+        if old_user.notAnonymus != 'yes' || old_user.notAnonymus != '-100'
+          old_user = User.find(old_id)
+          histories = old_user.histories
+          old_user.destroy
+          histories.each do |h|
+            h.destroy
+          end
+        end
         render :text => "OK", :layout=>false
-      #  render :layout => false
-    #    render "needactivation", :layout=> false
-    #    return true
-    #    redirect_to :root
       else
-     #   @msg = "ACTIVATION"
         render :text => "ACTIVATION", :layout=>false
-
-      #  render :layout => false
-      #  render "needactivation"
-   #     return false
-    #    @msg = "Your account needs activation. Go to your email and do it!"
-    #    render "new"
       end
     else
-  #    @msg = "WRONG"
         render :text => "WRONG", :layout=>false
-     # render :layout => false
-    #  render "needactivation"
-     # @msg = "Username/Password combination error."
-      #render "new"
     end
   end
 

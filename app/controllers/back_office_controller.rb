@@ -6,13 +6,13 @@ class BackOfficeController < ApplicationController
 
       user = User.find(session[:user_id])
 
-#      if user.notAnonymus == '-100'
-#
+      if user.notAnonymus == '-100'
+
         render :layout => false
-#
-#      else
-#        render "error", :layout => false
-#      end
+
+      else
+        render "error", :layout => false
+      end
     end
 
   end
@@ -23,7 +23,7 @@ class BackOfficeController < ApplicationController
 
       user = User.find(session[:user_id])
 
-#      if user.notAnonymus == '-100'
+     if user.notAnonymus == '-100'
 
         @url = params[:url]
         @icon = params[:service]
@@ -102,9 +102,9 @@ class BackOfficeController < ApplicationController
 
         render :layout => false
 
-#      else
-#        render "error", :layout => false
-#      end
+      else
+        render "error", :layout => false
+      end
     end
 
   end
@@ -115,24 +115,31 @@ class BackOfficeController < ApplicationController
 
       user = User.find(session[:user_id])
 
-#      if user.notAnonymus == '-100'
+       if user.notAnonymus == '-100'
 
-        @services = Service.all
-        @competences = Competence.all
-        @entities = InfEntity.all
-        @users = User.where(:notAnonymus => "yes")
-        @histories = []
-        @favorites = []
-        @users.each do |user|
-          @histories << user.histories
-          @favorites << user.favorites
-        end
+          @services = Service.all
+          @competences = Competence.all
+          @entities = InfEntity.all
+          @users = User.where(:notAnonymus => "yes")
+          @histories = []
+          @favorites = []
+          @users.each do |user|
+            @histories << user.histories
+            @favorites << user.favorites
+          end
 
-        render :layout => false
+          render :layout => false
 
-#    else
-#        render "error", :layout => false
-#      end
+      else
+         render "error", :layout => false
+      end
+    else
+      name = "Anonymus"+rand(100000).to_s
+      User.create :userName => name, :password => name, :email => name
+      users = User.where(:userName => name)
+      session[:user_id] = users[0].id
+      session[:expires_at] = 30.minutes.from_now
+      render "error", :layout => false
     end
 
   end
@@ -258,12 +265,15 @@ class BackOfficeController < ApplicationController
       if user.notAnonymus == '-100' then
         session[:user_id] = user.id
         session[:expires_at] = 180.minutes.from_now
-        #old_user = User.find(old_id)
-        #histories = old_user.histories
-        #old_user.destroy
-        #histories.each do |h|
-          #h.destroy
-        #end
+        old_user = User.find(old_id)
+        if old_user.notAnonymus != 'yes' || old_user.notAnonymus != '-100'
+          old_user =
+          histories = old_user.histories
+          old_user.destroy
+          histories.each do |h|
+            h.destroy
+          end
+        end
         redirect_to "/admin/listservices"
       else
         @msg = "You are not the admnistrator, sorry"

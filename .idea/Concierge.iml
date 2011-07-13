@@ -118,6 +118,14 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] multi_json (v1.0.3, /home/pedro/.rvm/gems/ruby-1.9.2-p180@global/gems/multi_json-1.0.3)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] arel (v2.1.1, /home/pedro/.rvm/gems/ruby-1.9.2-p180@global/gems/arel-2.1.1)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] highline (v1.6.2, /home/pedro/.rvm/gems/ruby-1.9.2-p180/gems/highline-1.6.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] tzinfo (v0.3.27, /home/jphorta/.rvm/gems/ruby-1.9.2-p180@global/gems/tzinfo-0.3.27)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rake (v0.9.2, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/rake-0.9.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] mysql2 (v0.3.2, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/mysql2-0.3.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] paperclip (v2.3.10, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/bundler/gems/paperclip-79381dc9fce7)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] nokogiri (v1.4.4, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/nokogiri-1.4.4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activemodel (v3.1.0.rc4, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/activemodel-3.1.0.rc4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activerecord (v3.1.0.rc4, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/activerecord-3.1.0.rc4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v3.1.0.rc4, /home/jphorta/.rvm/gems/ruby-1.9.2-p180/gems/activesupport-3.1.0.rc4)" level="application" />
   </component>
 </module>
 
