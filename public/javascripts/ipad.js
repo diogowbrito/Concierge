@@ -160,7 +160,7 @@ function createPage(id, logged) {
     var gridB = $('<div>').addClass("ui-block-b").attr("id", "paginaB");
 
     <!-- Draw Header-->
-    if (logged == 'true')
+    if (logged.toString() == 'true')
         log = "<a id='login' href='" + url + "logout' class='ui-btn-right' data-icon='gear'>Logout</a>";
     else log = "<a href='" + url + "login' class='ui-btn-right' data-icon='gear'>Login</a>";
     var headerbody = log +
@@ -182,7 +182,7 @@ function createPage(id, logged) {
     var favouritestab = $("<li>").append("<a class='parse link_to_favourites' href='" + url + "favourites' data-icon='star'>Favourites</a>");
 
     //  var searchtab = $("<li>").attr("id", "tab_bar_search").attr("style", "width:50%").append("<a href='' data-icon='search'>Search</a>");
-    var optionstab = $("<li>").append("<a href='options' data-icon='gear'>Options</a>");
+    var optionstab = $("<li>").append("<a class='link_to_options' href='' data-icon='gear'>Options</a>");
     var navbarul;
 
     if (logged == 'true') {
@@ -817,6 +817,36 @@ $('.register_user_btn').live('click', function(event) {
     $.mobile.ajaxEnabled = false;
 
     return false;
+});
+
+$('.link_to_options').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_favourites').removeClass('ui-btn-active');
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPageWithoutList("options" + pageRandomId, true);
+    var pageWritable =  page.find('#content');
+
+    page.find('.link_to_options').addClass('ui-btn-active');
+
+    $.get(optionsURL, function(data) {
+        pageWritable.append(data);
+    });
+
+    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#options' + pageRandomId).find('.ui-btn-right').hide();
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+
+    return true;
 });
 
 $('.login_btn').live('click', function() {

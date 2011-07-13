@@ -120,10 +120,14 @@ function createPage(id, logged) {
     var optionstab = $("<li>").append("<a class='link_to_options' href='' data-icon='gear'>Options</a>");
     var navbarul;
 
-    if (logged == 'true') {
+    console.log('goddamn');
+    console.log(logged);
+    if (logged.toString() == 'true' ) {
+        console.log('wtf');
         navbarul = $("<ul>").append(hometab).append(historytab).append(favouritestab).append(optionstab);
     }
     else {
+        console.log('fdx');
         navbarul = $("<ul>").append(hometab).append(historytab);
     }
 
@@ -667,6 +671,37 @@ $('.register_user_btn').live('click', function(event) {
     return false;
 });
 
+$('.link_to_options').live('click', function() {
+    $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
+    $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_favourites').removeClass('ui-btn-active');
+
+    var pageRandomId = Math.floor(1000 * (Math.random() % 1));
+    var page = createPage("options" + pageRandomId, true);
+    var pageWritable = $("[data-role=content]", page.get(0));
+
+    page.find('.link_to_options').addClass('ui-btn-active');
+
+    $.get(optionsURL, function(data) {
+        pageWritable.append(data);
+    });
+
+    page.find(':jqmData(role="header")').append("<a href='' class='ui-btn-left link_to_homepage' data-icon='arrow-l'>Back</a>");
+
+    page.page();
+    $.mobile.pageContainer.append(page);
+
+    $('#options' + pageRandomId).find('.ui-btn-right').hide();
+
+
+    $.mobile.changePage("#" + page.attr("id"));
+
+    $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
+
+    return true;
+});
+
+
 $('.login_btn').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
@@ -711,6 +746,7 @@ $('.link_to_homepage').live('click', function() {
     $("#web_homepage").find('.home_btn').addClass('ui-btn-active');
     $('#web_homepage').find('.login_btn').removeClass('ui-btn-active');
     $('.link_to_history').removeClass('ui-btn-active');
+    $('.link_to_options').removeClass('ui-btn-active');
     $.mobile.changePage('#web_homepage');
     return true;
 });
