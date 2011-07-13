@@ -460,13 +460,13 @@ function parseMap(xml) {
     var pageRandomId = Math.floor(1000 * (Math.random() % 1));
     var page = createPageWithoutList("map" + pageRandomId, logged);
 
-    var pageWritable = $("#content");
+    var pageWritable = page.find("#content");
     var title = $(xml).find("map").attr('title');
     var mapId = "map_canvas" + pageRandomId;
     var height = $(window).height();
     var width = $(window).width();
 
-    pageWritable.add("<div id=" + mapId + " style='height:" + height + "px;width:" + width + "px;' class='map'></div>");
+    pageWritable.append("<div id=" + mapId + " style='height:" + height + "px;width:" + width + "px;' class='map'></div>");
 
 
     $(xml).find("map").children().each(function(index, element) {
