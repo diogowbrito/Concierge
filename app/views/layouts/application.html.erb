@@ -8,12 +8,14 @@
 
   <link rel="apple-touch-icon" href="images/buttons/concierge-icon.jpg"/>
 
-  <%= stylesheet_link_tag "iphone" %>
+  <%= stylesheet_link_tag "iphone", :media => "only screen and (max-width: 480px)" %>
+  <%= stylesheet_link_tag "ipad", :media => "only screen and (min-width: 481px)" %>
   <%= stylesheet_link_tag "jquery.mobile-1.0a4.1" %>
 
+  <%= javascript_include_tag "jquery-1.6" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery.mobile-1.0a4.1" %>
 
-      <%= javascript_include_tag "application" %>
-      <%= javascript_include_tag "jquery.mobile-1.0a4.1" %>
 
   <%= csrf_meta_tag %>
 
