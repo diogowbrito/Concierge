@@ -6,6 +6,7 @@
 <table id="service_table">
   <tbody>
   <% counter = 0 %>
+  <% if mobile? then %>
       <% @services.each do |service| %>
           <% if counter % 3 == 0 then %>
               <tr>
@@ -25,3 +26,38 @@
               </tr>
           <% end %>
       <% end %>
+  <% else %>
+      <% @services.each do |service| %>
+          <% if counter % 6 == 0 then %>
+              <tr>
+          <% end %>
+          <td>
+            <% address = get_address %>
+            <% if service.icon_file_name == nil %>
+                <img src="./images/buttons/letra c1.png" id="serviceLink" href=<%= address +"services/"+service.serviceName.gsub(" ", "_")+"/index" %>>
+            <% else %>
+                <img data-panel="main"
+                     src=<%= "./images/buttons/"+service.icon_file_name %> id='serviceLink'
+                href=<%= address +"services/"+service.serviceName.gsub(" ", "_")+"/index" %>>
+            <% end %>
+            <p class="service_name"><%= service.serviceName %></p>
+          </td>
+          <% counter = counter + 1 %>
+          <% if (counter % 6 == 0) || (counter == @services.size) then %>
+              </tr>
+          <% end %>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+
+
+<% content_for :serviceList do %>
+    <% address = get_address %>
+    <ul data-role='listview' data-inset='true' data-theme='c'>
+      <% @services.each do |service| %>
+          <li><a id="serviceLink" href=<%= address +"services/"+service.serviceName.gsub(" ", "_")+"/index" %>><%= service.serviceName %></a></li>
+      <% end %>
+    </ul>
+<% end %>
