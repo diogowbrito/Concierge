@@ -8,18 +8,14 @@
 
   <link rel="apple-touch-icon" href="images/buttons/concierge-icon.jpg"/>
 
-  <%= stylesheet_link_tag "iphone", :media => "only screen and (max-width: 480px)" %>
-  <%= stylesheet_link_tag "ipad", :media => "only screen and (min-width: 481px)" %>
+  <%= stylesheet_link_tag "iphone" %>
   <%= stylesheet_link_tag "jquery.mobile-1.0a4.1" %>
 
   <%= javascript_include_tag "jquery-1.6" %>
-  <% if mobile? then %>
+
       <%= javascript_include_tag "application" %>
       <%= javascript_include_tag "jquery.mobile-1.0a4.1" %>
-  <% else %>
-      <%= javascript_include_tag "ipad" %>
-      <%= javascript_include_tag "jquery.mobile-1.0a4.1" %>
-  <% end %>
+
 
   <%= csrf_meta_tag %>
 
@@ -29,7 +25,7 @@
 
 <% address = get_address %>
 
-<% if mobile? then %>
+
 
     <div id="web_homepage" data-role="page" data-position="inline" data-theme="a">
 
@@ -70,61 +66,7 @@
       </div>
     </div>
 
-<% else %>
 
-    <div data-role="page" id="web_homepage" data-position="inline" data-theme="a" class="ui-grid-a">
-
-      <div class="ui-block-a" id="paginaA">
-
-        <div data-role="header">
-          <h1 id="logo" class="ui-title">Menu</h1>
-        </div>
-
-        <div data-role="content" id="contentMenu">
-          <%= yield :serviceList %>
-        </div>
-
-      </div>
-
-      <div class="ui-block-b" id="paginaB">
-        <div data-role="header">
-
-          <h1 id="logo" class="ui-title">Concierge</h1>
-
-          <% if current_user && current_user.notAnonymus %>
-              <a id="login" href='<%= address + "logout" %>' class="ui-btn-right" data-role="button" data-icon="gear">Logout</a>
-          <% else %>
-              <a href='' class="ui-btn-right login_btn" data-role="button" data-icon="gear">Login</a>
-          <% end %>
-
-        </div>
-
-
-        <div data-role="content" id="content">
-          <%= yield %>
-        </div>
-
-      </div>
-
-      <div data-role="footer" data-position="fixed" data-id="navbar">
-        <div data-role="navbar">
-          <ul>
-            <li><a href="" class="home_btn link_to_homepage" data-icon="home">Home</a></li>
-            <li><a class="parse link_to_history" href='<%= address + "history" %>' data-icon="grid">History</a></li>
-
-            <% if current_user && current_user.notAnonymus %>
-                <li>
-                  <a class="parse link_to_favourites" href='<%= address + "favourites" %>' data-icon="star">Favourites</a>
-                </li>
-                <li><a class="link_to_options" href='' data-icon="gear">Options</a></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-<% end %>
 
 </body>
 
